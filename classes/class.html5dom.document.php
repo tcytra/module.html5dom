@@ -18,6 +18,9 @@ class HTML5Document
 	private	$domimp;
 	private	$domobj;
 	
+	/** @var string The saveHTML string returned from PHP DOMDocument */
+	private	$output;
+	
 	/**
 	 * __construct()
 	 *  Create an instance of the HTML5Document object
@@ -64,6 +67,18 @@ class HTML5Document
 		$this->output = $this->domobj->saveHTML();
 		
 		return	$this;
+	}
+	
+	/**
+	 *  write()
+	 *  Write the HTML5Document DOMDocument contents
+	 *  
+	 *  @access	public
+	 */
+	public	function write()
+	{
+		//  write the saveHTML output string
+		echo $this->output;
 	}
 }
 ?>
