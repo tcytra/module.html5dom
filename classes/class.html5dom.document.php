@@ -49,5 +49,21 @@ class HTML5Document
 		$this->objnode	= $this->domnode;
 	}
 	
+	//  HTML5Document Output Functionality ----
+	
+	/**
+	 *  save()
+	 *  Perform a PHP DOMDocument saveHTML into the instance $output variable
+	 *  
+	 *  @param	bool	$showdoctype = true
+	 *  @return	object	HTML5Document
+	 *  @access	public
+	 */
+	public	function save()
+	{
+		$this->output = $this->domobj->saveHTML();
+		
+		return	$this;
+	}
 }
 ?>
