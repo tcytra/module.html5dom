@@ -30,6 +30,7 @@ class HTML5Document
 	private $objnode;
 	
 	private $html;
+	private $head;
 	private $body;
 	
 	//  The document output value
@@ -48,9 +49,11 @@ class HTML5Document
 	 */
 	function __construct($html = null, $body = null)
 	{
+		//  sanity check: define rigid values for the "html" and "body" arguments
 		$this->html = (($html === true) || (strtolower($html) == "html")) ? "html" : null;
-		$this->body = (($body === true) || (strtolower($body) == "body")) ? "body" : null;
+		$this->body = (($body === true) || (strtolower($body) == "body")) && $this->html ? "body" : null;
 		
+		//  create an implementation of this HTML5Document request
 		$this->implement();
 	}
 	
@@ -63,21 +66,30 @@ class HTML5Document
 	private	function implement()
 	{
 		//  create an instance of the PHP DOMImplementation
-		$this->domimp	= new DOMImplementation;
+		$this->domimp = new DOMImplementation;
 		//  declare the doctype
-		$this->domdtd	= $this->domimp->createDocumentType("html", null, null);
+		$this->domdtd = $this->domimp->createDocumentType("html", null, null);
 		//  create the document object
-		$this->domobj	= $this->domimp->createDocument("", $this->html, $this->domdtd);
+		$this->domobj = $this->domimp->createDocument("", $this->html, $this->domdtd);
 		//  format the document parameters
 		$this->domobj->formatOutput = true;
 		$this->domobj->preserveWhiteSpace = true;
 		$this->domobj->encoding	= strtoupper( ($this->charset) ? $this->charset : "utf-8" );
-		//  identify the instance DOM node
-		$this->domnode	= $this->domobj->documentElement;
-		//  identify the instance 
-		$this->objnode	= $this->domnode;
 		
-		//echo gettype($this->domnode);
+		//  identify the instance $objnode as the "html" node
+		if ($this->html) {
+			$this->domnode = $this->domobj->documentElement;
+			$this->objnode = $this->domnode;
+		}
+		
+		//  identify the instance $objnode as the "body" node
+		if ($this->body) {
+			$body = $this->domobj->createElement("body");
+			$this->domnode->appendChild($body);
+			$this->objnode = $body;
+		}
+		
+		//echo $this->objnode->nodeName;
 		//exit;
 	}
 	
