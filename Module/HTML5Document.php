@@ -20,12 +20,14 @@ class HTML5Document
 	
 	//  The objects involved in the PHP Document Object Model
 	
-	/** @var object $domdtd Is the definition of the HTML DOM DocumentType */
+	/** @var object $domdtd   Is the definition of the HTML DOM DocumentType */
 	private	$domdtd;
-	/** @var object $domimp Is the PHP DOMImplementation of the HTML DOM DocumentType */
+	/** @var object $domimp   Is the PHP DOMImplementation of the HTML DOM DocumentType */
 	private	$domimp;
-	/** @var object	$domobj Is the PHP DOMDocument instance of the DOMImplementation */
+	/** @var object	$domobj   Is the PHP DOMDocument instance of the DOMImplementation */
 	private	$domobj;
+	/** @var object $objnode  Is the target DOMDocument node, normally "html" or "body" */
+	private $objnode;
 	
 	private $html;
 	private $body;
