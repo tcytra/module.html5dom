@@ -27,6 +27,9 @@ class HTML5Document
 	/** @var object	$domobj Is the PHP DOMDocument instance of the DOMImplementation */
 	private	$domobj;
 	
+	private $html;
+	private $body;
+	
 	//  The document output value
 	
 	/** @var string The saveHTML string returned from PHP DOMDocument */
@@ -35,29 +38,34 @@ class HTML5Document
 	/**
 	 * __construct()
 	 *  Create an instance of the HTML5Document object
+	 *  Optionally, create the root "html" and "body" nodes by arguing (true, true) or ("html", "body")
+	 *  By default, this object instance will not create a root node or any child nodes
 	 *  
-	 *  @param  string  $root = null
+	 *  @param  mixed   $html = null
+	 *  @param  mixed   $body = null
 	 */
-	function __construct($root = null)
+	function __construct($html = null, $body = null)
 	{
-		$this->implement($root);
+		$this->html = (($html === true) || (strtolower($html) == "html")) ? "html" : null;
+		$this->body = (($body === true) || (strtolower($body) == "body")) ? "body" : null;
+		
+		$this->implement();
 	}
 	
 	/**
 	 *  implement()
 	 *  Create an instance of the DOMImplementation for this HTML5Document
 	 *  
-	 *  @param  string  $root
 	 *  @access	private
 	 */
-	private	function implement($root)
+	private	function implement()
 	{
 		//  create an instance of the PHP DOMImplementation
 		$this->domimp	= new DOMImplementation;
 		//  declare the doctype
 		$this->domdtd	= $this->domimp->createDocumentType("html", null, null);
 		//  create the document object
-		$this->domobj	= $this->domimp->createDocument("", $root, $this->domdtd);
+		$this->domobj	= $this->domimp->createDocument("", $this->html, $this->domdtd);
 		//  format the document parameters
 		$this->domobj->formatOutput = true;
 		$this->domobj->preserveWhiteSpace = true;
@@ -66,6 +74,9 @@ class HTML5Document
 		$this->domnode	= $this->domobj->documentElement;
 		//  identify the instance 
 		$this->objnode	= $this->domnode;
+		
+		//echo gettype($this->domnode);
+		//exit;
 	}
 	
 	//  HTML5Document Output Functionality ----
