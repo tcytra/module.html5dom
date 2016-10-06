@@ -2,7 +2,7 @@
 <?php require "../../load.html5dom.php"; ?>
 <?php
 
-//  Test 03
+//  Test 04
 //  Create Document with html and body nodes via boolen arguments to the
 //  + instance constructor. Result should be the same as test-03
 
