@@ -11,12 +11,23 @@
  */
 class HTML5Document
 {
+	//  Various configuration options necessary for tailoring HTML5 output
+	
+	/** @var string $charset Is the specified character set for this HTML5 output */
 	private $charset;
+	/** @var string $language Is the specified language encoding for this HTML5 output */
 	private $language;
 	
+	//  The objects involved in the PHP Document Object Model
+	
+	/** @var object $domdtd Is the definition of the HTML DOM DocumentType */
 	private	$domdtd;
+	/** @var object $domimp Is the PHP DOMImplementation of the HTML DOM DocumentType */
 	private	$domimp;
+	/** @var object	$domobj Is the PHP DOMDocument instance of the DOMImplementation */
 	private	$domobj;
+	
+	//  The document output value
 	
 	/** @var string The saveHTML string returned from PHP DOMDocument */
 	private	$output;
@@ -41,14 +52,19 @@ class HTML5Document
 	 */
 	private	function implement($root)
 	{
+		//  create an instance of the PHP DOMImplementation
 		$this->domimp	= new DOMImplementation;
+		//  declare the doctype
 		$this->domdtd	= $this->domimp->createDocumentType("html", null, null);
+		//  create the document object
 		$this->domobj	= $this->domimp->createDocument("", $root, $this->domdtd);
+		//  format the document parameters
 		$this->domobj->formatOutput = true;
 		$this->domobj->preserveWhiteSpace = true;
 		$this->domobj->encoding	= strtoupper( ($this->charset) ? $this->charset : "utf-8" );
-		
+		//  identify the instance DOM node
 		$this->domnode	= $this->domobj->documentElement;
+		//  identify the instance 
 		$this->objnode	= $this->domnode;
 	}
 	
