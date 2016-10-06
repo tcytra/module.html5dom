@@ -49,12 +49,31 @@ class HTML5Document
 	 */
 	function __construct($html = null, $body = null)
 	{
-		//  sanity check: define rigid values for the "html" and "body" arguments
-		$this->html = (($html === true) || (strtolower($html) == "html")) ? "html" : null;
-		$this->body = (($body === true) || (strtolower($body) == "body")) && $this->html ? "body" : null;
+		//  import the arguments into the object instance
+		$this->html = $html;
+		$this->body = $body;
+		
+		//  perform an instance parameter sanity check
+		$this->checksane();
 		
 		//  create an implementation of this HTML5Document request
 		$this->implement();
+	}
+	
+	//  HTML5Document Instance Private Methods
+	
+	/**
+	 *  checksane()
+	 *  Ensure the object and/or its parameters are not completely batshit
+	 *  
+	 *  @return bool
+	 *  @access private
+	 */
+	private function checksane()
+	{
+		//  sanity check: define rigid values for the "html" and "body" arguments
+		$this->html = (($this->html === true) || (strtolower($this->html) == "html")) ? "html" : null;
+		$this->body = (($this->body === true) || (strtolower($this->body) == "body")) && $this->html ? "body" : null;
 	}
 	
 	/**
@@ -88,9 +107,6 @@ class HTML5Document
 			$this->domnode->appendChild($body);
 			$this->objnode = $body;
 		}
-		
-		//echo $this->objnode->nodeName;
-		//exit;
 	}
 	
 	//  HTML5Document Output Functionality ----
