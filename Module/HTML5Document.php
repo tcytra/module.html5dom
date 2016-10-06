@@ -42,16 +42,19 @@ class HTML5Document
 	 * __construct()
 	 *  Create an instance of the HTML5Document object
 	 *  Optionally, create the root "html" and "body" nodes by arguing (true, true) or ("html", "body")
+	 *  If the "html" and "body" are argued for, the <head> will also automatically be appended to <html>
 	 *  By default, this object instance will not create a root node or any child nodes
 	 *  
-	 *  @param  mixed   $html = null
-	 *  @param  mixed   $body = null
+	 *  @param  bool,"html"  $html = null
+	 *  @param  bool,"body"  $body = null
+	 *  @param  bool,"head"  $head = null
 	 */
-	function __construct($html = null, $body = null)
+	function __construct($html = null, $body = null, $head = true)
 	{
 		//  import the arguments into the object instance
 		$this->html = $html;
 		$this->body = $body;
+		$this->head = $head;
 		
 		//  perform an instance parameter sanity check
 		$this->checksane();
@@ -74,6 +77,7 @@ class HTML5Document
 		//  sanity check: define rigid values for the "html" and "body" arguments
 		$this->html = (($this->html === true) || (strtolower($this->html) == "html")) ? "html" : null;
 		$this->body = (($this->body === true) || (strtolower($this->body) == "body")) && $this->html ? "body" : null;
+		$this->head = (($this->head === true) || (strtolower($this->head) == "head")) && $this->body ? "head" : null;
 	}
 	
 	/**
@@ -101,7 +105,13 @@ class HTML5Document
 			$this->objnode = $this->domnode;
 		}
 		
-		//  identify the instance $objnode as the "body" node
+		//  append the <head> to the document <html>
+		if ($this->head) {
+			$head = $this->domobj->createElement("head");
+			$this->domnode->appendChild($head);
+		}
+		
+		//  append the <body> to the document <html> and identify the instance $objnode as the "body" node
 		if ($this->body) {
 			$body = $this->domobj->createElement("body");
 			$this->domnode->appendChild($body);
