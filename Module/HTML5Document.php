@@ -112,7 +112,27 @@ class HTML5Document
 		}
 	}
 	
-	//  HTML5Document Output Functionality ----
+	//  HTML5Document DOMElement   ----
+	
+	/**
+	 *  append()
+	 *  Create and return a DOMElement with the specified nodeName
+	 *  
+	 *  @param  $nodeName = "div"
+	 *  @return object	HTML5Element
+	 *  @access	public
+	 */
+	public	function append($nodeName = "div")
+	{
+		//  create a new instance of the HTML5Element and create()
+		$element = new HTML5Element($this, $this->objnode);
+		$element->create($nodeName);
+		
+		//  return the instance of the HTML5Element
+		return	$element;
+	}
+	
+	//  HTML5Document Output       ----
 	
 	/**
 	 *  save()
