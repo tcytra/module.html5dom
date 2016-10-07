@@ -2,8 +2,7 @@
 /**
  *  Class       HTML5Document
  *  
- *  This Model is the top-level object of the HTML5Dom module for manipulating and extending
- *  + the PHP DOMDocument system
+ *  The top-level instance of the HTML5 object model
  *  
  *  @author     Todd Cytra <tcytra@gmail.com>
  *  @version    0.2.3 class.html5dom.document.php 2016-09-14
@@ -11,32 +10,40 @@
  */
 class HTML5Document
 {
-	//  The objects involved in the PHP Document Object Model
+	//  DOMDocument Objects
 	
-	/** @var object $domdtd   Is the definition of the HTML DOM DocumentType */
+	/** @var object $domdtd   The definition of the HTML DOM DocumentType */
 	private	$domdtd;
-	/** @var object $domimp   Is the PHP DOMImplementation of the HTML DOM DocumentType */
+	/** @var object $domimp   The DOMImplementation of DOM DocumentType */
 	private	$domimp;
-	/** @var object	$domobj   Is the PHP DOMDocument instance of the DOMImplementation */
+	/** @var object	$domobj   The DOMDocument instance of DOMImplementation */
 	private	$domobj;
-	/** @var object $objnode  Is the target DOMDocument node, normally "html" or "body" */
+	
+	//  HTML5Document Objects
+	
+	/** @var object $objnode  The target DOMDocument node, normally "html" or "body" */
 	private $objnode;
 	
 	private $html;
 	private $head;
 	private $body;
 	
-	//  The document output value
+	//  HTML5Document Output
 	
 	/** @var string The saveHTML string returned from PHP DOMDocument */
 	private	$output;
 	
 	/**
 	 * __construct()
+	 *  
 	 *  Create an instance of the HTML5Document object
-	 *  Optionally, create the root "html" and "body" nodes by arguing (true, true) or ("html", "body")
-	 *  If the "html" and "body" are argued for, the <head> will also automatically be appended to <html>
-	 *  By default, this object instance will not create a root node or any child nodes
+	 *  
+	 *  Optionally, create the root "html" and "body" nodes by arguing
+	 *  + (true, true) or ("html", "body") If the "html" and "body" are argued
+	 *  + for, the <head> will also automatically be appended to <html>
+	 *  
+	 *  By default, this object instance will not create a root node or any 
+	 *  + child nodes
 	 *  
 	 *  @param  bool,"html"  $html = null
 	 *  @param  bool,"body"  $body = null
