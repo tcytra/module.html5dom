@@ -3,8 +3,9 @@
  *  Abstract
  *  Class       HTML5Dom
  *  
- *  The HTMLDom Model is a global abstract object to effect general control of the DOMDocument
- *  + system that is created and manipulated by this modules's instance methods
+ *  The HTMLDom Model is a global abstract object to effect general control of
+ *  + the DOMDocument system that is created and manipulated by this modules's
+ *  + instance methods
  *  
  *  @author     Todd Cytra <tcytra@gmail.com>
  *	@version    0.1.1 class.html5dom.php 2016-09-14
@@ -12,6 +13,16 @@
  */
 abstract class HTML5Dom
 {
+	//  HML5Dom Configuration
+	
+	/** @var string $charset  Is the specified character set for this HTML5 output */
+	public	static	$charset	= "utf-8";
+	/** @var string $language Is the specified language encoding for this HTML5 output */
+	public	static	$language	= "en-US";
+	
+	//  HTML5Dom Objects
+	
+	/** @var object $document Is the existing instance of the HTML5Document */
 	static	$document = null;
 	
 	/**
@@ -23,23 +34,28 @@ abstract class HTML5Dom
 	 *  @static
 	 */
 	public static function Construct()
-	{
-		
-	}
+	{  }
 	
 	/**
-	 *  Document()
+	 *  CreateDocument()
 	 *  Create and return an instance of the HTML5Dom Document
 	 *  
 	 *  @return	object HTML5Document
 	 *  @access	public
 	 *  @static
 	 */
-	public static function Document()
+	public static function CreateDocument()
 	{
-		self::$document = "new HTML5Document()";
+		//  sanity check: ensure an instance does not already exist
+		if (self::$document) {
+			/** @todo Issue a warning */
+			return;
+		}
 		
-		return self::$document;
+		//  create an instance of the HTML5Document
+		self::$document = new HTML5Document("html", "body");
+		
+		return self;
 	}
 	
 	/**
@@ -51,9 +67,7 @@ abstract class HTML5Dom
 	 *  @static
 	 */
 	public static function Element()
-	{
-		
-	}
+	{  }
 	
 	/**
 	 *  Save()
@@ -63,9 +77,7 @@ abstract class HTML5Dom
 	 *  @access public
 	 *  @static
 	 */
-	public static function Save()
-	{
-		//return self::$document->save()->out();
-	}
+	public static function Render()
+	{ /* self::$document->save()->out(); */ }
 }
 ?>
