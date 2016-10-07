@@ -3,6 +3,10 @@
 <?php
 
 //  Test 01
-//  Create a PHP DOMDocument DOMElement by specified nodeName
+//  Create a PHP DOMDocument DOMElement with a specified nodeName
 
+$html5 = new HTML5Document("html", "body");
 
+$html5->append();
+
+$html5->save()->write();

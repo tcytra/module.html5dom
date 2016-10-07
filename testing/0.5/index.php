@@ -1,7 +1,7 @@
-<article id="test-0-4">
+<article id="test-0-5">
 	<header class="header">
-		<h2>0.4</h2>
-		<p>Create an instance of the PHP DOMDocument via the HTML5Dom static methods</p>
+		<h2>0.5</h2>
+		<p>Create and append a DOMElement to the DOMDocument; Add attributes to the node</p>
 	</header>
 	<section class="tests">
 		
