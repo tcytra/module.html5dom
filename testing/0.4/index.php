@@ -1,6 +1,3 @@
-<?php
-
-?>
 <article id="test-0-4">
 	<header class="header">
 		<h2>0.4</h2>
