@@ -12,6 +12,43 @@
  */
 class HTML5Element extends HTML5Document
 {
+	//  DOMDocument Objects
 	
+	/** @var object	$domobj   The DOMDocument instance of DOMImplementation */
+	private	$domobj;
+	/** @var object $objnode  The target DOMElement node; <div> by default */
+	private $objnode;
+	
+	//  HTML5Element Objects
+	
+	/** @var object $parent   The parent HTML5 object appending an element */
+	private	$parent;
+	
+	/**
+	 * __construct()
+	 *  Create an instance of the HTML5Element
+	 *  
+	 *  @param	object	$parent
+	 *  @param	object	$objnode = null
+	 */
+	public function __construct($parent, $objnode = null)
+	{
+		$this->parent   = $parent;
+		$this->objnode  = $objnode;
+	}
+	
+	/**
+	 *  create()
+	 *  @param  type    $nodeName
+	 *  @access public
+	 */
+	public function create($nodeName)
+	{
+		//  create the new DOMElement
+		$this->objnode = $this->domobj->createElement($nodeName);
+		
+		echo $this->objnode->nodeName;
+		exit;
+	}
 }
 ?>
