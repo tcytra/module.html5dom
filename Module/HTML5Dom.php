@@ -54,8 +54,6 @@ abstract class HTML5Dom
 		
 		//  create an instance of the HTML5Document
 		self::$document = new HTML5Document("html", "body");
-		
-		return self;
 	}
 	
 	/**
@@ -70,14 +68,16 @@ abstract class HTML5Dom
 	{  }
 	
 	/**
-	 *  Save()
-	 *  Finish the instance of HTML5Dom Document and return the contents
+	 *  Out()
+	 *  Save the instance of HTML5Dom Document and output the contents
 	 *  
 	 *  @return	string
 	 *  @access public
 	 *  @static
 	 */
-	public static function Render()
-	{ /* self::$document->save()->out(); */ }
+	public static function Out()
+	{
+		self::$document->save()->write();
+	}
 }
 ?>
