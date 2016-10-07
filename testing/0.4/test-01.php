@@ -7,4 +7,6 @@
 
 HTML5Dom::CreateDocument();
 
+HTML5Dom::Out();
+
 ?>
