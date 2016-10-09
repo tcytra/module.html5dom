@@ -41,6 +41,28 @@ class HTML5Element extends HTML5Document
 		$this->objnode  = $objnode;
 	}
 	
+	//  HTML5Element Manipulation
+	
+	/**
+	 *  attribute()
+	 *  Get or set an attribute value by name
+	 *  
+	 *  @param  string  $name
+	 *  @param  string  $value = null
+	 *  @return string|object
+	 */
+	public	function attribute($name, $value = null)
+	{
+		if ($value) {
+			$this->objnode->setAttribute($name, $value);
+			
+			return $this;
+		}
+		else
+		if ($this->objnode->hasAttribute($name))
+		{ return $this->objnode->getAttribute($name); }
+	}
+	
 	/**
 	 *  create()
 	 *  @param  type    $nodeName
