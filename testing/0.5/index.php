@@ -6,4 +6,12 @@
 	<section class="tests">
 		
 	</section>
+	<section class="notes">
+		<h2>Notes</h2>
+		<ul>
+			<li>$objnode should be $target</li>
+			<li>$html, $head, $body should become the references to those nodes</li>
+			<li>Need a consistent construct for HTML5Document and its extended objects</li>
+		</ul>
+	</section>
 </article>
