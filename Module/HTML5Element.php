@@ -56,22 +56,23 @@ class HTML5Element extends HTML5Document
 		if ($value) {
 			$this->objnode->setAttribute($name, $value);
 			
+			if ($name == "id") { $this->objnode->setIdAttribute($name, true); }
+			
 			return $this;
 		}
 		else
-		if ($this->objnode->hasAttribute($name))
-		{ return $this->objnode->getAttribute($name); }
+		if ($this->objnode->hasAttribute($name)) { return $this->objnode->getAttribute($name); }
 	}
 	
 	/**
 	 *  create()
-	 *  @param  type    $nodeName
+	 *  @param  type    $nodename
 	 *  @access public
 	 */
-	public function create($nodeName)
+	public function create($nodename)
 	{
 		//  create the new DOMElement
-		$this->objnode = $this->domobj->createElement($nodeName);
+		$this->objnode = $this->domobj->createElement($nodename);
 		
 		//echo $this->objnode->nodeName;
 		//exit;
