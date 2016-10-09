@@ -139,6 +139,32 @@ class HTML5Document
 		return	$element;
 	}
 	
+	//  HTML5Document Internal References
+	
+	/**
+	 *  domnode()
+	 *  Return the current working node for this instance
+	 *  
+	 *	@return	object
+	 *  @access	public
+	 */
+	public	function domnode()
+	{
+		return	$this->objnode;
+	}
+	
+	/**
+	 *  domobject()
+	 *  Return the DOMDocument object for this instance
+	 *  
+	 *  @return	object
+	 *  @access	public
+	 */
+	public	function domobject()
+	{
+		return	$this->domobj;
+	}
+	
 	//  HTML5Document Output       ----
 	
 	/**
