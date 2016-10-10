@@ -102,6 +102,7 @@ class HTML5Document
 		//  identify the instance $objnode as the "html" node
 		if ($this->html) {
 			$this->domnode = $this->domobj->documentElement;
+			if(HTML5Dom::$language){ $this->domnode->setAttribute("lang", HTML5Dom::$language); }
 			$this->objnode = $this->domnode;
 		}
 		
