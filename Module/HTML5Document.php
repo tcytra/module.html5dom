@@ -22,7 +22,7 @@ class HTML5Document
 	//  HTML5Document Objects
 	
 	/** @var object $objnode  The target DOMDocument node, normally "html" or "body" */
-	private $objnode;
+	protected $objnode;
 	
 	private $html;
 	private $head;
@@ -107,15 +107,20 @@ class HTML5Document
 		
 		//  append the <head> to the document <html>
 		if ($this->head) {
-			$head = $this->domobj->createElement("head");
-			$this->domnode->appendChild($head);
+			//$head = $this->domobj->createElement("head");
+			//$this->domnode->appendChild($head);
+			$this->head = new HTML5Element($this);
+			$this->head->create("head");
 		}
 		
 		//  append the <body> to the document <html> and identify the instance $objnode as the "body" node
 		if ($this->body) {
-			$body = $this->domobj->createElement("body");
-			$this->domnode->appendChild($body);
-			$this->objnode = $body;
+			//$body = $this->domobj->createElement("body");
+			//$this->domnode->appendChild($body);
+			//$this->objnode = $body;
+			$this->body = new HTML5Element($this);
+			$this->body->create("body");
+			$this->objnode = $this->body->objnode;
 		}
 	}
 	
