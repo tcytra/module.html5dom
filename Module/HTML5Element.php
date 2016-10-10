@@ -19,7 +19,7 @@ class HTML5Element extends HTML5Document
 	/** @var object $domnode  The parent DOMElement node; <html>,<body>,etc */
 	private $domnode;
 	/** @var object $objnode  The target DOMElement node; <div> by default */
-	private $objnode;
+	protected $objnode;
 	
 	//  HTML5Element Objects
 	
@@ -42,6 +42,19 @@ class HTML5Element extends HTML5Document
 	}
 	
 	//  HTML5Element Manipulation
+	
+	/**
+	 *  append()
+	 *  Append an HTML5Element with a specified nodename
+	 *  
+	 *  @param  string  $nodename = "div"
+	 *  @return object  HTML5Element
+	 *  @access public
+	 */
+	public	function append($nodename = "div")
+	{
+		return	parent::append($nodename);
+	}
 	
 	/**
 	 *  attribute()
