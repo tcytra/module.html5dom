@@ -7,6 +7,6 @@
 
 $html5 = new HTML5Document("html", "body");
 
-
+$html5->append("section")->attribute("class", "interface");
 
 $html5->save()->write();
