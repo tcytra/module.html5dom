@@ -3,10 +3,12 @@
 <?php
 
 //  Test 01
-//  Create the Html5Document head and body as Html5Element objects
+//  Provide the means to create a document meta tag with attributes
 
 $html5 = new HTML5Document("html", "body");
 
-$html5->append("section")->attribute("class", "interface");
+$html5->meta( ["viewport"=>"width=device-width,initial-scale=1"] );
+
+$html5->append("div")->attribute("id", "homepage")->attribute("class", "page interface");
 
 $html5->save()->write();

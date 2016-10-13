@@ -22,7 +22,7 @@ class HTML5Document
 	//  HTML5Document Objects
 	
 	/** @var object $objnode  The target DOMDocument node, normally "html" or "body" */
-	protected $objnode;
+	private $objnode;
 	
 	private $html;
 	private $head;
@@ -108,20 +108,19 @@ class HTML5Document
 		
 		//  append the <head> to the document <html>
 		if ($this->head) {
-			//$head = $this->domobj->createElement("head");
-			//$this->domnode->appendChild($head);
-			$this->head = new HTML5Element($this);
-			$this->head->create("head");
+			$this->head = $this->domobj->createElement("head");
+			$this->domnode->appendChild($this->head);
+			
+			if (HTML5Dom::$charset) {
+				$this->meta(["charset"=>HTML5Dom::$charset]);
+			}
 		}
 		
 		//  append the <body> to the document <html> and identify the instance $objnode as the "body" node
 		if ($this->body) {
-			//$body = $this->domobj->createElement("body");
-			//$this->domnode->appendChild($body);
-			//$this->objnode = $body;
-			$this->body = new HTML5Element($this);
-			$this->body->create("body");
-			$this->objnode = $this->body->objnode;
+			$this->body = $this->domobj->createElement("body");
+			$this->domnode->appendChild($this->body);
+			$this->objnode = $this->body;
 		}
 	}
 	
@@ -169,6 +168,51 @@ class HTML5Document
 	public	function domobject()
 	{
 		return	$this->domobj;
+	}
+	
+	//  HTML5Document Head         ----
+	
+	/**
+	 *  meta()
+	 *  
+	 *  @param  array|object $attr
+	 */
+	public function meta($attr)
+	{
+		/** @todo Log this event */
+		if (!$this->head) { return; }
+		
+		$node = $this->domobj->createElement("meta");
+		
+		foreach ($attr as $name=>$text) {
+			if (preg_match("/^[a-z]+$/", $name)) { $node->setAttribute($name, $text); }
+		}
+		
+		$this->head->appendChild($node);
+	}
+	
+	/**
+	 *  title()
+	 *  Add the document title tag to the html5 node tree
+	 *  + 0 (Default) will overwrite, 1 will append, -1 will prepend
+	 *  
+	 *  @param  string  $text
+	 *  @param  int	    $append = 
+	 */
+	public function title($text, $append = 0)
+	{
+		$search = $this->head->getElementsByTagName("title");
+		
+		if (!$search->length) {
+			$node = $this->domobj->createElement("title", $text);
+			//echo $node->textContent;exit;
+			$this->head->appendChild($node);
+		}
+		
+		//$exists = ($search->length) ? 1 : 0;
+		//$node = ($exists) ? $search[0] : $this->domobj->createElement("title");
+		
+		
 	}
 	
 	//  HTML5Document Output       ----
