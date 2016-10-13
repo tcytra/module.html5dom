@@ -75,9 +75,9 @@ class HTML5Document
 	private function checksane()
 	{
 		//  sanity check: define rigid values for the "html" and "body" arguments
-		$this->html = (($this->html === true) || (strtolower($this->html) == "html")) ? "html" : null;
-		$this->body = (($this->body === true) || (strtolower($this->body) == "body")) && $this->html ? "body" : null;
-		$this->head = (($this->head === true) || (strtolower($this->head) == "head")) && $this->body ? "head" : null;
+		$this->html = ( (gettype($this->html)!=="object") && (($this->html === true) || (strtolower($this->html) == "html")) ) ? "html" : $this->html;
+		$this->body = ( (gettype($this->body)!=="object") && (($this->body === true) || (strtolower($this->body) == "body")) ) && $this->html ? "body" : $this->body;
+		$this->head = ( (gettype($this->head)!=="object") && (($this->head === true) || (strtolower($this->head) == "head")) ) && $this->body ? "head" : $this->head;
 	}
 	
 	/**
@@ -170,13 +170,18 @@ class HTML5Document
 	
 	/**
 	 *  meta()
+	 *  Add a document META tag and attributes to the html5 node tree
 	 *  
-	 *  @param  array|object $attr
+	 *  @param  array   $attr
+	 *  @return object  HTML5DocumentHead
+	 *  @access public
 	 */
 	public function meta($attr)
 	{
 		if ($this->head) {
-			return $this->head->meta($attr);
+			$this->head->meta($attr);
+			
+			return $this;
 		}
 	}
 	
@@ -186,12 +191,17 @@ class HTML5Document
 	 *  + 0 (Default) will overwrite, 1 will append, -1 will prepend
 	 *  
 	 *  @param  string  $text
-	 *  @param  int	    $append = 
+	 *  @param  int	    $append = 0
+	 *  @param  string  $join = null
+	 *  @return object  HTML5DocumentHead
+	 *  @access public
 	 */
-	public function title($text, $append = 0)
+	public function title($text, $append = 0, $join = null)
 	{
 		if ($this->head) {
-			return $this->head->title($text, $append);
+			$this->head->title($text, $append, $join);
+			
+			return $this;
 		}
 	}
 	

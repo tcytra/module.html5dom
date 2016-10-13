@@ -31,8 +31,11 @@ class HTML5DocumentHead extends HTML5Document
 	
 	/**
 	 *  meta()
+	 *  Add a document META tag and attributes to the html5 node tree
 	 *  
-	 *  @param  array|object $attr
+	 *  @param  array   $attr
+	 *  @return object  HTML5DocumentHead
+	 *  @access public
 	 */
 	public function meta($attr)
 	{
@@ -49,24 +52,34 @@ class HTML5DocumentHead extends HTML5Document
 	
 	/**
 	 *  title()
-	 *  Add the document title tag to the html5 node tree
-	 *  + 0 (Default) will overwrite, 1 will append, -1 will prepend
+	 *  Add the document TITLE tag to the html5 node tree
 	 *  
 	 *  @param  string  $text
-	 *  @param  int	    $append = 
+	 *  @param  int	    $append = 0
+	 *  @param  string  $join = null
+	 *  @return object  HTML5DocumentHead
+	 *  @access public
 	 */
-	public function title($text, $append = 0)
+	public function title($text, $append = 0, $join = null)
 	{
+		$append = ($append == -1) ? -1 : 1;
 		$search = $this->objnode->getElementsByTagName("title");
 		
-		if (!$search->length) {
+		if ($search->length) {
+			$node = $this->objnode->getElementsByTagName("title")->item(0);
+			
+			if ($append) {
+				$join = strlen($join) ? preg_replace("/\s+/", " ", " ".substr($join, 0, 1)." ") : "";
+				$text = ($append < 0) ? $text.$join.$node->textContent : $node->textContent.$join.$text;
+			}
+			
+			$node->textContent = $text;
+			
+		} else {
 			$node = $this->domobj->createElement("title", $text);
-			//echo $node->textContent;exit;
+			
 			$this->objnode->appendChild($node);
 		}
-		
-		//$exists = ($search->length) ? 1 : 0;
-		//$node = ($exists) ? $search[0] : $this->domobj->createElement("title");
 		
 		return	$this;
 	}
