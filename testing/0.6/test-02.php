@@ -8,7 +8,7 @@
 $html5 = new HTML5Document("html", "body");
 $html5->meta( ["viewport"=>"width=device-width,initial-scale=1"] );
 
-$html5->title("Test 02");
+$html5->title("0.6 Test 02");
 
 $html5->append("div")->attribute("id", "homepage")->attribute("class", "page interface");
 
