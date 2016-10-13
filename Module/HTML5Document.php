@@ -102,18 +102,14 @@ class HTML5Document
 		//  identify the instance $objnode as the "html" node
 		if ($this->html) {
 			$this->domnode = $this->domobj->documentElement;
-			if(HTML5Dom::$language){ $this->domnode->setAttribute("lang", HTML5Dom::$language); }
 			$this->objnode = $this->domnode;
+			
+			if(HTML5Dom::$language){ $this->domnode->setAttribute("lang", HTML5Dom::$language); }
 		}
 		
 		//  append the <head> to the document <html>
 		if ($this->head) {
-			$this->head = $this->domobj->createElement("head");
-			$this->domnode->appendChild($this->head);
-			
-			if (HTML5Dom::$charset) {
-				$this->meta(["charset"=>HTML5Dom::$charset]);
-			}
+			$this->head = new HTML5DocumentHead($this, $this->objnode);
 		}
 		
 		//  append the <body> to the document <html> and identify the instance $objnode as the "body" node
@@ -179,16 +175,9 @@ class HTML5Document
 	 */
 	public function meta($attr)
 	{
-		/** @todo Log this event */
-		if (!$this->head) { return; }
-		
-		$node = $this->domobj->createElement("meta");
-		
-		foreach ($attr as $name=>$text) {
-			if (preg_match("/^[a-z]+$/", $name)) { $node->setAttribute($name, $text); }
+		if ($this->head) {
+			return $this->head->meta($attr);
 		}
-		
-		$this->head->appendChild($node);
 	}
 	
 	/**
@@ -201,18 +190,9 @@ class HTML5Document
 	 */
 	public function title($text, $append = 0)
 	{
-		$search = $this->head->getElementsByTagName("title");
-		
-		if (!$search->length) {
-			$node = $this->domobj->createElement("title", $text);
-			//echo $node->textContent;exit;
-			$this->head->appendChild($node);
+		if ($this->head) {
+			return $this->head->title($text, $append);
 		}
-		
-		//$exists = ($search->length) ? 1 : 0;
-		//$node = ($exists) ? $search[0] : $this->domobj->createElement("title");
-		
-		
 	}
 	
 	//  HTML5Document Output       ----
