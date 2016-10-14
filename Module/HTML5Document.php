@@ -26,8 +26,8 @@ class HTML5Document
 	private $objnode;
 	
 	private $html;
-	private $head;
-	private $body;
+	public  $head;
+	public  $body;
 	
 	//  HTML5Document Output
 	
