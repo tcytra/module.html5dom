@@ -1,8 +1,15 @@
 <?php
 /**
- * 
+ *  HTML5DocumentHead
+ *  
+ *  This object provides the ability to create, identify, and manipulate the
+ *  + document head elements distinctly.
+ *  
+ *  @author     Todd Cytra <tcytra@gmail.com>
+ *	@version    0.1.1 HTML5DocumentHead.php 2016-10-13
+ *	@since      system-0.5.1
  */
-class HTML5DocumentHead extends HTML5Document
+class HTML5DocumentHead
 {
 	/** @var object	$domobj   The DOMDocument instance of DOMImplementation */
 	private	$domobj;

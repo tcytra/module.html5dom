@@ -1,11 +1,12 @@
 <?php
 /**
- *  Class       HTML5Document
+ *  HTML5Document
  *  
- *  The top-level instance of the HTML5 object model
+ *  This object provides the ability to create and utilize the PHP DOMDocument
+ *  + object to create, identify, and manipulate all types of nodes in the tree
  *  
  *  @author     Todd Cytra <tcytra@gmail.com>
- *  @version    0.2.3 class.html5dom.document.php 2016-09-14
+ *  @version    0.2.5 HTML5Document.php 2016-09-14
  *  @since      system-0.3.1
  */
 class HTML5Document

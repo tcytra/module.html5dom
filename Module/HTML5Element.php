@@ -1,16 +1,14 @@
 <?php
 /**
- *  Class	HTML5Element
- *  Extends	HTML5Document
+ *  HTML5Element
  *  
- *  This class provides the ability to create and manipulate an HTML5Element
- *  HTML5Element serves as a wrapper interface for the PHP DOMElement object
+ *  This object provides the ability to create and manipulate a DOMElement
  *  
  *  @author		Todd Cytra <tcytra@gmail.com>
- *  @version	0.1.3 class.html5.element.php 2016-09-21
+ *  @version	0.1.5 HTML5Element.php 2016-09-21
  *  @since		system-0.5.1
  */
-class HTML5Element extends HTML5Document
+class HTML5Element
 {
 	//  DOMDocument Objects
 	
@@ -24,7 +22,7 @@ class HTML5Element extends HTML5Document
 	//  HTML5Element Objects
 	
 	/** @var object $parent   The parent HTML5 object appending an element */
-	private	$parent;
+	//private	$parent;
 	
 	/**
 	 * __construct()
@@ -35,7 +33,7 @@ class HTML5Element extends HTML5Document
 	 */
 	public function __construct($parent, $objnode = null)
 	{
-		$this->parent   = $parent;
+		//$this->parent   = $parent;
 		$this->domobj	= $parent->domobject();
 		$this->domnode	= $parent->domnode();
 		$this->objnode  = $objnode;

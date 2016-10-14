@@ -1,14 +1,12 @@
 <?php
 /**
- *  Abstract
- *  Class       HTML5Dom
+ *  HTML5Dom
  *  
- *  The HTMLDom Model is a global abstract object to effect general control of
- *  + the DOMDocument system that is created and manipulated by this modules's
- *  + instance methods
+ *  This object is a global abstract means of creating and manipulating HTML5
+ *  + instances of document, fragment, element, etc.
  *  
  *  @author     Todd Cytra <tcytra@gmail.com>
- *	@version    0.1.1 class.html5dom.php 2016-09-14
+ *	@version    0.1.3 HTML5Dom.php 2016-09-14
  *	@since      system-0.5.1
  */
 abstract class HTML5Dom
