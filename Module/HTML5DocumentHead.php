@@ -37,8 +37,31 @@ class HTML5DocumentHead
 	}
 	
 	/**
+	 *  link()
+	 *  Add a document <link> tag and attributes to the html5 node tree
+	 *  
+	 *  @param  string	$href
+	 *  @return object  HTML5DocumentHead
+	 *  @access public
+	 */
+	public function link($href)
+	{
+		/** @todo Perform a check on this uri */
+		
+		$node = $this->domobj->createElement("link");
+		
+		foreach (["rel"=>"stylesheet","type"=>"text/css"] as $name=>$text) { $node->setAttribute($name, $text); }
+		
+		$node->setAttribute("href", $href);
+		
+		$this->objnode->appendChild($node);
+		
+		return	$this;
+	}
+	
+	/**
 	 *  meta()
-	 *  Add a document META tag and attributes to the html5 node tree
+	 *  Add a document <meta> tag and attributes to the html5 node tree
 	 *  
 	 *  @param  array   $attr
 	 *  @return object  HTML5DocumentHead
