@@ -29,6 +29,8 @@
 						<h2>Requirements</h2>
 						<ul>
 							<li>Require an isvalid object to test element names and attributes, document title, etc</li>
+							<li>Shorten the element append and attributes "id" and "class" to a constructor argument</li>
+							<li>Argue the charset and language to the HTML5Document __construct and call implement with node tags separately</li>
 						</ul>
 					</section>
 				</main>
