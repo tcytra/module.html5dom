@@ -49,10 +49,17 @@ class HTML5DocumentHead
 		$node = $this->domobj->createElement("meta");
 		
 		foreach ($attr as $name=>$text) {
-			if (preg_match("/^[a-z]+$/", $name)) { $node->setAttribute($name, $text); }
+			$nameok	= preg_match("/^[a-z]+$/", $name);
+			$textok = preg_match("/^[a-zA-Z][a-zA-Z0-9:;=-_\.,]/", $text);
+			
+			if ($nameok && $textok) { $node->setAttribute($name, $text); }
 		}
 		
-		$this->objnode->appendChild($node);
+		if ($this->objnode->getElementsByTagName("title")->length) {
+			$this->objnode->insertBefore($node, $this->objnode->getElementsByTagName("title")->item(0));
+		} else {
+			$this->objnode->appendChild($node);
+		}
 		
 		return	$this;
 	}
