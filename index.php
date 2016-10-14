@@ -4,7 +4,6 @@
 		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width,initial-scale=1"/>
 		<title>HTML5Dom</title>
-		<link rel="stylesheet" href="/include/stylesheets/default.css"/>
 	</head>
 	<body>
 		<div class="page interface">
@@ -24,6 +23,12 @@
 							<li>Top-down HTML5 rendering: The ability to define an HTML5 document and build the internal structure within it.</li>
 							<li>Bottom-up HTML5 rendering: The ability to define an HTML5 fragment and build the remaining document upwards around it.</li>
 							<li>Detached simultaneous fragments: The ability to have several HTML5 fragments detached from the document structure indexed and accessible for further work.</li>
+						</ul>
+					</section>
+					<section class="requirements">
+						<h2>Requirements</h2>
+						<ul>
+							<li>Require an isvalid object to test element names and attributes, document title, etc</li>
 						</ul>
 					</section>
 				</main>
