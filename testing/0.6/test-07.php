@@ -9,7 +9,7 @@ $describe = "Require the ability to create a javascript script element with the 
 $html5 = new HTML5Document("html", "body");
 
 //  Create the document <title>
-$html5->head->title("0.7")
+$html5->head->title("0.6")
 	->title("Test 07", 1, " ")
 	->title("HTML5Dom", -1, "|");
 
@@ -18,10 +18,10 @@ $html5->head->meta( ["viewport"=>"width=device-width,initial-scale=1"] )
 	->meta( ["name"=>"author","content"=>"Todd Cytra tcytra.gmail.com."] )
 	->meta( ["name"=>"description","content"=>$describe] );
 
-//  Create some document stylesheet <link> elements
+//  Create a document stylesheet <link> element
 $html5->head->link("include/default.css")->link("include/utility.css");
 
-//  Create some document stylesheet <link> elements
+//  Create a document javascript <script> element
 $html5->head->script("include/system-0.5.1.js");
 
 //  Create a document <body> element

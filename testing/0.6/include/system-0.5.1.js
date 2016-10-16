@@ -4,6 +4,6 @@
 
 (function(){
 	
-	document.onload = function(){ console.log("Here we are then."); };
+	window.onload = function(){ console.log("Here we are then."); };
 	
 })();

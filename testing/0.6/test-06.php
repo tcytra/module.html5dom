@@ -18,7 +18,7 @@ $html5->head->meta( ["viewport"=>"width=device-width,initial-scale=1"] )
 	->meta( ["name"=>"author","content"=>"Todd Cytra tcytra.gmail.com."] )
 	->meta( ["name"=>"description","content"=>$describe] );
 
-//  Create some document stylesheet <link>
+//  Create some document stylesheet <link> elements
 $html5->head->link("include/default.css")->link("include/utility.css");
 
 //  Create a document <body> element
