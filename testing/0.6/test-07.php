@@ -25,6 +25,6 @@ $html5->head->link("include/default.css")->link("include/utility.css");
 $html5->head->script("include/system-0.5.1.js");
 
 //  Create a document <body> element
-$html5->append("div")->attribute("id", "homepage")->attribute("class", "page interface");
+$html5->append("div")->attribute("id", "testing")->attribute("class", "page interface");
 
 $html5->save()->write();

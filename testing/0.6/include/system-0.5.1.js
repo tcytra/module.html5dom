@@ -4,6 +4,6 @@
 
 (function(){
 	
-	window.onload = function(){ console.log("Here we are then."); };
+	window.onload = function(){ document.getElementById("testing").innerHTML = "<p>Ready.</p>"; };
 	
 })();
