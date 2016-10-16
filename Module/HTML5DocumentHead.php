@@ -46,7 +46,7 @@ class HTML5DocumentHead
 	 */
 	public function link($href)
 	{
-		/** @todo Perform a check on this uri */
+		/** @todo Perform a check on this $href */
 		
 		$node = $this->domobj->createElement("link");
 		
@@ -83,6 +83,28 @@ class HTML5DocumentHead
 		} else {
 			$this->objnode->appendChild($node);
 		}
+		
+		return	$this;
+	}
+	
+	/**
+	 *  script()
+	 *  Add a document <script> tag and attributes to the html5 node tree
+	 *  
+	 *  @param  string	$src
+	 *  @return object  HTML5DocumentHead
+	 *  @access public
+	 */
+	public function script($src)
+	{
+		/** @todo Perform a check on this $src */
+		
+		$node = $this->domobj->createElement("script");
+		
+		$node->setAttribute("type", "text/javascript");
+		$node->setAttribute("src", $src);
+		
+		$this->objnode->appendChild($node);
 		
 		return	$this;
 	}
