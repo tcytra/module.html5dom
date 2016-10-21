@@ -37,22 +37,21 @@ class HTML5DocumentHead
 	}
 	
 	/**
-	 *  link()
-	 *  Add a document <link> tag and attributes to the html5 node tree
+	 *  javascript()
+	 *  Add a document <script> tag and attributes to the html5 node tree
 	 *  
-	 *  @param  string	$href
+	 *  @param  string	$src
 	 *  @return object  HTML5DocumentHead
 	 *  @access public
 	 */
-	public function link($href)
+	public function javascript($src)
 	{
-		/** @todo Perform a check on this $href */
+		/** @todo Perform a check on this $src */
 		
-		$node = $this->domobj->createElement("link");
+		$node = $this->domobj->createElement("script");
 		
-		foreach (["rel"=>"stylesheet","type"=>"text/css"] as $name=>$text) { $node->setAttribute($name, $text); }
-		
-		$node->setAttribute("href", $href);
+		$node->setAttribute("type", "text/javascript");
+		$node->setAttribute("src", $src);
 		
 		$this->objnode->appendChild($node);
 		
@@ -88,21 +87,22 @@ class HTML5DocumentHead
 	}
 	
 	/**
-	 *  script()
-	 *  Add a document <script> tag and attributes to the html5 node tree
+	 *  stylesheet()
+	 *  Add a document <link> tag and attributes to the html5 node tree
 	 *  
-	 *  @param  string	$src
+	 *  @param  string	$href
 	 *  @return object  HTML5DocumentHead
 	 *  @access public
 	 */
-	public function script($src)
+	public function stylesheet($href)
 	{
-		/** @todo Perform a check on this $src */
+		/** @todo Perform a check on this $href */
 		
-		$node = $this->domobj->createElement("script");
+		$node = $this->domobj->createElement("link");
 		
-		$node->setAttribute("type", "text/javascript");
-		$node->setAttribute("src", $src);
+		foreach (["rel"=>"stylesheet","type"=>"text/css"] as $name=>$text) { $node->setAttribute($name, $text); }
+		
+		$node->setAttribute("href", $href);
 		
 		$this->objnode->appendChild($node);
 		
