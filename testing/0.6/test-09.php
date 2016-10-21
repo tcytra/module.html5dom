@@ -2,7 +2,7 @@
 <?php require "../../load.html5dom.php"; ?>
 <?php
 
-$testcase = "Test 0.9";
+$testcase = "Test 09";
 $describe = "Require the ability to create a javascript script element with provided code";
 
 //  Create an instance of the HTML5Document
@@ -20,13 +20,13 @@ $html5->head->meta( ["viewport"=>"width=device-width,initial-scale=1"] )
 $html5->head->stylesheet("include/default.css")->stylesheet("include/utility.css");
 
 //  Assemble some javascript code to include with the <script> element
-$code = <<<EOT
+$code = <<<JavaScript
 (function(){
 	window.onload = function(){
 		document.getElementById("testing").innerHTML = "<p>Ready.</p>";
 	}
 })();
-EOT;
+JavaScript;
 
 //  Create a document javascript <script> element
 $html5->head->javascript("include/system-0.5.1.js")->javascript(null, $code);

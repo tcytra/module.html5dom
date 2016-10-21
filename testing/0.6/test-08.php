@@ -2,7 +2,7 @@
 <?php require "../../load.html5dom.php"; ?>
 <?php
 
-$testcase = "Test 0.8";
+$testcase = "Test 08";
 $describe = "Ensure the head elements are appended in a sensible order";
 
 //  Create an instance of the HTML5Document
