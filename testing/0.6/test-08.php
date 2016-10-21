@@ -10,23 +10,22 @@ $html5 = new HTML5Document("html", "body");
 
 //  Create some document <meta> tags
 $html5->head->meta( ["viewport"=>"width=device-width,initial-scale=1"] )
-	->meta( ["name"=>"author","content"=>"Todd Cytra tcytra.gmail.com."] )
-	->meta( ["name"=>"description","content"=>$describe] );
+	->meta( ["name"=>"author","content"=>"Todd Cytra tcytra.gmail.com."] );
 
 //  Create a document stylesheet <link> element
-$html5->head->link("include/default.css");
+$html5->head->stylesheet("include/default.css");
 
 //  Create a document javascript <script> element
-$html5->head->script("include/system-0.5.1.js");
+$html5->head->javascript("include/system-0.5.1.js");
 
+//  Add another stylesheet after adding a <script> tag
+$html5->head->stylesheet("include/utility.css");
 
+//  Create the document <title> after the external file tags
+$html5->head->title("HTML5Dom | 0.6 {$testcase}");
 
-$html5->head->link("include/utility.css");
-
-
-//  Create the document <title>
-$html5->head->title("HTML5Dom | 0.6 Test {$testcase}");
-
+//  Add another <meta> tag after adding the <title> tag
+$html5->head->meta( ["name"=>"description","content"=>$describe] );
 
 //  Create a document <body> element
 $html5->append("div")->attribute("id", "testing")->attribute("class", "page interface");
