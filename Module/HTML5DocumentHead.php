@@ -36,6 +36,49 @@ class HTML5DocumentHead
 	}
 	
 	/**
+	 *  favicon()
+	 *  Add a document <link> tag and attributes for the icon to the node tree
+	 *  
+	 *  @param  string  $href = "favicon.png"
+	 *  @return object  HTML5DocumentHead
+	 *  @access public
+	 */
+	public function favicon($href = "favicon.png")
+	{
+		$node = null;
+		
+		//  detect an existing icon <link> tag and remove the href attribute
+		foreach ($this->objnode->getElementsByTagName("link") as $each) {
+			if ($each->hasAttribute("rel") && preg_match("/icon/", $each->getAttribute("rel"))) {
+				$node = $each;
+				$node->removeAttribute("href");
+				break;
+			}
+		}
+		
+		//  otherwise create an icon <link> tag without the href attribute
+		if (!$node) {
+			$node = $this->domobj->createElement("link");
+			$node->setAttribute("rel", "icon");
+			
+			//  ensure the icon <link> is appended after the <title> element
+			if ($this->objnode->getElementsByTagName("title")->length) {
+				$this->objnode->insertBefore($node, $this->objnode->getElementsByTagName("title")->item(0)->nextSibling);
+			} else
+			if ($this->objnode->getElementsByTagName("link")->length) {
+				$this->objnode->insertBefore($node, $this->objnode->getElementsByTagName("link")->item(0));
+			} else {
+				$this->objnode->appendChild($node);
+			}
+		}
+		
+		//  finally, add the link href
+		$node->setAttribute("href", $href);
+		
+		return $this;
+	}
+	
+	/**
 	 *  javascript()
 	 *  Add a document <script> tag and attributes to the html5 node tree
 	 *  
@@ -143,7 +186,7 @@ class HTML5DocumentHead
 	 */
 	public function title($text, $amend = 0, $join = null)
 	{
-		$amend = ($amend == -1) ? -1 : 1;
+		$amend = (!$amend) ? 0 : (($amend === -1) ? -1 : 1);
 		$title = $this->objnode->getElementsByTagName("title");
 		
 		//  check to see if the <title> is being appended or amended
