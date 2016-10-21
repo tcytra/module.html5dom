@@ -50,6 +50,7 @@ class HTML5DocumentHead
 		
 		$node = $this->domobj->createElement("script");
 		
+		//  append the stylesheet attributes to this <meta> tag
 		$node->setAttribute("type", "text/javascript");
 		$node->setAttribute("src", $src);
 		
@@ -70,6 +71,7 @@ class HTML5DocumentHead
 	{
 		$node = $this->domobj->createElement("meta");
 		
+        //  append the requested attributes to this <meta> tag
 		foreach ($attr as $name=>$text) {
 			$nameok	= preg_match("/^[a-z]+$/", $name);
 			$textok = preg_match("/^[a-zA-Z][a-zA-Z0-9:;=-_\.,]/", $text);
@@ -77,8 +79,13 @@ class HTML5DocumentHead
 			if ($nameok && $textok) { $node->setAttribute($name, $text); }
 		}
 		
+        //  ensure the <meta> tag is appended before the <title>, <link>, or <script> tags
 		if ($this->objnode->getElementsByTagName("title")->length) {
 			$this->objnode->insertBefore($node, $this->objnode->getElementsByTagName("title")->item(0));
+		} else if ($this->objnode->getElementsByTagName("link")->length) {
+			$this->objnode->insertBefore($node, $this->objnode->getElementsByTagName("link")->item(0));
+		} else if ($this->objnode->getElementsByTagName("script")->length) {
+			$this->objnode->insertBefore($node, $this->objnode->getElementsByTagName("script")->item(0));
 		} else {
 			$this->objnode->appendChild($node);
 		}
@@ -100,11 +107,18 @@ class HTML5DocumentHead
 		
 		$node = $this->domobj->createElement("link");
 		
+		//  append the stylesheet attributes to this <meta> tag
 		foreach (["rel"=>"stylesheet","type"=>"text/css"] as $name=>$text) { $node->setAttribute($name, $text); }
 		
+        //  append the href attribute with the source file
 		$node->setAttribute("href", $href);
 		
-		$this->objnode->appendChild($node);
+		//  ensure the stylesheet is appended before any <script> tags
+		if ($this->objnode->getElementsByTagName("script")->length) {
+			$this->objnode->insertBefore($node, $this->objnode->getElementsByTagName("script")->item(0));
+		} else {
+			$this->objnode->appendChild($node);
+		}
 		
 		return	$this;
 	}
@@ -114,22 +128,24 @@ class HTML5DocumentHead
 	 *  Add the document TITLE tag to the html5 node tree
 	 *  
 	 *  @param  string  $text
-	 *  @param  int	    $append = 0
+	 *  @param  int	    $amend = 0
 	 *  @param  string  $join = null
 	 *  @return object  HTML5DocumentHead
 	 *  @access public
 	 */
-	public function title($text, $append = 0, $join = null)
+	public function title($text, $amend = 0, $join = null)
 	{
-		$append = ($append == -1) ? -1 : 1;
-		$search = $this->objnode->getElementsByTagName("title");
+		$amend = ($amend == -1) ? -1 : 1;
+		$title = $this->objnode->getElementsByTagName("title");
 		
-		if ($search->length) {
+		//  check to see if the <title> is being appended or amended
+		if ($title->length) {
 			$node = $this->objnode->getElementsByTagName("title")->item(0);
 			
-			if ($append) {
+			//  the argument is to amend the existing <title>
+			if ($amend) {
 				$join = strlen($join) ? preg_replace("/\s+/", " ", " ".substr($join, 0, 1)." ") : "";
-				$text = ($append < 0) ? $text.$join.$node->textContent : $node->textContent.$join.$text;
+				$text = ($amend < 0) ? $text.$join.$node->textContent : $node->textContent.$join.$text;
 			}
 			
 			$node->textContent = $text;
@@ -137,7 +153,14 @@ class HTML5DocumentHead
 		} else {
 			$node = $this->domobj->createElement("title", $text);
 			
-			$this->objnode->appendChild($node);
+			//  ensure the <title> is appended before the <link> and <script> tags
+			if ($this->objnode->getElementsByTagName("link")->length) {
+				$this->objnode->insertBefore($node, $this->objnode->getElementsByTagName("link")->item(0));
+			} else if ($this->objnode->getElementsByTagName("script")->length) {
+				$this->objnode->insertBefore($node, $this->objnode->getElementsByTagName("script")->item(0));
+			} else {
+				$this->objnode->appendChild($node);
+			}
 		}
 		
 		return	$this;
