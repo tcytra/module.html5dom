@@ -24,7 +24,6 @@ class HTML5DocumentHead
 	function __construct($parent, $objnode = null)
 	{
 		$this->domobj	= $parent->domobject();
-		
 		$this->objnode	= $this->domobj->createElement("head");
 		
 		if (HTML5Dom::$charset) {
@@ -89,9 +88,11 @@ class HTML5DocumentHead
         //  ensure the <meta> tag is appended before the <title>, <link>, or <script> tags
 		if ($this->objnode->getElementsByTagName("title")->length) {
 			$this->objnode->insertBefore($node, $this->objnode->getElementsByTagName("title")->item(0));
-		} else if ($this->objnode->getElementsByTagName("link")->length) {
+		} else 
+		if ($this->objnode->getElementsByTagName("link")->length) {
 			$this->objnode->insertBefore($node, $this->objnode->getElementsByTagName("link")->item(0));
-		} else if ($this->objnode->getElementsByTagName("script")->length) {
+		} else
+		if ($this->objnode->getElementsByTagName("script")->length) {
 			$this->objnode->insertBefore($node, $this->objnode->getElementsByTagName("script")->item(0));
 		} else {
 			$this->objnode->appendChild($node);
@@ -163,7 +164,8 @@ class HTML5DocumentHead
 			//  ensure the <title> is appended before the <link> and <script> tags
 			if ($this->objnode->getElementsByTagName("link")->length) {
 				$this->objnode->insertBefore($node, $this->objnode->getElementsByTagName("link")->item(0));
-			} else if ($this->objnode->getElementsByTagName("script")->length) {
+			} else
+			if ($this->objnode->getElementsByTagName("script")->length) {
 				$this->objnode->insertBefore($node, $this->objnode->getElementsByTagName("script")->item(0));
 			} else {
 				$this->objnode->appendChild($node);
