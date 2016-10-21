@@ -40,19 +40,26 @@ class HTML5DocumentHead
 	 *  javascript()
 	 *  Add a document <script> tag and attributes to the html5 node tree
 	 *  
-	 *  @param  string	$src
+	 *  @param  string  $src
+	 *  @param  string  $code = null
 	 *  @return object  HTML5DocumentHead
 	 *  @access public
 	 */
-	public function javascript($src)
+	public function javascript($src, $code = null)
 	{
 		/** @todo Perform a check on this $src */
 		
-		$node = $this->domobj->createElement("script");
-		
-		//  append the stylesheet attributes to this <meta> tag
-		$node->setAttribute("type", "text/javascript");
-		$node->setAttribute("src", $src);
+		if ($code) {
+			$node = $this->domobj->createElement("script", "\n{$code}\n");
+			$node->setAttribute("type", "text/javascript");
+			
+		} else {
+			$node = $this->domobj->createElement("script");
+			
+			//  append the stylesheet attributes to this <meta> tag
+			$node->setAttribute("type", "text/javascript");
+			$node->setAttribute("src", $src);
+		}
 		
 		$this->objnode->appendChild($node);
 		

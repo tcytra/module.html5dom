@@ -28,8 +28,8 @@ class HTML5Element
 	 * __construct()
 	 *  Create an instance of the HTML5Element
 	 *  
-	 *  @param	object	$parent
-	 *  @param	object	$objnode = null
+	 *  @param  object  $parent
+	 *  @param  object  $objnode = null
 	 */
 	public function __construct($parent, $objnode = null)
 	{
