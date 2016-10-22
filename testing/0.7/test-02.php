@@ -2,14 +2,12 @@
 <?php require "../../load.html5dom.php"; ?>
 <?php
 
-//  Test 01
-//  Create a basic parent Html5 object for this system
-
-$html5 = new HTML5Document("html", "body");
-
 //  Title and describe this testcase
-$testcase = "Test 01";
-$describe = "Require the ability to add a favicon link element to the document head";
+$testcase = "Test 02";
+$describe = "Rename the object files to the StudlyCase convention; Extend objects from the Html5 object";
+
+//  create an instance of the Html5Document
+$html5 = new Html5Document("html", "body");
 
 //  Assemble some javascript code to include with the <script> element
 $code = <<<JavaScript
