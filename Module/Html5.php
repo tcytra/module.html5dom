@@ -6,7 +6,7 @@
  *  + the top level configuration and dom references and interaction
  *  
  *  @author     Todd Cytra <tcytra@gmail.com>
- *  @version    0.1.1 HTML5Document.php 2016-10-21
+ *  @version    0.1.1 Html5.php 2016-10-21
  *  @since      Html5-0.0.7
  */
 class Html5

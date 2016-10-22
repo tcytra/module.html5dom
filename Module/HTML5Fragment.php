@@ -1,14 +1,14 @@
 <?php
 /**
- *  HTML5Fragment
+ *  Html5Fragment
  *  
- *  This object provides the ability to create and manipulate a DOMFragment
+ *  This object provides the ability to create and manipulate a PHP DomFragment
  *  
  *  @author		Todd Cytra <tcytra@gmail.com>
- *  @version	0.1.5 HTML5Fragment.php 2016-09-19
- *  @since		system-0.5.1
+ *  @version	0.1.5 Html5Fragment.php 2016-09-19
+ *  @since		html5-0.0.1
  */
-class HTML5Fragment
+class Html5Fragment
 {
 	
 }

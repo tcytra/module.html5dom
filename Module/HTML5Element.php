@@ -1,32 +1,32 @@
 <?php
 /**
- *  HTML5Element
+ *  Html5Element
  *  
- *  This object provides the ability to create and manipulate a DOMElement
+ *  This object provides the ability to create and manipulate a PHP DomElement
  *  
  *  @author		Todd Cytra <tcytra@gmail.com>
- *  @version	0.1.5 HTML5Element.php 2016-09-21
- *  @since		system-0.5.1
+ *  @version	0.1.5 Html5Element.php 2016-09-21
+ *  @since		html5-0.0.1
  */
-class HTML5Element
+class Html5Element
 {
-	//  DOMDocument Objects
+	//  DomDocument Objects
 	
-	/** @var object	$domobj   The DOMDocument instance of DOMImplementation */
+	/** @var object	$domobj   The DomDocument instance of DomImplementation */
 	private	$domobj;
-	/** @var object $domnode  The parent DOMElement node; <html>,<body>,etc */
+	/** @var object $domnode  The parent DomElement node; <html>,<body>,etc */
 	private $domnode;
-	/** @var object $objnode  The target DOMElement node; <div> by default */
+	/** @var object $objnode  The target DomElement node; <div> by default */
 	private $objnode;
 	
-	//  HTML5Element Objects
+	//  Html5Element Objects
 	
-	/** @var object $parent   The parent HTML5 object appending an element */
+	/** @var object $parent   The parent Html5 object appending an element */
 	//private	$parent;
 	
 	/**
 	 * __construct()
-	 *  Create an instance of the HTML5Element
+	 *  Create an instance of the Html5Element
 	 *  
 	 *  @param  object  $parent
 	 *  @param  object  $objnode = null
@@ -39,7 +39,7 @@ class HTML5Element
 		$this->objnode  = $objnode;
 	}
 	
-	//  HTML5Element Manipulation
+	//  Html5Element Manipulation
 	
 	/**
 	 *  attribute()

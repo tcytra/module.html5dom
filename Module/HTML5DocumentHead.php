@@ -1,25 +1,25 @@
 <?php
 /**
- *  HTML5DocumentHead
+ *  Html5DocumentHead
  *  
  *  This object provides the ability to create, identify, and manipulate the
  *  + document head elements distinctly.
  *  
  *  @author     Todd Cytra <tcytra@gmail.com>
- *	@version    0.1.1 HTML5DocumentHead.php 2016-10-13
- *	@since      system-0.5.1
+ *	@version    0.1.3 Html5DocumentHead.php 2016-10-13
+ *	@since      html5-0.0.6
  */
-class HTML5DocumentHead
+class Html5DocumentHead
 {
-	/** @var object	$domobj   The DOMDocument instance of DOMImplementation */
+	/** @var object	$domobj   The DomDocument instance of DomImplementation */
 	private	$domobj;
 	
-	/** @var object $objnode  The DOMDocument "head" node */
+	/** @var object $objnode  The DomDocument "head" node */
 	private $objnode;
 	
 	/**
 	 * __construct()
-	 *  Create an instance of the HTML5DocumentHead
+	 *  Create an instance of the Html5DocumentHead
 	 */
 	function __construct($parent, $objnode = null)
 	{
@@ -40,7 +40,7 @@ class HTML5DocumentHead
 	 *  Add a document <link> tag and attributes for the icon to the node tree
 	 *  
 	 *  @param  string  $href = "favicon.png"
-	 *  @return object  HTML5DocumentHead
+	 *  @return object  Html5DocumentHead
 	 *  @access public
 	 */
 	public function favicon($href = "favicon.png")
@@ -84,7 +84,7 @@ class HTML5DocumentHead
 	 *  
 	 *  @param  string  $src
 	 *  @param  string  $code = null
-	 *  @return object  HTML5DocumentHead
+	 *  @return object  Html5DocumentHead
 	 *  @access public
 	 */
 	public function javascript($src, $code = null)
@@ -110,10 +110,10 @@ class HTML5DocumentHead
 	
 	/**
 	 *  meta()
-	 *  Add a document <meta> tag and attributes to the html5 node tree
+	 *  Add a document <meta> tag and attributes to the Html5 node tree
 	 *  
 	 *  @param  array   $attr
-	 *  @return object  HTML5DocumentHead
+	 *  @return object  Html5DocumentHead
 	 *  @access public
 	 */
 	public function meta($attr)
@@ -149,7 +149,7 @@ class HTML5DocumentHead
 	 *  Add a document <link> tag and attributes to the html5 node tree
 	 *  
 	 *  @param  string	$href
-	 *  @return object  HTML5DocumentHead
+	 *  @return object  Html5DocumentHead
 	 *  @access public
 	 */
 	public function stylesheet($href)
@@ -176,12 +176,12 @@ class HTML5DocumentHead
 	
 	/**
 	 *  title()
-	 *  Add the document TITLE tag to the html5 node tree
+	 *  Add the document <title> tag to the html5 node tree
 	 *  
 	 *  @param  string  $text
 	 *  @param  int	    $amend = 0
 	 *  @param  string  $join = null
-	 *  @return object  HTML5DocumentHead
+	 *  @return object  Html5DocumentHead
 	 *  @access public
 	 */
 	public function title($text, $amend = 0, $join = null)

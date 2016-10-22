@@ -1,43 +1,43 @@
 <?php
 /**
- *  HTML5Document
+ *  Html5Document
  *  
- *  This object provides the ability to create and utilize the PHP DOMDocument
- *  + object to create, identify, and manipulate all types of nodes in the tree
+ *  This object provides the ability to create and utilize the PHP DomDocument
+ *  + object to create, identify, and manipulate the types of nodes in the tree
  *  
  *  @author     Todd Cytra <tcytra@gmail.com>
- *  @version    0.2.5 HTML5Document.php 2016-09-14
- *  @since      system-0.3.1
+ *  @version    0.2.5 Html5Document.php 2016-09-14
+ *  @since      html5-0.0.1
  */
-class HTML5Document
+class Html5Document
 {
-	//  DOMDocument Objects
+	//  DomDocument Objects
 	
 	/** @var object $domdtd   The definition of the HTML DOM DocumentType */
 	private	$domdtd;
-	/** @var object $domimp   The DOMImplementation of DOM DocumentType */
+	/** @var object $domimp   The DomImplementation of DOM DocumentType */
 	private	$domimp;
-	/** @var object	$domobj   The DOMDocument instance of DOMImplementation */
+	/** @var object	$domobj   The DomDocument instance of DomImplementation */
 	private	$domobj;
 	
-	//  HTML5Document Objects
+	//  Html5Document Objects
 	
-	/** @var object $objnode  The target DOMDocument node, normally "html" or "body" */
+	/** @var object $objnode  The target DomDocument node, normally "html" or "body" */
 	private $objnode;
 	
 	private $html;
 	public  $head;
 	public  $body;
 	
-	//  HTML5Document Output
+	//  Html5Document Output
 	
-	/** @var string The saveHTML string returned from PHP DOMDocument */
+	/** @var string The saveHTML string returned from PHP DomDocument */
 	private	$output;
 	
 	/**
 	 * __construct()
 	 *  
-	 *  Create an instance of the HTML5Document object
+	 *  Create an instance of the Html5Document object
 	 *  
 	 *  Optionally, create the root "html" and "body" nodes by arguing
 	 *  + (true, true) or ("html", "body") If the "html" and "body" are argued
@@ -60,7 +60,7 @@ class HTML5Document
 		//  perform an instance parameter sanity check
 		$this->checksane();
 		
-		//  create an implementation of this HTML5Document request
+		//  create an implementation of this Html5Document request
 		$this->implement();
 	}
 	
@@ -83,13 +83,13 @@ class HTML5Document
 	
 	/**
 	 *  implement()
-	 *  Create an instance of the DOMImplementation for this HTML5Document
+	 *  Create an instance of the DomImplementation for this Html5Document
 	 *  
 	 *  @access	private
 	 */
 	private	function implement()
 	{
-		//  create an instance of the PHP DOMImplementation
+		//  create an instance of the PHP DomImplementation
 		$this->domimp = new DOMImplementation;
 		//  declare the doctype
 		$this->domdtd = $this->domimp->createDocumentType("html", null, null);
@@ -125,7 +125,7 @@ class HTML5Document
 	
 	/**
 	 *  append()
-	 *  Create and return a DOMElement with the specified nodeName
+	 *  Create and return a DomElement with the specified nodeName
 	 *  
 	 *  @param  $nodeName = "div"
 	 *  @return object	HTML5Element
@@ -133,15 +133,15 @@ class HTML5Document
 	 */
 	public	function append($nodeName = "div")
 	{
-		//  create a new instance of the HTML5Element and create()
+		//  create a new instance of the Html5Element and create()
 		$element = new HTML5Element($this, $this->objnode);
 		$element->create($nodeName);
 		
-		//  return the instance of the HTML5Element
+		//  return the instance of the Html5Element
 		return	$element;
 	}
 	
-	//  HTML5Document Internal References
+	//  Html5Document Internal References
 	
 	/**
 	 *  domnode()
@@ -157,7 +157,7 @@ class HTML5Document
 	
 	/**
 	 *  domobject()
-	 *  Return the DOMDocument object for this instance
+	 *  Return the DomDocument object for this instance
 	 *  
 	 *  @return	object
 	 *  @access	public
@@ -174,7 +174,7 @@ class HTML5Document
 	 *  Add a document META tag and attributes to the html5 node tree
 	 *  
 	 *  @param  array   $attr
-	 *  @return object  HTML5DocumentHead
+	 *  @return object  Html5DocumentHead
 	 *  @access public
 	 */
 	public function meta($attr)
@@ -194,7 +194,7 @@ class HTML5Document
 	 *  @param  string  $text
 	 *  @param  int	    $append = 0
 	 *  @param  string  $join = null
-	 *  @return object  HTML5DocumentHead
+	 *  @return object  Html5DocumentHead
 	 *  @access public
 	 */
 	public function title($text, $append = 0, $join = null)
@@ -210,10 +210,10 @@ class HTML5Document
 	
 	/**
 	 *  save()
-	 *  Perform a PHP DOMDocument saveHTML into the instance $output variable
+	 *  Perform a PHP DomDocument saveHTML into the instance $output variable
 	 *  
 	 *  @param	bool	$showdoctype = true
-	 *  @return	object	HTML5Document
+	 *  @return	object	Html5Document
 	 *  @access	public
 	 */
 	public	function save()
@@ -225,7 +225,7 @@ class HTML5Document
 	
 	/**
 	 *  write()
-	 *  Write the HTML5Document DOMDocument contents
+	 *  Write the Html5Document DomDocument contents
 	 *  
 	 *  @access	public
 	 */
