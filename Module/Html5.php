@@ -32,8 +32,10 @@ class Html5
 	public	function __construct($config = null)
 	{
 		//  cycle the provided configuration into the configure method
-		foreach ($config as $index=>$value) {
-			$this->configure($index, $value);
+		if ($config && is_array($config)) {
+			foreach ($config as $index=>$value) {
+				$this->configure($index, $value);
+			}
 		}
 	}
 	
@@ -50,7 +52,10 @@ class Html5
 		//  evaluate and execute the configuration change, if possible
 		switch ($index) {
 			case 'charset':
-				if (preg_match("/^[a-z][a-z0-9-]+[0-9]{1}$/", $value)) { self::$charset = $value; }
+				if (self::isValid("charset", $value)) { self::$charset = $value; }
+				break;
+			case 'language':
+				if (self::isValid("language", $value)) { self::$language = $value; }
 				break;
 		}
 	}
@@ -69,8 +74,17 @@ class Html5
 			case 'attribute':
 				$valid = preg_match("/^[a-z][a-z0-9-]+$/", $value);
 				break;
+			case 'charset':
+				$valid = preg_match("/^[a-z][a-z0-9-]+[0-9]{1}$/", $value);
+				break;
+			case 'language':
+				$valid = preg_match("/^[a-z]{2}_[A-Z]{2}$/", $value);
+				break;
 			case 'nodename':
-				$valid = preg_match("/^[a-z][a-z0-9-]+$/", $value);
+				$valid = preg_match("/^[a-z]+$/", $value);
+				break;
+			case 'title':
+				$valid = preg_match("", $value);
 				break;
 		}
 		

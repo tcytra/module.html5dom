@@ -13,15 +13,18 @@ class Html5Document extends Html5
 {
 	//  PHP DomDocument Objects
 	
-	/** @var object $domdtd   The definition of the HTML DOM DocumentType */
+	/** @var object $domdtd The definition of the HTML DOM DocumentType */
 	private	$domdtd;
-	/** @var object $domimp   The DomImplementation of DOM DocumentType */
+	/** @var object $domimp The DomImplementation of DOM DocumentType */
 	private	$domimp;
 	
 	//  Html5Document Objects
 	
+	/** @var object $html   The <html> document element and global domnode */
 	private $html;
+	/** @var object $head   The instance of the Html5DocumentHead object */
 	public  $head;
+	/** @var object $body   The <body> document element and local objnode */
 	public  $body;
 	
 	//  Html5Document Output
@@ -31,50 +34,16 @@ class Html5Document extends Html5
 	
 	/**
 	 * __construct()
-	 *  
 	 *  Create an instance of the Html5Document object
-	 *  
-	 *  Optionally, create the root "html" and "body" nodes by arguing
-	 *  + (true, true) or ("html", "body") If the "html" and "body" are argued
-	 *  + for, the <head> will also automatically be appended to <html>
-	 *  
-	 *  By default, this object instance will not create a root node or any 
-	 *  + child nodes
-	 *  
-	 *  @param  bool,"html"  $html = null
-	 *  @param  bool,"body"  $body = null
-	 *  @param  bool,"head"  $head = null
 	 */
-	function __construct($html = null, $body = null, $head = true)
+	function __construct($config = null)
 	{
-		//  import the arguments into the object instance
-		$this->html = $html;
-		$this->body = $body;
-		$this->head = $head;
+		parent::__construct($config);
 		
-		//  perform an instance parameter sanity check
-		$this->checksane();
-		
-		//  create an implementation of this Html5Document request
 		$this->implement();
 	}
 	
 	//  HTML5Document Instance Private Methods
-	
-	/**
-	 *  checksane()
-	 *  Ensure the object and/or its parameters are not completely batshit
-	 *  
-	 *  @return bool
-	 *  @access private
-	 */
-	private function checksane()
-	{
-		//  sanity check: define rigid values for the "html" and "body" arguments
-		$this->html = ( (gettype($this->html)!=="object") && (($this->html === true) || (strtolower($this->html) == "html")) ) ? "html" : $this->html;
-		$this->body = ( (gettype($this->body)!=="object") && (($this->body === true) || (strtolower($this->body) == "body")) ) && $this->html ? "body" : $this->body;
-		$this->head = ( (gettype($this->head)!=="object") && (($this->head === true) || (strtolower($this->head) == "head")) ) && $this->body ? "head" : $this->head;
-	}
 	
 	/**
 	 *  implement()
@@ -89,48 +58,43 @@ class Html5Document extends Html5
 		//  declare the doctype
 		$this->domdtd = $this->domimp->createDocumentType("html", null, null);
 		//  create the document object
-		$this->domobj = $this->domimp->createDocument("", $this->html, $this->domdtd);
+		$this->domobj = $this->domimp->createDocument("", "html", $this->domdtd);
 		//  format the document parameters
 		$this->domobj->formatOutput = true;
 		$this->domobj->preserveWhiteSpace = true;
-		$this->domobj->encoding	= strtoupper( (HTML5Dom::$charset) ? HTML5Dom::$charset : "utf-8" );
+		$this->domobj->encoding	= strtoupper( (Html5::$charset) ? Html5::$charset : "utf-8" );
 		
 		//  identify the instance $objnode as the "html" node
-		if ($this->html) {
-			$this->domnode = $this->domobj->documentElement;
-			$this->objnode = $this->domnode;
-			
-			if(HTML5Dom::$language){ $this->domnode->setAttribute("lang", HTML5Dom::$language); }
-		}
+		$this->domnode = $this->domobj->documentElement;
 		
-		//  append the <head> to the document <html>
-		if ($this->head) {
-			$this->head = new HTML5DocumentHead($this, $this->objnode);
-		}
+		//  set the language attribute for the <html> element, if available
+		if(Html5::$language){ $this->domnode->setAttribute("lang", Html5::$language); }
 		
-		//  append the <body> to the document <html> and identify the instance $objnode as the "body" node
-		if ($this->body) {
-			$this->body = $this->domobj->createElement("body");
-			$this->domnode->appendChild($this->body);
-			$this->objnode = $this->body;
-		}
+		//  append the <head> element to the document <html> element
+		$this->head = new Html5DocumentHead($this, $this->objnode);
+		
+		//  append the <body> to the document <html> and identify the instance
+		//  + $objnode as the "body" node
+		$this->body = $this->domobj->createElement("body");
+		$this->domnode->appendChild($this->body);
+		$this->objnode = $this->body;
 	}
 	
-	//  HTML5Document DOMElement   ----
+	//  HTML5Document DomElement    ----
 	
 	/**
 	 *  append()
-	 *  Create and return a DomElement with the specified nodeName
+	 *  Create and return a DomElement with the specified nodename
 	 *  
-	 *  @param  $nodeName = "div"
-	 *  @return object	HTML5Element
+	 *  @param  $nodename = "div"
+	 *  @return object	Html5Element
 	 *  @access	public
 	 */
-	public	function append($nodeName = "div")
+	public	function append($nodename = "div")
 	{
 		//  create a new instance of the Html5Element and create()
-		$element = new HTML5Element($this, $this->objnode);
-		$element->create($nodeName);
+		$element = new Html5Element($this, $this->objnode);
+		$element->create($nodename);
 		
 		//  return the instance of the Html5Element
 		return	$element;
@@ -147,7 +111,7 @@ class Html5Document extends Html5
 	 */
 	public	function domnode()
 	{
-		return	$this->objnode;
+		return	$this->domnode;
 	}
 	
 	/**
