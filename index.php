@@ -32,6 +32,10 @@
 							<li>Require an isvalid object to test element names and attributes, document title, etc</li>
 							<li>Shorten the element append and attributes "id" and "class" to a constructor argument</li>
 							<li>Argue the charset and language to the HTML5Document __construct and call implement with node tags separately</li>
+							<li>Require the ability to create, manipulate, and output a PHP DomFragment</li>
+							<li>Require the ability to populate an Html5 Document, Fragment, or Element from a text or data source</li>
+							<li>Require the ability to specify environment behavior through a configuration system (Which could chain up a parent system)</li>
+							<li>Utilize the Html5 namespace to contain this module</li>
 						</ul>
 					</section>
 				</main>
