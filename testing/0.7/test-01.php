@@ -3,7 +3,7 @@
 <?php
 
 //  Test 01
-//  Create a PHP DOMDocument DOMElement without arguments; default to <div>
+//  Create a basic parent Html5 object for this system
 
 $html5 = new HTML5Document("html", "body");
 
