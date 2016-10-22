@@ -18,15 +18,23 @@ class Html5
 	/** @var string $language Is the specified language encoding for this HTML5 output */
 	public	static	$language	= "en-US";
 	
+	//  PHP DomDocument Objects
+	
+	/** @var object	$domobj   The DomDocument instance of DomImplementation */
+	private	$domobj;
+	
 	/**
 	 * __construct()
 	 *  Create an instance of the Html5 object
 	 *  
-	 *  @param  object  $config = null
+	 *  @param  array  $config = null
 	 */
 	public	function __construct($config = null)
 	{
-		
+		//  cycle the provided configuration into the configure method
+		foreach ($config as $index=>$value) {
+			$this->configure($index, $value);
+		}
 	}
 	
 	/**
@@ -39,6 +47,7 @@ class Html5
 	 */
 	private	function configure($index, $value)
 	{
+		//  evaluate and execute the configuration change, if possible
 		switch ($index) {
 			case 'charset':
 				if (preg_match("/^[a-z][a-z0-9-]+[0-9]{1}$/", $value)) { self::$charset = $value; }

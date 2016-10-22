@@ -9,14 +9,8 @@
  *	@version    0.1.3 Html5DocumentHead.php 2016-10-13
  *	@since      html5-0.0.6
  */
-class Html5DocumentHead
+class Html5DocumentHead extends Html5Document
 {
-	/** @var object	$domobj   The DomDocument instance of DomImplementation */
-	private	$domobj;
-	
-	/** @var object $objnode  The DomDocument "head" node */
-	private $objnode;
-	
 	/**
 	 * __construct()
 	 *  Create an instance of the Html5DocumentHead

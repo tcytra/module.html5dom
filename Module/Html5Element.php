@@ -8,21 +8,12 @@
  *  @version	0.1.5 Html5Element.php 2016-09-21
  *  @since		html5-0.0.1
  */
-class Html5Element
+class Html5Element extends Html5
 {
 	//  DomDocument Objects
 	
-	/** @var object	$domobj   The DomDocument instance of DomImplementation */
-	private	$domobj;
 	/** @var object $domnode  The parent DomElement node; <html>,<body>,etc */
 	private $domnode;
-	/** @var object $objnode  The target DomElement node; <div> by default */
-	private $objnode;
-	
-	//  Html5Element Objects
-	
-	/** @var object $parent   The parent Html5 object appending an element */
-	//private	$parent;
 	
 	/**
 	 * __construct()
@@ -70,13 +61,13 @@ class Html5Element
 	 */
 	public function create($nodename)
 	{
-		//  create the new DOMElement
+		//  create the new DomElement
 		$this->objnode = $this->domobj->createElement($nodename);
 		
 		//echo $this->objnode->nodeName;
 		//exit;
 		
-		//  append the new DOMElement to the target node element
+		//  append the new DomElement to the target node element
 		$this->domnode->appendChild( $this->objnode );
 		
 		return	$this;

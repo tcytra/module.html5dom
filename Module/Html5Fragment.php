@@ -8,7 +8,7 @@
  *  @version	0.1.5 Html5Fragment.php 2016-09-19
  *  @since		html5-0.0.1
  */
-class Html5Fragment
+class Html5Fragment extends Html5Document
 {
 	
 }

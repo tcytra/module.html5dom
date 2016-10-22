@@ -9,21 +9,16 @@
  *  @version    0.2.5 Html5Document.php 2016-09-14
  *  @since      html5-0.0.1
  */
-class Html5Document
+class Html5Document extends Html5
 {
-	//  DomDocument Objects
+	//  PHP DomDocument Objects
 	
 	/** @var object $domdtd   The definition of the HTML DOM DocumentType */
 	private	$domdtd;
 	/** @var object $domimp   The DomImplementation of DOM DocumentType */
 	private	$domimp;
-	/** @var object	$domobj   The DomDocument instance of DomImplementation */
-	private	$domobj;
 	
 	//  Html5Document Objects
-	
-	/** @var object $objnode  The target DomDocument node, normally "html" or "body" */
-	private $objnode;
 	
 	private $html;
 	public  $head;
