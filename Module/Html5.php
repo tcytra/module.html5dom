@@ -54,4 +54,26 @@ class Html5
 				break;
 		}
 	}
+	
+	//  Global Methods
+	
+	/**
+	 *  isValid()
+	 *  
+	 */
+	public	static	function isValid($type, $value)
+	{
+		$valid = false;
+		
+		switch (strtolower($type)) {
+			case 'attribute':
+				$valid = preg_match("/^[a-z][a-z0-9-]+$/", $value);
+				break;
+			case 'nodename':
+				$valid = preg_match("/^[a-z][a-z0-9-]+$/", $value);
+				break;
+		}
+		
+		return $valid;
+	}
 }
