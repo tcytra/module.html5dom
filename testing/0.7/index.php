@@ -10,7 +10,7 @@
 		<h2>Notes</h2>
 		<ul>
 			<li>Will create an instance of the Html5 object, bare contructor?</li>
-			<li>Rename objects as Html5[A-Z][A-Za-z]</li>
+			<li>Rename objects in the StudlyCase convention; ie Html5Document</li>
 			<li>Extend the Html5DocumentHead, Html5Element, Html5Fragment objects from this Html5 object</li>
 			<li>Might merge static HTML5Dom methods into this structure</li>
 		</ul>
