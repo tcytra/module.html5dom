@@ -9,24 +9,64 @@
  *	@version    0.1.3 Html5DocumentHead.php 2016-10-13
  *	@since      html5-0.0.6
  */
-class Html5DocumentHead extends Html5Document
+class Html5DocumentHead extends Html5
 {
+	//  Local Object Parameters
+	
+	/** @var object $objnode  The local target PHP DomElement reference */
+	private $objnode;
+	/** @var string $objtype  The instance type of this object is documenthead */
+	public	$objtype	= "documenthead";
+	
 	/**
 	 * __construct()
 	 *  Create an instance of the Html5DocumentHead
 	 */
-	function __construct($parent, $objnode = null)
+	function __construct($config = null)
 	{
-		$this->domobj	= $parent->domobject();
+		//  cycle the provided configuration into the configure method
+		if ($config && is_array($config)) {
+			foreach ($config as $index=>$value) { $this->configure($index, $value); }
+		}
+		
+		//  pass the remaining config to the parent constructor
+		parent::__construct($config);
+	}
+	
+	//  Private Methods
+	
+	/**
+	 *  configure()
+	 *  Set a configuration value for this object by specified index
+	 *  
+	 *  @param  string  $index
+	 *  @param  string  $value
+	 *  @access private
+	 */
+	private	function configure($index, $value)
+	{
+		//  evaluate and execute the configuration change, if possible
+		switch ($index) {
+			case 'parent':
+				$this->domobj = $value->domobject();
+				break;
+			case 'target':
+				$this->target = $value;
+				break;
+		}
+	}
+	
+	//  Public Methods
+	
+	public function create()
+	{
 		$this->objnode	= $this->domobj->createElement("head");
 		
-		if (HTML5Dom::$charset) {
-			$this->meta(["charset"=>HTML5Dom::$charset]);
+		if (Html5::$charset) {
+			$this->meta(["charset"=>Html5::$charset]);
 		}
 		
-		if ($objnode) {
-			$objnode->appendChild($this->objnode);
-		}
+		$this->target->appendChild($this->objnode);
 	}
 	
 	/**

@@ -11,20 +11,25 @@
  */
 class Html5Document extends Html5
 {
+	//  Local Object Parameters
+	
+	/** @var string $objtype  The instance type of this object is document */
+	public	$objtype	= "document";
+	
 	//  PHP DomDocument Objects
 	
-	/** @var object $domdtd The definition of the HTML DOM DocumentType */
+	/** @var object $domdtd   The definition of the HTML DOM DocumentType */
 	private	$domdtd;
-	/** @var object $domimp The DomImplementation of DOM DocumentType */
+	/** @var object $domimp   The DomImplementation of DOM DocumentType */
 	private	$domimp;
+	/** @var object $domnode  The documentElement node, <html> element */
+	private	$domnode;
 	
 	//  Html5Document Objects
 	
-	/** @var object $html   The <html> document element and global domnode */
-	private $html;
-	/** @var object $head   The instance of the Html5DocumentHead object */
+	/** @var object $head     The instance of the Html5DocumentHead object */
 	public  $head;
-	/** @var object $body   The <body> document element and local objnode */
+	/** @var object $body     The <body> document element and local objnode */
 	public  $body;
 	
 	//  Html5Document Output
@@ -71,16 +76,17 @@ class Html5Document extends Html5
 		if(Html5::$language){ $this->domnode->setAttribute("lang", Html5::$language); }
 		
 		//  append the <head> element to the document <html> element
-		$this->head = new Html5DocumentHead($this, $this->objnode);
+		$this->head = new Html5DocumentHead(['parent'=>$this, 'target'=>$this->domnode]);
+		$this->head->create();
 		
 		//  append the <body> to the document <html> and identify the instance
 		//  + $objnode as the "body" node
 		$this->body = $this->domobj->createElement("body");
 		$this->domnode->appendChild($this->body);
-		$this->objnode = $this->body;
+		//$this->objnode = $this->body;
 	}
 	
-	//  HTML5Document DomElement    ----
+	//  HTML5Document DomElement
 	
 	/**
 	 *  append()
@@ -92,8 +98,8 @@ class Html5Document extends Html5
 	 */
 	public	function append($nodename = "div")
 	{
-		//  create a new instance of the Html5Element and create()
-		$element = new Html5Element($this, $this->objnode);
+		//  create a new instance of the Html5Element and create the element
+		$element = new Html5Element(['parent'=>$this, 'target'=>$this->body]);
 		$element->create($nodename);
 		
 		//  return the instance of the Html5Element

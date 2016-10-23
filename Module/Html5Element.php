@@ -10,24 +10,51 @@
  */
 class Html5Element extends Html5
 {
-	//  DomDocument Objects
+	//  Local Object Parameters
 	
-	/** @var object $domnode  The parent DomElement node; <html>,<body>,etc */
-	private $domnode;
+	/** @var object $objnode  The local target PHP DomElement reference */
+	private $objnode;
+	/** @var string $objtype  The instance type of this object is element */
+	public	$objtype	= "element";
 	
 	/**
 	 * __construct()
 	 *  Create an instance of the Html5Element
 	 *  
-	 *  @param  object  $parent
-	 *  @param  object  $objnode = null
+	 *  @param  object  $config = null
 	 */
-	public function __construct($parent, $objnode = null)
+	public function __construct($config = null)
 	{
-		//$this->parent   = $parent;
-		$this->domobj	= $parent->domobject();
-		$this->domnode	= $parent->domnode();
-		$this->objnode  = $objnode;
+		//  cycle the provided configuration into the configure method
+		if ($config && is_array($config)) {
+			foreach ($config as $index=>$value) { $this->configure($index, $value); }
+		}
+		
+		//  pass the remaining config to the parent constructor
+		parent::__construct($config);
+	}
+	
+	//  Private Methods
+	
+	/**
+	 *  configure()
+	 *  Set a configuration value for this object by specified index
+	 *  
+	 *  @param  string  $index
+	 *  @param  string  $value
+	 *  @access private
+	 */
+	private	function configure($index, $value)
+	{
+		//  evaluate and execute the configuration change, if possible
+		switch ($index) {
+			case 'parent':
+				$this->domobj = $value->domobject();
+				break;
+			case 'target':
+				$this->target = $value;
+				break;
+		}
 	}
 	
 	//  Html5Element Manipulation
@@ -68,7 +95,7 @@ class Html5Element extends Html5
 		//exit;
 		
 		//  append the new DomElement to the target node element
-		$this->domnode->appendChild( $this->objnode );
+		$this->target->appendChild( $this->objnode );
 		
 		return	$this;
 	}

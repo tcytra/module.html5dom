@@ -13,15 +13,24 @@ class Html5
 {
 	//  Html5 Document Parameters
 	
-	/** @var string $charset  Is the specified character set for this HTML5 output */
+	/** @var string $charset  The specified character set for the output */
 	public	static	$charset	= "utf-8";
-	/** @var string $language Is the specified language encoding for this HTML5 output */
+	/** @var string $language The specified language encoding for the output */
 	public	static	$language	= "en-US";
+	
+	//  Local Object Parameters
+	
+	/** @var string $objtype  The instance type of this object is parent */
+	public	$objtype	= "parent";
 	
 	//  PHP DomDocument Objects
 	
 	/** @var object	$domobj   The DomDocument instance of DomImplementation */
 	private	$domobj;
+	/** @var object $parent   The parent object instance */
+	private	$parent;
+	/** @var object @target   The parent object target element */
+	private	$target;
 	
 	/**
 	 * __construct()
@@ -33,11 +42,11 @@ class Html5
 	{
 		//  cycle the provided configuration into the configure method
 		if ($config && is_array($config)) {
-			foreach ($config as $index=>$value) {
-				$this->configure($index, $value);
-			}
+			foreach ($config as $index=>$value) { $this->configure($index, $value); }
 		}
 	}
+	
+	//  Private Methods
 	
 	/**
 	 *  configure()
