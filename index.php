@@ -49,6 +49,7 @@
 							<li>Require the ability to specify environment behavior through a configuration system (Which could chain up a parent system)</li>
 							<li>Utilize the Html5 namespace to contain this module</li>
 							<li>Consider the possibility of introducing an Html5DocumentBody object to manage the concept of interface pages, dialogues, and toolbars</li>
+							<li>Require an error detection and stop process system</li>
 						</ul>
 					</section>
 				</main>
