@@ -15,12 +15,9 @@ $code = <<<JavaScript
 JavaScript;
 
 //  Create the document <head> elements
-$html5->head->meta( ["name"=>"description","content"=>$describe] )
-	->title("Html5Dom | 0.8 {$testcase}")
-	->javascript(null, $code)
-	->favicon("/favicon.png");
+$html5->head->meta(["name"=>"description","content"=>$describe])->title("Html5Dom | 0.8 {$testcase}")->javascript(null, $code)->favicon("/favicon.png");
 
-//  Create a document <body> element
+//  Create a <div> element in the document <body>
 $html5->append("div")->attribute("id", "testing")->attribute("class", "page interface");
 
 $html5->save()->write();
