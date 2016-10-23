@@ -75,15 +75,15 @@ class Html5
 	 *  append()
 	 *  Create and return a DomElement with the specified nodename
 	 *  
-	 *  @param  $nodename = "div"
+	 *  @param  string  $construct
 	 *  @return object	Html5Element
 	 *  @access	public
 	 */
-	public	function append($nodename = "div")
+	public	function append($construct)
 	{
 		//  create a new instance of the Html5Element and create the element
-		$element = new Html5Element(['parent'=>$this, 'target'=>$this->body]);
-		$element->create($nodename);
+		$element = new Html5Element(['parent'=>$this, 'target'=>$this->objnode]);
+		$element->create($construct);
 		
 		//  return the instance of the Html5Element
 		return	$element;

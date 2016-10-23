@@ -57,7 +57,37 @@ class Html5Element extends Html5
 		}
 	}
 	
-	//  Html5Element Manipulation
+	//  Html5Element Construct
+	
+	/**
+	 *  create()
+	 *  @param  string  $construct
+	 *  @access public
+	 */
+	public function create($construct)
+	{
+		//  create an instance of the HTML5Contructor object
+		$this->construct = HTML5Construct::Set($construct);
+		
+		//  create a DomElement for this instance of the Html5Element, if able
+		if ($this->construct->able()) {
+			//  create the new DomElement
+			$this->objnode = $this->domobj->createElement($this->construct->name);
+			
+			//  add a provided class attribute to the DomElement
+			if ($this->construct->class) { $this->addClass($this->construct->class); }
+			
+			//  add a provided id attribute to the DOMElement
+			if ($this->construct->id && !$this->domobj->getElementById($this->construct->id)) { $this->setId($this->construct->id); }
+			
+			//  append the new DomElement to the target node element
+			$this->target->appendChild( $this->objnode );
+		}
+		
+		return $this;
+	}
+	
+	//  Html5Element Attributes
 	
 	/**
 	 *  attribute()
@@ -82,22 +112,47 @@ class Html5Element extends Html5
 	}
 	
 	/**
-	 *  create()
-	 *  @param  type    $nodename
+	 *  addClass()
+	 *  Add the provided classname(s) to the HTML5Element class attribute
+	 *  
+	 *  @param  string  $classname
+	 *  @return object  Html5Element
 	 *  @access public
 	 */
-	public function create($nodename)
+	public	function addClass($classname)
 	{
-		//  create the new DomElement
-		$this->objnode = $this->domobj->createElement($nodename);
+		//  retrieve a list of existing classes
+		$list = ($class = $this->attribute("class")) ? explode(" ", $class) : array();
 		
-		//echo $this->objnode->nodeName;
-		//exit;
+		//  exlode the list of classes to add
+		$classname = explode(" ", trim(str_replace(".", " ", $classname)));
 		
-		//  append the new DomElement to the target node element
-		$this->target->appendChild( $this->objnode );
+		//  add non existing classes to the list
+		foreach ($classname as $each) {
+			if (!in_array($each, $list)) { $list[] = $each; }
+		}
 		
-		return	$this;
+		//  implode the list into the attribute
+		$this->attribute("class", implode(" ", $list));
+		
+		return $this;
 	}
+	
+	/**
+	 *  setId()
+	 *  Add the provided id to this Html5Element id attribute
+	 *  
+	 *  @param  string  $id
+	 *  @return object  Html5Element
+	 *  @access public
+	 */
+	public function setId()
+	{
+		$this->objnode->setAttribute("id", $this->construct->id);
+		$this->objnode->setIdAttribute("id", true);
+		
+		return $this;
+	}
+	
 }
 ?>

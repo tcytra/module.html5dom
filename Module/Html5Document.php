@@ -13,6 +13,7 @@ class Html5Document extends Html5
 {
 	//  Local Object Parameters
 	
+	
 	/** @var string $objtype  The instance type of this object is document */
 	public	$objtype	= "document";
 	
@@ -83,6 +84,8 @@ class Html5Document extends Html5
 		//  + $objnode as the "body" node
 		$this->body = $this->domobj->createElement("body");
 		$this->domnode->appendChild($this->body);
+		
+		$this->objnode = $this->body;
 	}
 	
 	//  Html5Document Internal References
