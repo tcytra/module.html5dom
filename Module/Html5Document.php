@@ -29,7 +29,7 @@ class Html5Document extends Html5
 	
 	/** @var object $head     The instance of the Html5DocumentHead object */
 	public  $head;
-	/** @var object $body     The <body> document element and local objnode */
+	/** @var object $body     The document <body> element and local objnode */
 	public  $body;
 	
 	//  Html5Document Output
@@ -48,7 +48,7 @@ class Html5Document extends Html5
 		$this->implement();
 	}
 	
-	//  HTML5Document Instance Private Methods
+	//  Html5Document Instance Private Methods
 	
 	/**
 	 *  implement()
@@ -83,10 +83,9 @@ class Html5Document extends Html5
 		//  + $objnode as the "body" node
 		$this->body = $this->domobj->createElement("body");
 		$this->domnode->appendChild($this->body);
-		//$this->objnode = $this->body;
 	}
 	
-	//  HTML5Document DomElement
+	//  Html5Document DomElement
 	
 	/**
 	 *  append()
@@ -132,46 +131,7 @@ class Html5Document extends Html5
 		return	$this->domobj;
 	}
 	
-	//  HTML5Document Head         ----
-	
-	/**
-	 *  meta()
-	 *  Add a document META tag and attributes to the html5 node tree
-	 *  
-	 *  @param  array   $attr
-	 *  @return object  Html5DocumentHead
-	 *  @access public
-	 */
-	public function meta($attr)
-	{
-		if ($this->head) {
-			$this->head->meta($attr);
-			
-			return $this;
-		}
-	}
-	
-	/**
-	 *  title()
-	 *  Add the document title tag to the html5 node tree
-	 *  + 0 (Default) will overwrite, 1 will append, -1 will prepend
-	 *  
-	 *  @param  string  $text
-	 *  @param  int	    $append = 0
-	 *  @param  string  $join = null
-	 *  @return object  Html5DocumentHead
-	 *  @access public
-	 */
-	public function title($text, $append = 0, $join = null)
-	{
-		if ($this->head) {
-			$this->head->title($text, $append, $join);
-			
-			return $this;
-		}
-	}
-	
-	//  HTML5Document Output       ----
+	//  Html5Document Output       ----
 	
 	/**
 	 *  save()
