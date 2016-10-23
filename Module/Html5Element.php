@@ -13,9 +13,9 @@ class Html5Element extends Html5
 	//  Local Object Parameters
 	
 	/** @var object $objnode  The local target PHP DomElement reference */
-	private $objnode;
+	protected	$objnode;
 	/** @var string $objtype  The instance type of this object is element */
-	public	$objtype	= "element";
+	public		$objtype	= "element";
 	
 	/**
 	 * __construct()
@@ -61,13 +61,20 @@ class Html5Element extends Html5
 	
 	/**
 	 *  create()
+	 *  Create a DOMDocument element and append to the parent, with content if provided
+	 *  
 	 *  @param  string  $construct
+	 *  @param  string  $with = null
+	 *  @return object  Html5Element
 	 *  @access public
 	 */
-	public function create($construct)
+	public function create($construct, $with = null)
 	{
 		//  create an instance of the HTML5Contructor object
 		$this->construct = HTML5Construct::Set($construct);
+		
+		//  reconfigure the $with arguments into an array, if provided
+		if ($with && !is_array($with)) { $with = func_get_args(); array_shift($with); }
 		
 		//  create a DomElement for this instance of the Html5Element, if able
 		if ($this->construct->able()) {
@@ -82,9 +89,28 @@ class Html5Element extends Html5
 			
 			//  append the new DomElement to the target node element
 			$this->target->appendChild( $this->objnode );
+			
+			//  execute any provided $with arguments
+			if ($with) { $this->with($with); }
 		}
 		
 		return $this;
+	}
+	
+	/**
+	 *  with()
+	 *  Create the internal content with() the provided argument
+	 *  
+	 *  @param  string  $with
+	 *  @return object
+	 */
+	public function with($with)
+	{
+		//  reconfigure the $with arguments, if provided
+		if ($with && !is_array($with)) { $with = func_get_args(); }
+		
+		//  pass the argument to the parent object
+		return parent::with($with);
 	}
 	
 	//  Html5Element Attributes
@@ -97,7 +123,7 @@ class Html5Element extends Html5
 	 *  @param  string  $value = null
 	 *  @return string|object
 	 */
-	public	function attribute($name, $value = null)
+	public function attribute($name, $value = null)
 	{
 		if ($value) {
 			$this->objnode->setAttribute($name, $value);
@@ -119,7 +145,7 @@ class Html5Element extends Html5
 	 *  @return object  Html5Element
 	 *  @access public
 	 */
-	public	function addClass($classname)
+	public function addClass($classname)
 	{
 		//  retrieve a list of existing classes
 		$list = ($class = $this->attribute("class")) ? explode(" ", $class) : array();

@@ -21,16 +21,14 @@ class Html5
 	//  Local Object Parameters
 	
 	/** @var string $objtype  The instance type of this object is parent */
-	public	$objtype	= "parent";
+	public		$objtype	= "parent";
 	
 	//  PHP DomDocument Objects
 	
-	/** @var object	$domobj   The DomDocument instance of DomImplementation */
-	private	$domobj;
 	/** @var object $parent   The parent object instance */
-	private	$parent;
+	private		$parent;
 	/** @var object @target   The parent object target element */
-	private	$target;
+	private		$target;
 	
 	/**
 	 * __construct()
@@ -38,7 +36,7 @@ class Html5
 	 *  
 	 *  @param  array  $config = null
 	 */
-	public	function __construct($config = null)
+	public function __construct($config = null)
 	{
 		//  cycle the provided configuration into the configure method
 		if ($config && is_array($config)) {
@@ -75,27 +73,115 @@ class Html5
 	 *  append()
 	 *  Create and return a DomElement with the specified nodename
 	 *  
-	 *  @param  string  $construct
-	 *  @return object	Html5Element
+	 *  @param  mixed   $construct
+	 *  @param  mixed   $with = null
+	 *  @return object
 	 *  @access	public
 	 */
-	public	function append($construct)
+	public function append($construct, $with = null)
 	{
+		//  reconfigure the $with arguments, if provided
+		if ($with && !is_array($with)) { $with = func_get_args(); array_shift($with); }
+		
 		//  create a new instance of the Html5Element and create the element
 		$element = new Html5Element(['parent'=>$this, 'target'=>$this->objnode]);
-		$element->create($construct);
+		$element->create($construct, $with);
 		
 		//  return the instance of the Html5Element
-		return	$element;
+		return	$this;
+	}
+	
+	/**
+	 *  loadhtml()
+	 *  Import an HTML string into the target DomElement
+	 *  @param  string  $with
+	 *  @return object
+	 *  @access public
+	 */
+	public function loadhtml($with)
+	{
+		//  create a temporary instance of the DomDocument object
+		$domimp = new DOMImplementation;
+		$domdtd = $domimp->createDocumentType("html", null, null);
+		$domobj = $domimp->createDocument("", "", $domdtd);
+		
+		//  import the provided html into the temporary DomDocument
+		@$domobj->loadHTML("<div>{$with}</div>");
+		
+		//  retrieve the imported nodes from the DomDocument
+		$nodes  = $domobj->getElementsByTagName('div')->item(0)->childNodes;
+		
+		//  import the retrieved nodes into the Html5Element instance element
+		foreach($nodes as $node)
+		{
+			$node = $this->domobj->importNode($node, true);
+			
+			if (($node->nodeType == 1) && $node->hasAttribute("id")) { $node->setIdAttribute("id", true); }
+			
+			$this->objnode->appendChild($node);
+		}
+		
+		//  return this instance of the Html5 object
+		return  $this;
+	}
+	
+	/**
+	 *  loadtext()
+	 *  @param  string  $with
+	 *  @return object
+	 *  @access public
+	 */
+	public function loadtext($with)
+	{
+		//  for the time being, return the result of loadhtml
+		return $this->loadhtml($with);
+	}
+	
+	/**
+	 *  with()
+	 *  Create the DOMElement internal content with the provided argument
+	 *  
+	 *  @param  string  $with
+	 *  @return object
+	 *  @access public
+	 */
+	public function with($with)
+	{
+		//  reconfigure the $with arguments, if provided
+		if ($with && !is_array($with)) { $with = func_get_args(); }
+		
+		//  if $with has only one argument, it is default type text
+		if (count($with) == 1) { return $this->loadtext($with[0]); }
+		
+		//  there are at least two arguments to evaluate
+		switch (array_shift($with)) {
+			case 'data':
+				$this->loaddata(array_shift($with));
+				break;
+			case 'file':
+				$this->loadfile(array_shift($with));
+				break;
+			case 'html':
+				$this->loadhtml(array_shift($with));
+				break;
+			case 'text':
+				$this->loadtext(array_shift($with));
+				break;
+		}
+		
+		return $this;
 	}
 	
 	//  Global Methods
 	
 	/**
 	 *  isValid()
-	 *  
+	 *  @param  string  $type
+	 *  @param  string  $value
+	 *  @return bool
+	 *  @access global
 	 */
-	public	static	function isValid($type, $value)
+	public static function isValid($type, $value)
 	{
 		$valid = false;
 		

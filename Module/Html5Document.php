@@ -13,30 +13,31 @@ class Html5Document extends Html5
 {
 	//  Local Object Parameters
 	
-	
 	/** @var string $objtype  The instance type of this object is document */
-	public	$objtype	= "document";
+	public		$objtype	= "document";
 	
 	//  PHP DomDocument Objects
 	
 	/** @var object $domdtd   The definition of the HTML DOM DocumentType */
-	private	$domdtd;
+	private		$domdtd;
 	/** @var object $domimp   The DomImplementation of DOM DocumentType */
-	private	$domimp;
+	private		$domimp;
 	/** @var object $domnode  The documentElement node, <html> element */
-	private	$domnode;
+	private		$domnode;
+	/** @var object	$domobj   The DomDocument instance of DomImplementation */
+	protected	$domobj;
 	
 	//  Html5Document Objects
 	
 	/** @var object $head     The instance of the Html5DocumentHead object */
-	public  $head;
+	public		$head;
 	/** @var object $body     The document <body> element and local objnode */
-	public  $body;
+	public		$body;
 	
 	//  Html5Document Output
 	
 	/** @var string The saveHTML string returned from PHP DomDocument */
-	private	$output;
+	private		$output;
 	
 	/**
 	 * __construct()
@@ -57,7 +58,7 @@ class Html5Document extends Html5
 	 *  
 	 *  @access	private
 	 */
-	private	function implement()
+	private function implement()
 	{
 		//  create an instance of the PHP DomImplementation
 		$this->domimp = new DOMImplementation;
@@ -97,7 +98,7 @@ class Html5Document extends Html5
 	 *	@return	object
 	 *  @access	public
 	 */
-	public	function domnode()
+	public function domnode()
 	{
 		return	$this->domnode;
 	}
@@ -109,7 +110,7 @@ class Html5Document extends Html5
 	 *  @return	object
 	 *  @access	public
 	 */
-	public	function domobject()
+	public function domobject()
 	{
 		return	$this->domobj;
 	}
@@ -124,7 +125,7 @@ class Html5Document extends Html5
 	 *  @return	object	Html5Document
 	 *  @access	public
 	 */
-	public	function save()
+	public function save()
 	{
 		$this->output = $this->domobj->saveHTML();
 		
@@ -137,7 +138,7 @@ class Html5Document extends Html5
 	 *  
 	 *  @access	public
 	 */
-	public	function write()
+	public function write()
 	{
 		//  write the saveHTML output string
 		echo $this->output;

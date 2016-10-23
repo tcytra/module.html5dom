@@ -14,9 +14,9 @@ class Html5DocumentHead extends Html5
 	//  Local Object Parameters
 	
 	/** @var object $objnode  The local target PHP DomElement reference */
-	private $objnode;
+	protected	$objnode;
 	/** @var string $objtype  The instance type of this object is documenthead */
-	public	$objtype	= "documenthead";
+	public		$objtype	= "documenthead";
 	
 	/**
 	 * __construct()
