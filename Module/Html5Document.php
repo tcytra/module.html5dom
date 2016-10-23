@@ -6,7 +6,7 @@
  *  + object to create, identify, and manipulate the types of nodes in the tree
  *  
  *  @author     Todd Cytra <tcytra@gmail.com>
- *  @version    0.2.5 Html5Document.php 2016-09-14
+ *  @version    0.2.6 Html5Document.php 2016-09-14
  *  @since      html5-0.0.1
  */
 class Html5Document extends Html5
@@ -83,26 +83,6 @@ class Html5Document extends Html5
 		//  + $objnode as the "body" node
 		$this->body = $this->domobj->createElement("body");
 		$this->domnode->appendChild($this->body);
-	}
-	
-	//  Html5Document DomElement
-	
-	/**
-	 *  append()
-	 *  Create and return a DomElement with the specified nodename
-	 *  
-	 *  @param  $nodename = "div"
-	 *  @return object	Html5Element
-	 *  @access	public
-	 */
-	public	function append($nodename = "div")
-	{
-		//  create a new instance of the Html5Element and create the element
-		$element = new Html5Element(['parent'=>$this, 'target'=>$this->body]);
-		$element->create($nodename);
-		
-		//  return the instance of the Html5Element
-		return	$element;
 	}
 	
 	//  Html5Document Internal References

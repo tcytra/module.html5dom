@@ -6,7 +6,7 @@
  *  + the top level configuration and dom references and interaction
  *  
  *  @author     Todd Cytra <tcytra@gmail.com>
- *  @version    0.1.1 Html5.php 2016-10-21
+ *  @version    0.1.2 Html5.php 2016-10-21
  *  @since      Html5-0.0.7
  */
 class Html5
@@ -67,6 +67,26 @@ class Html5
 				if (self::isValid("language", $value)) { self::$language = $value; }
 				break;
 		}
+	}
+	
+	//  Public Methods
+	
+	/**
+	 *  append()
+	 *  Create and return a DomElement with the specified nodename
+	 *  
+	 *  @param  $nodename = "div"
+	 *  @return object	Html5Element
+	 *  @access	public
+	 */
+	public	function append($nodename = "div")
+	{
+		//  create a new instance of the Html5Element and create the element
+		$element = new Html5Element(['parent'=>$this, 'target'=>$this->body]);
+		$element->create($nodename);
+		
+		//  return the instance of the Html5Element
+		return	$element;
 	}
 	
 	//  Global Methods
