@@ -50,7 +50,7 @@ class Html5Document extends Html5
 		$this->implement();
 	}
 	
-	//  Html5Document Instance Private Methods
+	//  Private Methods
 	
 	/**
 	 *  implement()
@@ -62,10 +62,13 @@ class Html5Document extends Html5
 	{
 		//  create an instance of the PHP DomImplementation
 		$this->domimp = new DOMImplementation;
+		
 		//  declare the doctype
 		$this->domdtd = $this->domimp->createDocumentType("html", null, null);
+		
 		//  create the document object
 		$this->domobj = $this->domimp->createDocument("", "html", $this->domdtd);
+		
 		//  format the document parameters
 		$this->domobj->formatOutput = true;
 		$this->domobj->preserveWhiteSpace = true;
@@ -89,19 +92,18 @@ class Html5Document extends Html5
 		$this->objnode = $this->body;
 	}
 	
-	//  Html5Document Internal References
+	//  Public Methods
 	
 	/**
-	 *  domnode()
-	 *  Return the current working node for this instance
+	 *  fragment
 	 *  
-	 *	@return	object
-	 *  @access	public
 	 */
-	public function domnode()
+	public function fragment()
 	{
-		return	$this->domnode;
+		
 	}
+	
+	//  Internal References
 	
 	/**
 	 *  domobject()
@@ -112,10 +114,10 @@ class Html5Document extends Html5
 	 */
 	public function domobject()
 	{
-		return	$this->domobj;
+		return $this->domobj;
 	}
 	
-	//  Html5Document Output       ----
+	//  Html5Document Output
 	
 	/**
 	 *  save()
@@ -129,7 +131,7 @@ class Html5Document extends Html5
 	{
 		$this->output = $this->domobj->saveHTML();
 		
-		return	$this;
+		return $this;
 	}
 	
 	/**
