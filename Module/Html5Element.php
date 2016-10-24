@@ -73,9 +73,6 @@ class Html5Element extends Html5
 		//  create an instance of the HTML5Contructor object
 		$this->construct = HTML5Construct::Set($construct);
 		
-		//  reconfigure the $with arguments into an array, if provided
-		if ($with && !is_array($with)) { $with = func_get_args(); array_shift($with); }
-		
 		//  create a DomElement for this instance of the Html5Element, if able
 		if ($this->construct->able()) {
 			//  create the new DomElement
@@ -106,9 +103,6 @@ class Html5Element extends Html5
 	 */
 	public function with($with)
 	{
-		//  reconfigure the $with arguments, if provided
-		if ($with && !is_array($with)) { $with = func_get_args(); }
-		
 		//  pass the argument to the parent object
 		return parent::with($with);
 	}

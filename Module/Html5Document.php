@@ -95,11 +95,19 @@ class Html5Document extends Html5
 	//  Public Methods
 	
 	/**
-	 *  fragment
+	 *  fragment()
+	 *  Create and return an instance of the Html5Fragment
 	 *  
+	 *  @param  string  $construct
+	 *  @param  string  $with = null
+	 *  @return object  Html5Fragment
+	 *  @access public
 	 */
-	public function fragment()
+	public function fragment($construct, $with = null)
 	{
+		//  create an instance of the HTML5Contruct object
+		$construct = HTML5Construct::Set($construct);
+		
 		
 	}
 	

@@ -73,16 +73,13 @@ class Html5
 	 *  append()
 	 *  Create and return a DomElement with the specified nodename
 	 *  
-	 *  @param  mixed   $construct
-	 *  @param  mixed   $with = null
+	 *  @param  string  $construct
+	 *  @param  string  $with = null
 	 *  @return object
 	 *  @access	public
 	 */
 	public function append($construct, $with = null)
 	{
-		//  reconfigure the $with arguments, if provided
-		if ($with && !is_array($with)) { $with = func_get_args(); array_shift($with); }
-		
 		//  create a new instance of the Html5Element and create the element
 		$element = new Html5Element(['parent'=>$this, 'target'=>$this->objnode]);
 		$element->create($construct, $with);
@@ -92,13 +89,14 @@ class Html5
 	}
 	
 	/**
-	 *  loadhtml()
-	 *  Import an HTML string into the target DomElement
+	 *  with()
+	 *  Import the with argument into the object node
+	 *  
 	 *  @param  string  $with
 	 *  @return object
 	 *  @access public
 	 */
-	public function loadhtml($with)
+	public function with($with)
 	{
 		//  create a temporary instance of the DomDocument object
 		$domimp = new DOMImplementation;
@@ -123,53 +121,6 @@ class Html5
 		
 		//  return this instance of the Html5 object
 		return  $this;
-	}
-	
-	/**
-	 *  loadtext()
-	 *  @param  string  $with
-	 *  @return object
-	 *  @access public
-	 */
-	public function loadtext($with)
-	{
-		//  for the time being, return the result of loadhtml
-		return $this->loadhtml($with);
-	}
-	
-	/**
-	 *  with()
-	 *  Create the DOMElement internal content with the provided argument
-	 *  
-	 *  @param  string  $with
-	 *  @return object
-	 *  @access public
-	 */
-	public function with($with)
-	{
-		//  reconfigure the $with arguments, if provided
-		if ($with && !is_array($with)) { $with = func_get_args(); }
-		
-		//  if $with has only one argument, it is default type text
-		if (count($with) == 1) { return $this->loadtext($with[0]); }
-		
-		//  there are at least two arguments to evaluate
-		switch (array_shift($with)) {
-			case 'data':
-				$this->loaddata(array_shift($with));
-				break;
-			case 'file':
-				$this->loadfile(array_shift($with));
-				break;
-			case 'html':
-				$this->loadhtml(array_shift($with));
-				break;
-			case 'text':
-				$this->loadtext(array_shift($with));
-				break;
-		}
-		
-		return $this;
 	}
 	
 	//  Global Methods
