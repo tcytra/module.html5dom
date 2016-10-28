@@ -57,7 +57,7 @@ class Html5Element extends Html5
 		}
 	}
 	
-	//  Html5Element Construct
+	//  Public Methods
 	
 	/**
 	 *  create()
@@ -79,10 +79,12 @@ class Html5Element extends Html5
 			$this->objnode = $this->domobj->createElement($this->construct->name);
 			
 			//  add a provided class attribute to the DomElement
-			if ($this->construct->class) { $this->addClass($this->construct->class); }
+			if ($this->construct->class) { $this->classAdd($this->construct->class); }
 			
 			//  add a provided id attribute to the DOMElement
-			if ($this->construct->id && !$this->domobj->getElementById($this->construct->id)) { $this->setId($this->construct->id); }
+			if ($this->construct->id && !$this->domobj->getElementById($this->construct->id)) {
+				$this->setId($this->objnode, $this->construct->id);
+			}
 			
 			//  append the new DomElement to the target node element
 			$this->target->appendChild( $this->objnode );
@@ -93,86 +95,5 @@ class Html5Element extends Html5
 		
 		return $this;
 	}
-	
-	/**
-	 *  with()
-	 *  Create the internal content with() the provided argument
-	 *  
-	 *  @param  string  $with
-	 *  @return object
-	 */
-	public function with($with)
-	{
-		//  pass the argument to the parent object
-		return parent::with($with);
-	}
-	
-	//  Html5Element Attributes
-	
-	/**
-	 *  attribute()
-	 *  Get or set an attribute value by name
-	 *  
-	 *  @param  string  $name
-	 *  @param  string  $value = null
-	 *  @return string|object
-	 */
-	public function attribute($name, $value = null)
-	{
-		if ($value) {
-			$this->objnode->setAttribute($name, $value);
-			
-			//  the id attribute must be explicitly set in order to getElementById
-			if ($name == "id") { $this->objnode->setIdAttribute($name, true); }
-			
-			return $this;
-		}
-		else
-		if ($this->objnode->hasAttribute($name)) { return $this->objnode->getAttribute($name); }
-	}
-	
-	/**
-	 *  addClass()
-	 *  Add the provided classname(s) to the HTML5Element class attribute
-	 *  
-	 *  @param  string  $classname
-	 *  @return object  Html5Element
-	 *  @access public
-	 */
-	public function addClass($classname)
-	{
-		//  retrieve a list of existing classes
-		$list = ($class = $this->attribute("class")) ? explode(" ", $class) : array();
-		
-		//  exlode the list of classes to add
-		$classname = explode(" ", trim(str_replace(".", " ", $classname)));
-		
-		//  add non existing classes to the list
-		foreach ($classname as $each) {
-			if (!in_array($each, $list)) { $list[] = $each; }
-		}
-		
-		//  implode the list into the attribute
-		$this->attribute("class", implode(" ", $list));
-		
-		return $this;
-	}
-	
-	/**
-	 *  setId()
-	 *  Add the provided id to this Html5Element id attribute
-	 *  
-	 *  @param  string  $id
-	 *  @return object  Html5Element
-	 *  @access public
-	 */
-	public function setId()
-	{
-		$this->objnode->setAttribute("id", $this->construct->id);
-		$this->objnode->setIdAttribute("id", true);
-		
-		return $this;
-	}
-	
 }
 ?>

@@ -38,7 +38,7 @@ class Html5Document extends Html5
 	{
 		parent::__construct($config);
 		
-		$this->implement("html");
+		$this->implement();
 	}
 	
 	//  Secure Methods
@@ -58,12 +58,14 @@ class Html5Document extends Html5
 	 *  implement()
 	 *  Create an instance of the DomImplementation for this Html5Document
 	 *  
-	 *  @param  string  $rootnode = ""
 	 *  @access	private
 	 */
-	protected function implement($rootnode = "")
+	protected function implement()
 	{
-		parent::implement($rootnode);
+		parent::implement();
+		
+		//  create a reference to the dom documentelement
+		$this->domnode = $this->domobj->documentElement;
 		
 		//  set the language attribute for the <html> element, if available
 		if(Html5::$language){ $this->domnode->setAttribute("lang", Html5::$language); }
@@ -93,10 +95,13 @@ class Html5Document extends Html5
 	 */
 	public function fragment($construct, $with = null)
 	{
-		//  create an instance of the HTML5Contruct object
-		$construct = HTML5Construct::Set($construct);
+		//  create an instance of the Html5Fragment object
+		$fragment = new Html5Fragment(['parent' => $this]);
 		
+		//  pass the constructor and content with to the object
+		$fragment->create($construct, $with);
 		
+		return $fragment;
 	}
 	
 	//  Internal References

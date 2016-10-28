@@ -82,11 +82,12 @@ class Html5
 	 *  implement()
 	 *  Create an instance of the DomImplementation for this Html5Document
 	 *  
-	 *  @param  string  $rootnode = ""
 	 *  @access	protected
 	 */
-	protected function implement($rootnode = "")
+	protected function implement()
 	{
+		$rootnode = ($this->objtype == "document") ? "html" : "";
+		
 		//  create an instance of the PHP DomImplementation
 		$this->domimp = new DOMImplementation;
 		
@@ -100,9 +101,6 @@ class Html5
 		$this->domobj->formatOutput = true;
 		$this->domobj->preserveWhiteSpace = true;
 		$this->domobj->encoding	= strtoupper( self::isValid("charset", Html5::$charset) ? Html5::$charset : "utf-8" );
-		
-		//  identify the instance $objnode as the "html" node
-		if ($this->domobj->documentElement) { $this->domnode = $this->domobj->documentElement; }
 	}
 	
 	//  Public Methods
@@ -127,6 +125,72 @@ class Html5
 	}
 	
 	/**
+	 *  attribute()
+	 *  Get or set an attribute value by name
+	 *  
+	 *  @param  string  $name
+	 *  @param  string  $value = null
+	 *  @return string|object
+	 */
+	public function attribute($name, $value = null)
+	{
+		if ($value) {
+			$this->objnode->setAttribute($name, $value);
+			
+			//  the id attribute must be explicitly set in order to getElementById
+			if ($name == "id") { $this->objnode->setIdAttribute($name, true); }
+			
+			return $this;
+		}
+		else
+		if ($this->objnode->hasAttribute($name)) { return $this->objnode->getAttribute($name); }
+	}
+	
+	/**
+	 *  classAdd()
+	 *  Add the provided classname(s) to the element class attribute
+	 *  
+	 *  @param  string  $classname
+	 *  @return object
+	 *  @access public
+	 */
+	public function classAdd($classname)
+	{
+		//  retrieve a list of existing classes
+		$list = ($class = $this->attribute("class")) ? explode(" ", $class) : array();
+		
+		//  exlode the list of classes to add
+		$classname = explode(" ", trim(str_replace(".", " ", $classname)));
+		
+		//  add non existing classes to the list
+		foreach ($classname as $each) {
+			if (!in_array($each, $list)) { $list[] = $each; }
+		}
+		
+		//  implode the list into the attribute
+		$this->attribute("class", implode(" ", $list));
+		
+		return $this;
+	}
+	
+	/**
+	 *  setId()
+	 *  Add the provided id to this element id attribute
+	 *  
+	 *  @param  string  $node
+	 *  @param  string  $id
+	 *  @return object
+	 *  @access public
+	 */
+	public function setId($node, $id)
+	{
+		$node->setAttribute("id", $id);
+		$node->setIdAttribute("id", true);
+		
+		return $this;
+	}
+	
+	/**
 	 *  with()
 	 *  Import the with argument into the object node
 	 *  
@@ -142,7 +206,8 @@ class Html5
 		$domobj = $domimp->createDocument("", "", $domdtd);
 		
 		//  import the provided html into the temporary DomDocument
-		@$domobj->loadHTML("<div>{$with}</div>");
+		//  *** todo: this needs a try/catch into error reporting
+		$domobj->loadHTML("<div>{$with}</div>");
 		
 		//  retrieve the imported nodes from the DomDocument
 		$nodes  = $domobj->getElementsByTagName('div')->item(0)->childNodes;
