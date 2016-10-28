@@ -64,7 +64,7 @@ class Html5Construct
 		{ $construct->id = substr($constructor, strpos($constructor,"#")+1); $constructor = substr($constructor, 0, strpos($constructor,"#")); }
 		
 		//  verify the remainder as the node name
-		$construct->name = preg_match("/^[a-z]?([a-zA-Z0-9-]+)$/", $constructor) ? $constructor : self::$node;
+		$construct->name = preg_match("/^[a-z]?([a-zA-Z0-9-]+)$/", $constructor) ? $constructor : "div";
 		
 		//  ensure the construct node is a valid HTML5 entity
 		if(!$construct->able())
