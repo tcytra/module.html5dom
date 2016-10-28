@@ -5,7 +5,7 @@
  *  This object provides the ability to create and manipulate a PHP DomElement
  *  
  *  @author		Todd Cytra <tcytra@gmail.com>
- *  @version	0.1.5 Html5Element.php 2016-09-21
+ *  @version	0.1.7 Html5Element.php 2016-09-21
  *  @since		html5-0.0.1
  */
 class Html5Element extends Html5
@@ -34,7 +34,7 @@ class Html5Element extends Html5
 		parent::__construct($config);
 	}
 	
-	//  Private Methods
+	//  Secure Methods
 	
 	/**
 	 *  configure()
@@ -42,9 +42,9 @@ class Html5Element extends Html5
 	 *  
 	 *  @param  string  $index
 	 *  @param  string  $value
-	 *  @access private
+	 *  @access protected
 	 */
-	private	function configure($index, $value)
+	protected function configure($index, $value)
 	{
 		//  evaluate and execute the configuration change, if possible
 		switch ($index) {

@@ -6,29 +6,40 @@
  *  + the top level configuration and dom references and interaction
  *  
  *  @author     Todd Cytra <tcytra@gmail.com>
- *  @version    0.1.2 Html5.php 2016-10-21
+ *  @version    0.1.3 Html5.php 2016-10-21
  *  @since      Html5-0.0.7
  */
 class Html5
 {
-	//  Html5 Document Parameters
+	//  Html5 Global Parameters
 	
 	/** @var string $charset  The specified character set for the output */
 	public	static	$charset	= "utf-8";
 	/** @var string $language The specified language encoding for the output */
 	public	static	$language	= "en-US";
 	
-	//  Local Object Parameters
+	//  Html5 Object Parameters
 	
 	/** @var string $objtype  The instance type of this object is parent */
 	public		$objtype	= "parent";
 	
-	//  PHP DomDocument Objects
+	//  Html5 Objects
 	
 	/** @var object $parent   The parent object instance */
 	private		$parent;
 	/** @var object @target   The parent object target element */
 	private		$target;
+	
+	//  PHP DomDocument Objects
+	
+	/** @var object $domdtd   The definition of the HTML DOM DocumentType */
+	private		$domdtd;
+	/** @var object $domimp   The DomImplementation of DOM DocumentType */
+	private		$domimp;
+	/** @var object	$domobj   The DomDocument instance of DomImplementation */
+	protected	$domobj;
+	/** @var object $domnode  The documentElement node, <html> element */
+	protected	$domnode;
 	
 	/**
 	 * __construct()
@@ -44,7 +55,7 @@ class Html5
 		}
 	}
 	
-	//  Private Methods
+	//  Secure Methods
 	
 	/**
 	 *  configure()
@@ -52,9 +63,9 @@ class Html5
 	 *  
 	 *  @param  string  $index
 	 *  @param  string  $value
-	 *  @access private
+	 *  @access protected
 	 */
-	private	function configure($index, $value)
+	protected function configure($index, $value)
 	{
 		//  evaluate and execute the configuration change, if possible
 		switch ($index) {
@@ -65,6 +76,33 @@ class Html5
 				if (self::isValid("language", $value)) { self::$language = $value; }
 				break;
 		}
+	}
+	
+	/**
+	 *  implement()
+	 *  Create an instance of the DomImplementation for this Html5Document
+	 *  
+	 *  @param  string  $rootnode = ""
+	 *  @access	protected
+	 */
+	protected function implement($rootnode = "")
+	{
+		//  create an instance of the PHP DomImplementation
+		$this->domimp = new DOMImplementation;
+		
+		//  declare the doctype
+		$this->domdtd = $this->domimp->createDocumentType("html", null, null);
+		
+		//  create the document object
+		$this->domobj = $this->domimp->createDocument("", $rootnode, $this->domdtd);
+		
+		//  format the document parameters
+		$this->domobj->formatOutput = true;
+		$this->domobj->preserveWhiteSpace = true;
+		$this->domobj->encoding	= strtoupper( self::isValid("charset", Html5::$charset) ? Html5::$charset : "utf-8" );
+		
+		//  identify the instance $objnode as the "html" node
+		if ($this->domobj->documentElement) { $this->domnode = $this->domobj->documentElement; }
 	}
 	
 	//  Public Methods

@@ -6,7 +6,7 @@
  *  + document head elements distinctly.
  *  
  *  @author     Todd Cytra <tcytra@gmail.com>
- *	@version    0.1.3 Html5DocumentHead.php 2016-10-13
+ *	@version    0.1.5 Html5DocumentHead.php 2016-10-13
  *	@since      html5-0.0.6
  */
 class Html5DocumentHead extends Html5
@@ -33,7 +33,7 @@ class Html5DocumentHead extends Html5
 		parent::__construct($config);
 	}
 	
-	//  Private Methods
+	//  Secure Methods
 	
 	/**
 	 *  configure()
@@ -41,9 +41,9 @@ class Html5DocumentHead extends Html5
 	 *  
 	 *  @param  string  $index
 	 *  @param  string  $value
-	 *  @access private
+	 *  @access protected
 	 */
-	private	function configure($index, $value)
+	protected function configure($index, $value)
 	{
 		//  evaluate and execute the configuration change, if possible
 		switch ($index) {

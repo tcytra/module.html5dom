@@ -6,38 +6,29 @@
  *  + object to create, identify, and manipulate the types of nodes in the tree
  *  
  *  @author     Todd Cytra <tcytra@gmail.com>
- *  @version    0.2.6 Html5Document.php 2016-09-14
+ *  @version    0.2.7 Html5Document.php 2016-09-14
  *  @since      html5-0.0.1
  */
 class Html5Document extends Html5
 {
-	//  Local Object Parameters
-	
-	/** @var string $objtype  The instance type of this object is document */
-	public		$objtype	= "document";
-	
-	//  PHP DomDocument Objects
-	
-	/** @var object $domdtd   The definition of the HTML DOM DocumentType */
-	private		$domdtd;
-	/** @var object $domimp   The DomImplementation of DOM DocumentType */
-	private		$domimp;
-	/** @var object $domnode  The documentElement node, <html> element */
-	private		$domnode;
-	/** @var object	$domobj   The DomDocument instance of DomImplementation */
-	protected	$domobj;
-	
 	//  Html5Document Objects
 	
-	/** @var object $head     The instance of the Html5DocumentHead object */
-	public		$head;
 	/** @var object $body     The document <body> element and local objnode */
 	public		$body;
+	/** @var object $head     The instance of the Html5DocumentHead object */
+	public		$head;
 	
 	//  Html5Document Output
 	
 	/** @var string The saveHTML string returned from PHP DomDocument */
 	private		$output;
+	
+	//  Html5Document Parameters
+	
+	/** @var string $objtype  The instance type of this object is document */
+	public		$objtype	= "document";
+	
+	//  PHP DomDocument Objects
 	
 	/**
 	 * __construct()
@@ -47,35 +38,32 @@ class Html5Document extends Html5
 	{
 		parent::__construct($config);
 		
-		$this->implement();
+		$this->implement("html");
 	}
 	
-	//  Private Methods
+	//  Secure Methods
+	
+	/**
+	 *  configure()
+	 *  Set a configuration value for this object by specified index
+	 *  
+	 *  @param  string  $index
+	 *  @param  string  $value
+	 *  @access protected
+	 */
+	protected function configure($index, $value)
+	{  }
 	
 	/**
 	 *  implement()
 	 *  Create an instance of the DomImplementation for this Html5Document
 	 *  
+	 *  @param  string  $rootnode = ""
 	 *  @access	private
 	 */
-	private function implement()
+	protected function implement($rootnode = "")
 	{
-		//  create an instance of the PHP DomImplementation
-		$this->domimp = new DOMImplementation;
-		
-		//  declare the doctype
-		$this->domdtd = $this->domimp->createDocumentType("html", null, null);
-		
-		//  create the document object
-		$this->domobj = $this->domimp->createDocument("", "html", $this->domdtd);
-		
-		//  format the document parameters
-		$this->domobj->formatOutput = true;
-		$this->domobj->preserveWhiteSpace = true;
-		$this->domobj->encoding	= strtoupper( (Html5::$charset) ? Html5::$charset : "utf-8" );
-		
-		//  identify the instance $objnode as the "html" node
-		$this->domnode = $this->domobj->documentElement;
+		parent::implement($rootnode);
 		
 		//  set the language attribute for the <html> element, if available
 		if(Html5::$language){ $this->domnode->setAttribute("lang", Html5::$language); }
