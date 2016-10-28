@@ -13,6 +13,7 @@
 			<li>The internal structure of the fragment needs to be searchable with a find method</li>
 			<li>Require the ability to create the fragment with a text/html argument, as Html5Element does</li>
 			<li>Require the ability to create the fragment and output the content outside Html5Document save/write</li>
+			<li>Require the ability to implement the fragment externally to the document implementation</li>
 		</ul>
 	</section>
 </article>

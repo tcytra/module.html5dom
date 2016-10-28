@@ -7,12 +7,12 @@ $testcase = "Test 01";
 $describe = "Create a DomDocumentFragment via new fragment method in the Html5 object";
 
 //  Create an instance of the Html5Document
-$html5 = new Html5Document(['language'=>'en_CA']);
+$html5 = new Html5Document();
 
-//  Create the document <head> elements
-$html5->head->meta(["name"=>"description","content"=>$describe])->title("Html5Dom | 0.9 {$testcase}")->favicon("/favicon.png");
+//  Create an instance of the Html5Fragment
+$fragment = $html5->fragment("div#testing.interface","<h1>{$testcase}</h1><p>{$describe}</p>");
 
-//  Create a <div> element in the document <body>
-$html5->append("div#testing.page.interface", $describe);
+//  Append the fragment to the Html5Document <body>
+$fragment->appendTo($html5->body);
 
 $html5->save()->write();
