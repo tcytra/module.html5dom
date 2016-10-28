@@ -41,16 +41,21 @@
 								<strike>Argue the charset and language to the Html5Document __construct and call implement with node tags separately</strike>
 								<ul>
 									<li>The charset and language arguments are passed through the $config to the Html5 constructor</li>
-									<li>The implement method is still automatic, but could be renamed as the create method, which is consistent with sibling objects</li>
 								</ul>
 							</li>
-							<li>Require the ability to create, manipulate, and output a PHP DomFragment</li>
+							<li><strike>Require the ability to create, manipulate, and output a PHP DomFragment</strike></li>
 							<li>Require the ability to populate an Html5 Document, Fragment, or Element from a text or data source</li>
 							<li>Require the ability to specify environment behavior through a configuration system (Which could chain up a parent system)</li>
-							<li>Utilize the Html5 namespace to contain this module</li>
-							<li>Consider the possibility of introducing an Html5DocumentBody object to manage the concept of interface pages, dialogues, and toolbars</li>
+							<li>Require the ability to search the domdocument node tree for a matching construct definition</li>
 							<li>Require an error detection and stop process system</li>
+						</ul>
+					</section>
+					<section class="requirements">
+						<h2>Considerations</h2>
+						<ul>
+							<li>Consider the possibility of introducing an Html5DocumentBody object to manage the concept of interface pages, dialogues, and toolbars</li>
 							<li>Consider the option of creating all extended objects from the Html5 object</li>
+							<li>Consider utilizing a namespace for this module</li>
 						</ul>
 					</section>
 				</main>
