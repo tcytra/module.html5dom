@@ -50,6 +50,7 @@
 							<li>Utilize the Html5 namespace to contain this module</li>
 							<li>Consider the possibility of introducing an Html5DocumentBody object to manage the concept of interface pages, dialogues, and toolbars</li>
 							<li>Require an error detection and stop process system</li>
+							<li>Consider the option of creating all extended objects from the Html5 object</li>
 						</ul>
 					</section>
 				</main>
