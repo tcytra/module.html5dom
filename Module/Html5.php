@@ -26,9 +26,9 @@ class Html5
 	//  Html5 Objects
 	
 	/** @var object $parent   The parent object instance */
-	private		$parent;
+	//private		$parent;
 	/** @var object @target   The parent object target element */
-	private		$target;
+	//private		$target;
 	
 	//  PHP DomDocument Objects
 	

@@ -115,5 +115,43 @@ class Html5Fragment extends Html5
 			$node->appendChild($this->objnode);
 		}
 	}
+	
+	//  Html5Fragment Output
+	
+	/**
+	 *  save()
+	 *  Perform a PHP DomDocument saveHTML into the instance $output variable
+	 *  
+	 *  @return	object	Html5Document
+	 *  @access	public
+	 */
+	public function save()
+	{
+		//  append the fragment to the domdocument
+		if (!$this->domobj->documentElement) {
+			$this->domobj->appendChild($this->objnode);
+		}
+		
+		//  remove the DOCTYPE declaration from the domdocument
+		if ($this->domobj->childNodes->item(0)->nodeType == 10) {
+			$this->domobj->removeChild( $this->domobj->childNodes->item(0) );
+		}
+		
+		$this->output = $this->domobj->saveHTML();
+		
+		return $this;
+	}
+	
+	/**
+	 *  write()
+	 *  Write the Html5Document DomDocument contents
+	 *  
+	 *  @access	public
+	 */
+	public function write()
+	{
+		//  write the saveHTML output string
+		echo $this->output;
+	}
 }
 ?>
