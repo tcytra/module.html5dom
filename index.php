@@ -29,7 +29,7 @@
 					<section class="requirements">
 						<h2>Requirements</h2>
 						<ul>
-							<li>Require the ability to append an element with an argument for content</li>
+							<li><strike>Require the ability to append an element with an argument for content</strike></li>
 							<li>
 								<strike>Require an isvalid object to test element names and attributes, document title, etc</strike>
 								<ul>
