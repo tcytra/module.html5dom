@@ -174,6 +174,35 @@ class Html5Fragment extends Html5
 	}
 	
 	/**
+	 *	wrap()
+	 *	Wrap the HTML5Fragment contents with the specified construct
+	 *	
+	 *	@param	string	$construct = null
+	 *	@return	object	HTML5Fragment
+	 *	@access	public
+	 */
+	public	function wrap($construct = null)
+	{
+		//	create an instance of the HTML5Contruct object
+		$construct = Html5Construct::Set($construct);
+		
+		if ($construct->able()) {
+			//  create an instance of the Html5Element object and construct the element
+			$wrapper = new Html5Element(["parent"=>$this->parent]);
+			$wrapper->create($construct);
+			
+			//  append the current objnode to the new objectnode
+			$wrapper->objectnode()->appendChild( $this->objnode );
+			
+			//  define the new objnode as the objectnode
+			$this->objnode = $wrapper->objectnode();
+		}
+		
+		//	return this instance of the HTML5Fragment
+		return	$this;
+	}
+	
+	/**
 	 *  write()
 	 *  Write the Html5Document DomDocument contents
 	 *  
