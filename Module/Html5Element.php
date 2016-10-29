@@ -87,7 +87,7 @@ class Html5Element extends Html5
 			}
 			
 			//  append the new DomElement to the target node element
-			$this->target->appendChild( $this->objnode );
+			if ($this->target) { $this->target->appendChild( $this->objnode ); }
 			
 			//  execute any provided $with arguments
 			if ($with) { $this->with($with); }
