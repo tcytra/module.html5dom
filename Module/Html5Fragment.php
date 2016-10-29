@@ -188,7 +188,7 @@ class Html5Fragment extends Html5
 		
 		if ($construct->able()) {
 			//  create an instance of the Html5Element object and construct the element
-			$wrapper = new Html5Element(["parent"=>$this->parent]);
+			$wrapper = new Html5Element(["parent"=>$this]);
 			$wrapper->create($construct);
 			
 			//  append the current objnode to the new objectnode
