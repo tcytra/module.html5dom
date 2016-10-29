@@ -3,7 +3,7 @@
 <?php
 
 //  Title and describe this testcase
-$testcase = "Test 03";
+$testcase = "Test 05";
 $describe = "Provide the ability to wrap an Html5Fragment with a constructor argument";
 
 //  Create an instance of the Html5Document
@@ -20,8 +20,8 @@ MainContent;
 
 //  Wrap the fragment with a specified construct
 $fragment->wrap("#interface")
-		->append("main#content", $content)
-		->append("footer","&copy;2016 Todd Cytra");
+	->append("main#content", $content)
+	->append("footer","&copy;2016 Todd Cytra");
 
 //  Append the fragment to the Html5Document <body>
 $fragment->appendTo($html5->body);
