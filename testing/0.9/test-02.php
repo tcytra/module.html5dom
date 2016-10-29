@@ -8,6 +8,6 @@ $describe = "Create and output a DomDocumentFragment directly via new instance o
 
 //  Create an instance of the Html5Document
 $fragment = new Html5Fragment();
-$fragment->create("div.testcase","<h2>{$testcase}</h2><p>{$describe}</p>");
+$fragment->create("div.testcase","<h3>{$testcase}</h3><p>{$describe}</p>");
 
 $fragment->save()->write();

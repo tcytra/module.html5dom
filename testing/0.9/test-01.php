@@ -10,7 +10,7 @@ $describe = "Create a DomDocumentFragment via new fragment method in the Html5 o
 $html5 = new Html5Document();
 
 //  Create an instance of the Html5Fragment
-$fragment = $html5->fragment("div#testing.interface","<h1>{$testcase}</h1><p>{$describe}</p>");
+$fragment = $html5->fragment("div#testing.interface","<h3>{$testcase}</h3><p>{$describe}</p>");
 
 //  Append the fragment to the Html5Document <body>
 $fragment->appendTo($html5->body);
