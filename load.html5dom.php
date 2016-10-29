@@ -1,3 +1,4 @@
+<?php libxml_use_internal_errors(true); ?>
 <?php
 //  the global object
 require_once "Module/Html5Dom.php";
