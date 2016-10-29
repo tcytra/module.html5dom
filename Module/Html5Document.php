@@ -6,7 +6,7 @@
  *  + object to create, identify, and manipulate the types of nodes in the tree
  *  
  *  @author     Todd Cytra <tcytra@gmail.com>
- *  @version    0.2.7 Html5Document.php 2016-09-14
+ *  @version    0.2.9 Html5Document.php 2016-09-14
  *  @since      html5-0.0.1
  */
 class Html5Document extends Html5
@@ -36,6 +36,8 @@ class Html5Document extends Html5
 	 */
 	function __construct($config = null)
 	{
+		if (!is_array($config) && self::isValid("language", $config)) { $config = ["language" => $config]; }
+		
 		parent::__construct($config);
 		
 		$this->implement();
@@ -52,7 +54,9 @@ class Html5Document extends Html5
 	 *  @access protected
 	 */
 	protected function configure($index, $value)
-	{  }
+	{
+		parent::configure($index, $value);
+	}
 	
 	/**
 	 *  implement()
@@ -102,20 +106,6 @@ class Html5Document extends Html5
 		$fragment->create($construct, $with);
 		
 		return $fragment;
-	}
-	
-	//  Internal References
-	
-	/**
-	 *  domobject()
-	 *  Return the DomDocument object for this instance
-	 *  
-	 *  @return	object
-	 *  @access	public
-	 */
-	public function domobject()
-	{
-		return $this->domobj;
 	}
 	
 	//  Html5Document Output

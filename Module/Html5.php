@@ -6,7 +6,7 @@
  *  + the top level configuration and dom references and interaction
  *  
  *  @author     Todd Cytra <tcytra@gmail.com>
- *  @version    0.1.3 Html5.php 2016-10-21
+ *  @version    0.1.5 Html5.php 2016-10-21
  *  @since      Html5-0.0.7
  */
 class Html5
@@ -224,6 +224,20 @@ class Html5
 		
 		//  return this instance of the Html5 object
 		return  $this;
+	}
+	
+	//  Html5Document DOM References
+	
+	/**
+	 *  domobject()
+	 *  Return the DomDocument object for this instance
+	 *  
+	 *  @return	object
+	 *  @access	public
+	 */
+	public function domobject()
+	{
+		return $this->domobj;
 	}
 	
 	//  Global Methods
