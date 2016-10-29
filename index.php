@@ -65,6 +65,7 @@
 							<li>Require the ability to search the domdocument node tree for a matching construct definition</li>
 							<li>Require an error detection and stop process system</li>
 							<li>Require the ability to output text/plain</li>
+							<li>Require the ability to identify and index an element for further reference (recall, indexAs ?)</li>
 						</ul>
 					</section>
 					<section class="considerations">
