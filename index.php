@@ -26,6 +26,12 @@
 							<li>Chain and/or repeat element manipulation methods to create HTML5 node treet structures and populate with externally derived content.</li>
 						</ul>
 					</section>
+					<!--<section class="benefits">
+						<h2>Benefits</h2>
+						<ul>
+							<li>Ability to completely suspend further user-requested content generation and derive a separate document, ie: an error report</li>
+						</ul>
+					</section>-->
 					<section class="requirements">
 						<h2>Requirements</h2>
 						<ul>
@@ -36,7 +42,12 @@
 									<li>isValid has been added as a static method to the Html5 object</li>
 								</ul>
 							</li>
-							<li>Shorten the element append and attributes "id" and "class" to a constructor argument</li>
+							<li>
+								<strike>Shorten the element append and attributes "id" and "class" to a constructor argument</strike>
+								<ul>
+									<li>The Html5Constructor is creating self-instances through a static method, but the functionality it performs should exist in the non-static methods</li>
+								</ul>
+							</li>
 							<li>
 								<strike>Argue the charset and language to the Html5Document __construct and call implement with node tags separately</strike>
 								<ul>
@@ -45,17 +56,24 @@
 							</li>
 							<li><strike>Require the ability to create, manipulate, and output a PHP DomFragment</strike></li>
 							<li>Require the ability to populate an Html5 Document, Fragment, or Element from a text or data source</li>
-							<li>Require the ability to specify environment behavior through a configuration system (Which could chain up a parent system)</li>
+							<li>
+								<span>Require the ability to specify environment behavior through a configuration system (Which could chain up a parent system)</span>
+								<ul>
+									<li>Option to search and report element id collisions (on/off)</li>
+								</ul>
+							</li>
 							<li>Require the ability to search the domdocument node tree for a matching construct definition</li>
 							<li>Require an error detection and stop process system</li>
+							<li>Require the ability to output text/plain</li>
 						</ul>
 					</section>
-					<section class="requirements">
+					<section class="considerations">
 						<h2>Considerations</h2>
 						<ul>
 							<li>Consider the possibility of introducing an Html5DocumentBody object to manage the concept of interface pages, dialogues, and toolbars</li>
 							<li>Consider the option of creating all extended objects from the Html5 object</li>
 							<li>Consider utilizing a namespace for this module</li>
+							<li>Consider a cleaner (better readability) means of referencing domobj, domnode, objnode, parent, and target</li>
 						</ul>
 					</section>
 				</main>
