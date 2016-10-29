@@ -10,7 +10,7 @@
  */
 class Html5Element extends Html5
 {
-	//  Local Object Parameters
+	//  Html5Element Parameters
 	
 	/** @var object $objnode  The local target PHP DomElement reference */
 	protected	$objnode;

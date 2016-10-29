@@ -10,6 +10,16 @@
  */
 class Html5Fragment extends Html5
 {
+	//  Html5Fragment Output
+	
+	/** @var string The saveHTML string returned from PHP DomDocument */
+	private		$output;
+	
+	//  Html5Fragment Parameters
+	
+	/** @var string $objtype  The instance type of this object is fragment */
+	public		$objtype	= "fragment";
+	
 	/**
 	 * __construct()
 	 *  Create an instance of the Html5Document object
@@ -129,6 +139,15 @@ class Html5Fragment extends Html5
 	{  }
 	
 	//  Html5Fragment Output
+	
+	/**
+	 *  getOutput()
+	 *  Return the derived output from this Html5Fragment
+	 */
+	public function getOutput($stripnewlines = false)
+	{
+		return ($stripnewlines) ? preg_replace("/[\n|\r]/", "", $this->output) : $this->output;
+	}
 	
 	/**
 	 *  save()

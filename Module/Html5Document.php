@@ -28,8 +28,6 @@ class Html5Document extends Html5
 	/** @var string $objtype  The instance type of this object is document */
 	public		$objtype	= "document";
 	
-	//  PHP DomDocument Objects
-	
 	/**
 	 * __construct()
 	 *  Create an instance of the Html5Document object

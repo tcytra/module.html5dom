@@ -250,6 +250,11 @@ class Html5
 		return $this->domobj;
 	}
 	
+	public function objectnode()
+	{
+		return $this->objnode;
+	}
+	
 	//  Global Methods
 	
 	/**
