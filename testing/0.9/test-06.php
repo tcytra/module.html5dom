@@ -3,14 +3,12 @@
 <?php
 
 //  Title and describe this testcase
-$testcase = "Test 05";
-$describe = "Ensure the previous append method works following a fragment wrap";
+$testcase = "Test 06";
+$describe = "Ensure the previous append method works following a stand-alone fragment wrap";
 
 //  Create an instance of the Html5Document
-$html5 = new Html5Document("en_CA");
-
-//  Create an instance of the Html5Fragment
-$fragment = $html5->fragment("header.testcase", "<h3>{$testcase}</h3><p>{$describe}</p>");
+$fragment = new Html5Fragment();
+$fragment->create("header.testcase", "<h3>{$testcase}</h3><p>{$describe}</p>");
 
 $content = <<<MainContent
 <h4 class="subtitle">Main Content</h4>
@@ -23,7 +21,4 @@ $fragment->wrap("#interface")
 	->append("main#content", $content)
 	->append("footer","&copy;2016 Todd Cytra");
 
-//  Append the fragment to the Html5Document <body>
-$fragment->appendTo($html5->body);
-
-$html5->save()->write();
+$fragment->save()->write();
