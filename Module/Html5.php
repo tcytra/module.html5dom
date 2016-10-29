@@ -26,9 +26,9 @@ class Html5
 	//  Html5 Objects
 	
 	/** @var object $parent   The parent object instance */
-	//private		$parent;
+	protected	$parent;
 	/** @var object @target   The parent object target element */
-	//private		$target;
+	protected	$target;
 	
 	//  PHP DomDocument Objects
 	
@@ -78,6 +78,7 @@ class Html5
 			//  these are evaluated by Html5Element and Html5Fragment
 			case 'parent':
 				$this->domobj = $value->domobject();
+				$this->parent = $value;
 				unset($this->config[ $index ]);
 				break;
 			case 'target':
