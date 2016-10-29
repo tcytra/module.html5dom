@@ -52,8 +52,11 @@ class Html5Construct
 	 */
 	public static function Set($constructor)
 	{
+		//  if the constructor is an object, return the object
+		if (gettype($constructor) === "object") { return $constructor; }
+		
 		//  create an instance of the HTML5Construct object
-		$construct	= new HTML5Construct();
+		$construct	= new Html5Construct();
 		
 		//  extract a node class definition, if available; match '.classname'
 		if(preg_match("/\.[a-z]?([a-z0-9-]+)$/", $constructor))
