@@ -20,10 +20,10 @@
 						<h2>Objectives</h2>
 						<p>There are several key objectives identified for this system that have must be met.</p>
 						<ul>
-							<li>Top-down HTML5 rendering: The ability to define an HTML5 document and build the internal structure within it.</li>
-							<li>Bottom-up HTML5 rendering: The ability to define an HTML5 fragment and build the remaining document upwards around it.</li>
-							<li>Detached simultaneous fragments: The ability to have several HTML5 fragments detached from the document structure indexed and accessible for further work.</li>
-							<li>Chain and/or repeat element manipulation methods to create HTML5 node treet structures and populate with externally derived content.</li>
+							<li>Top-down document rendering: The ability to define an Html5 document and build the internal structure within it</li>
+							<li>Bottom-up document rendering: The ability to define an Hhtml5 fragment and build the remaining document upwards around it</li>
+							<li>Perform hierarchical searches across multiple indexed instances of the various Html5 objects and argue for deep manipulation</li>
+							<li>Chain and/or repeat manipulation methods to create Html5 node tree structures and populate with externally derived content</li>
 						</ul>
 					</section>
 					<!--<section class="benefits">
