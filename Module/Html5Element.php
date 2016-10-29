@@ -25,13 +25,17 @@ class Html5Element extends Html5
 	 */
 	public function __construct($config = null)
 	{
+		//  the instance config will be passed to the parent object but first
+		//  + any locally applicable configuration will be applied and stripped
+		$this->config = $config;
+		
 		//  cycle the provided configuration into the configure method
-		if ($config && is_array($config)) {
-			foreach ($config as $index=>$value) { $this->configure($index, $value); }
+		if ($this->config && is_array($this->config)) {
+			foreach ($this->config as $index=>$value) { $this->configure($index, $value); }
 		}
 		
-		//  pass the remaining config to the parent constructor
-		parent::__construct($config);
+		//  pass the remaining config to the parent object for further evaluation
+		parent::__construct($this->config);
 	}
 	
 	//  Secure Methods
@@ -46,16 +50,12 @@ class Html5Element extends Html5
 	 */
 	protected function configure($index, $value)
 	{
-		//  evaluate and execute the configuration change, if possible
-		switch ($index) {
-			case 'parent':
-				$this->domobj = $value->domobject();
-				break;
-			case 'target':
-				$this->target = $value;
-				break;
-		}
+		//  pass the arguments to the parent object
+		parent::configure($index, $value);
 	}
+	
+	protected function implement()
+	{ /* do nothing */ }
 	
 	//  Public Methods
 	

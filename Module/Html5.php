@@ -75,6 +75,15 @@ class Html5
 			case 'language':
 				if (self::isValid("language", $value)) { self::$language = $value; }
 				break;
+			//  these are evaluated by Html5Element and Html5Fragment
+			case 'parent':
+				$this->domobj = $value->domobject();
+				unset($this->config[ $index ]);
+				break;
+			case 'target':
+				$this->target = $value;
+				unset($this->config[ $index ]);
+				break;
 		}
 	}
 	

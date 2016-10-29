@@ -38,8 +38,10 @@ class Html5Document extends Html5
 	{
 		if (!is_array($config) && self::isValid("language", $config)) { $config = ["language" => $config]; }
 		
+		//  pass the config to the parent object for evaluation
 		parent::__construct($config);
 		
+		//  implement the DomDocument
 		$this->implement();
 	}
 	

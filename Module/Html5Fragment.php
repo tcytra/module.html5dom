@@ -5,7 +5,7 @@
  *  This object provides the ability to create and manipulate a PHP DomFragment
  *  
  *  @author		Todd Cytra <tcytra@gmail.com>
- *  @version	0.2.1 Html5Fragment.php 2016-09-19
+ *  @version	0.2.3 Html5Fragment.php 2016-09-19
  *  @since		html5-0.0.1
  */
 class Html5Fragment extends Html5
@@ -16,13 +16,19 @@ class Html5Fragment extends Html5
 	 */
 	function __construct($config = null)
 	{
+		//  the instance config will be passed to the parent object but first
+		//  + any locally applicable configuration will be applied and stripped
+		$this->config = $config;
+		
 		//  cycle the provided configuration into the configure method
-		if ($config && is_array($config)) {
-			foreach ($config as $index=>$value) { $this->configure($index, $value); }
+		if ($this->config && is_array($this->config)) {
+			foreach ($this->config as $index=>$value) { $this->configure($index, $value); }
 		}
 		
-		parent::__construct($config);
+		//  pass the remaining config to the parent object for further evaluation
+		parent::__construct($this->config);
 		
+		//  implement the DomDocumentFragment
 		$this->implement();
 	}
 	
@@ -38,15 +44,8 @@ class Html5Fragment extends Html5
 	 */
 	protected function configure($index, $value)
 	{
-		//  evaluate and execute the configuration change, if possible
-		switch ($index) {
-			case 'parent':
-				$this->domobj = $value->domobject();
-				break;
-			case 'target':
-				$this->target = $value;
-				break;
-		}
+		//  pass the arguments to the parent object
+		parent::configure($index, $value);
 	}
 	
 	/**
@@ -63,8 +62,11 @@ class Html5Fragment extends Html5
 			parent::implement();
 		}
 		
+		//  the new DomDocumentFragment becomes the instance domnode (?)
 		$this->domnode	= $this->domobj->createDocumentFragment();
 	}
+	
+	//  Public Methods
 	
 	/**
 	 *  create()
@@ -79,6 +81,8 @@ class Html5Fragment extends Html5
 	{
 		//  create an instance of the Html5Contruct object
 		$this->construct = Html5Construct::Set($construct);
+		
+		/** @todo  perform this element create via the Html5Element */
 		
 		//  create a DomElement for this instance of the Html5Element, if able
 		if ($this->construct->able()) {
@@ -100,8 +104,6 @@ class Html5Fragment extends Html5
 		return $this;
 	}
 	
-	//  Public Methods
-	
 	/**
 	 *  appendTo()
 	 *  Append this fragment to the provided target node
@@ -115,6 +117,16 @@ class Html5Fragment extends Html5
 			$node->appendChild($this->objnode);
 		}
 	}
+	
+	/**
+	 *  cloneInto()
+	 *  Clone this fragment into a target node a specified number of times
+	 *  
+	 *  @param  object  $node
+	 *  @access public
+	 */
+	public function cloneInto($node, $repeat = 1)
+	{  }
 	
 	//  Html5Fragment Output
 	
