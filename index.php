@@ -32,6 +32,22 @@
 						<p>Current stable: 0.1.0; <strong>This module is currently in development and not yet intended for production use.</strong></p>
 						<p>Html5Dom is a PHP-based module incorporating the concept of selectors and utilizing instances of DOMDocument objects for creating, manipulating, and outputting HTML5 documents or portions of HTML5 markup.</p>
 					</section>
+					<section class="objectives">
+						<h2>Objectives</h2>
+						<p>There are several key objectives identified for this system that will be met as development progresses.</p>
+						<ul>
+							<li>Top-down document rendering: The ability to define an Html5 document and build the internal structure within it</li>
+							<li>Bottom-up document rendering: The ability to define an Hhtml5 fragment and build the remaining document upwards around it</li>
+							<li>Perform hierarchical searches across multiple indexed instances of the various Html5 objects and argue for deep manipulation</li>
+							<li>Chain and/or repeat manipulation methods to create Html5 node tree structures and populate with externally derived content</li>
+						</ul>
+					</section>
+					<!--<section class="benefits">
+						<h2>Benefits</h2>
+						<ul>
+							<li>Ability to completely suspend further user-requested content generation and derive a separate document, ie: an error report</li>
+						</ul>
+					</section>-->
 					<section class="exampleuse">
 						<h2>Example Use</h2>
 						<p>The following code:</p>
@@ -82,22 +98,6 @@
 							</ol>
 						</code>
 					</section>
-					<section class="objectives">
-						<h2>Objectives</h2>
-						<p>There are several key objectives identified for this system that will be met as development progresses.</p>
-						<ul>
-							<li>Top-down document rendering: The ability to define an Html5 document and build the internal structure within it</li>
-							<li>Bottom-up document rendering: The ability to define an Hhtml5 fragment and build the remaining document upwards around it</li>
-							<li>Perform hierarchical searches across multiple indexed instances of the various Html5 objects and argue for deep manipulation</li>
-							<li>Chain and/or repeat manipulation methods to create Html5 node tree structures and populate with externally derived content</li>
-						</ul>
-					</section>
-					<!--<section class="benefits">
-						<h2>Benefits</h2>
-						<ul>
-							<li>Ability to completely suspend further user-requested content generation and derive a separate document, ie: an error report</li>
-						</ul>
-					</section>-->
 					<section class="requirements">
 						<h2>Requirements</h2>
 						<ul>
@@ -131,8 +131,7 @@
 							<li>Require the ability to search the domdocument node tree for a matching construct definition</li>
 							<li>Require an error detection and stop process system</li>
 							<li>Require the ability to output text/plain</li>
-							<li>Require the ability to identify and index an element for further reference (recall, indexAs ?)</li>
-							
+							<li>Require the ability to identify and index a fragment for further reference (recall, indexAs ?)</li>
 						</ul>
 					</section>
 					<section class="considerations">
