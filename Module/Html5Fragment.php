@@ -129,14 +129,22 @@ class Html5Fragment extends Html5
 	}
 	
 	/**
-	 *  cloneInto()
-	 *  Clone this fragment into a target node a specified number of times
+	 *  cloneFragment()
+	 *  Create and return a copy of this Html5Fragment
 	 *  
-	 *  @param  object  $node
+	 *  @return Html5Fragment
 	 *  @access public
 	 */
-	public function cloneInto($node, $repeat = 1)
-	{  }
+	public function cloneFragment()
+	{
+		//  create a new instance of the Html5Fragment
+		$fragment = new Html5Fragment(["parent"=>$this->parent,"target"=>$this->target]);
+		
+		//  clone the objectnode and its nodetree
+		$fragment->objnode = $this->objnode->cloneNode(true);
+		
+		return $fragment;
+	}
 	
 	//  Html5Fragment Output
 	
