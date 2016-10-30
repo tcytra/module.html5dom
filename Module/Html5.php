@@ -202,7 +202,7 @@ class Html5
 	
 	/**
 	 *  with()
-	 *  Import the with argument into the object node
+	 *  Import the argument into the object node; replace existing text/html
 	 *  
 	 *  @param  string  $with
 	 *  @return object
@@ -210,6 +210,11 @@ class Html5
 	 */
 	public function with($with)
 	{
+		//  remove any existing structure from this objectnode
+		while ($this->objnode->childNodes->length) {
+			$this->objnode->removeChild( $this->objnode->childNodes->item(0) );
+		}
+		
 		//  create a temporary instance of the DomDocument object
 		$domimp = new DOMImplementation;
 		$domdtd = $domimp->createDocumentType("html", null, null);
