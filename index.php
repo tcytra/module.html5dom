@@ -3,22 +3,33 @@
 	<head>
 		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width,initial-scale=1"/>
+		<meta name="author" content="Todd Cytra tcytra.gmail.com.">
 		<title>HTML5Dom</title>
+		<style type="text/css">
+			body { margin:0; padding:0; font-family:verdana,sans-serif; font-size:16px; }
+			h1,h2,h3,h4,h5,h6 { margin:0; padding:1em 0; font-family:arial,sans-serif; }
+			header { background-color:steelblue; }
+			h1 { width:960px; margin:0 auto; color:white; }
+			main { width:960px; margin:0 auto; padding-bottom:2em; }
+		</style>
 	</head>
 	<body>
 		<div class="page interface">
-			<header class="head">
-				<h1 class="heading">Html5Dom</h1>
+			<header>
+				<div class="body">
+					<h1 class="heading">Html5Dom</h1>
+				</div>
 			</header>
-			<div class="body">
-				<main>
+			<main>
+				<div class="body">
 					<section class="description">
 						<h2>Description</h2>
-						<p>The Html5 system is intended to be an interface for HTML5 dom-node creation and manipulation via string-format nodename and element id selectors.</p>
+						<p>Html5Dom is a PHP-based module incorporating the concept of selectors and utilizing instances of DOMDocument objects for creating, manipulating, and outputting HTML5 documents or portions of HTML5 markup.</p>
+						<p><strong>This module is currently in development and not yet intended for production use.</strong></p>
 					</section>
 					<section class="objectives">
 						<h2>Objectives</h2>
-						<p>There are several key objectives identified for this system that have must be met.</p>
+						<p>There are several key objectives identified for this system that will be met as development progresses.</p>
 						<ul>
 							<li>Top-down document rendering: The ability to define an Html5 document and build the internal structure within it</li>
 							<li>Bottom-up document rendering: The ability to define an Hhtml5 fragment and build the remaining document upwards around it</li>
@@ -77,8 +88,8 @@
 							<li>Consider a cleaner (better readability) means of referencing domobj, domnode, objnode, parent, and target</li>
 						</ul>
 					</section>
-				</main>
-			</div>
+				</div>
+			</main>
 		</div>
 	</body>
 </html>
