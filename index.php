@@ -132,6 +132,7 @@
 							<li>Require an error detection and stop process system</li>
 							<li>Require the ability to output text/plain</li>
 							<li>Require the ability to identify and index an element for further reference (recall, indexAs ?)</li>
+							
 						</ul>
 					</section>
 					<section class="considerations">
@@ -141,6 +142,7 @@
 							<li>Consider the option of creating all extended objects from the Html5 object</li>
 							<li>Consider utilizing a namespace for this module</li>
 							<li>Consider a cleaner (better readability) means of referencing domobj, domnode, objnode, parent, and target</li>
+							<li>Consider implementing the ability to define a constructor chain via some kind of configuration markup</li>
 						</ul>
 					</section>
 				</div>
