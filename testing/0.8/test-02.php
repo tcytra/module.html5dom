@@ -7,7 +7,7 @@ $testcase = "Test 02";
 $describe = "Alter the append method to accept a constructor argument";
 
 //  Create an instance of the Html5Document
-$html5 = new Html5Document(['language'=>'en_CA']);
+$html5 = new Html5Document(['language'=>'en-CA']);
 
 //  Assemble some javascript code to include with the <script> element
 $code = <<<JavaScript

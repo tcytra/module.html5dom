@@ -7,7 +7,7 @@ $testcase = "Test 07";
 $describe = "Create a clone of the Html5Fragment and work with it separately";
 
 //  Create an instance of the Html5Document
-$html5 = new Html5Document("en_CA");
+$html5 = new Html5Document("en-CA");
 
 $webpage = <<<MainContent
 <header>

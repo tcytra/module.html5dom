@@ -16,7 +16,7 @@ class Html5
 	/** @var string $charset  The specified character set for the output */
 	public	static	$charset	= "utf-8";
 	/** @var string $language The specified language encoding for the output */
-	public	static	$language	= "en-US";
+	public	static	$language	= "en";
 	
 	//  Html5 Object Parameters
 	
@@ -281,7 +281,7 @@ class Html5
 				$valid = preg_match("/^[a-z][a-z0-9-]+[0-9]{1}$/", $value);
 				break;
 			case 'language':
-				$valid = preg_match("/^[a-z]{2}_[A-Z]{2}$/", $value);
+				$valid = preg_match("/^[a-z]{2}(_[A-Z]{2})?$/", $value);
 				break;
 			case 'nodename':
 				$valid = preg_match("/^[a-z]+$/", $value);

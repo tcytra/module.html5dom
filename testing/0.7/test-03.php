@@ -7,7 +7,7 @@ $testcase = "Test 03";
 $describe = "Correct the creation of the Html5DocumentHead and Html5Element object instances to extend Html5";
 
 //  Create an instance of the Html5Document
-$html5 = new Html5Document(['language'=>'en_CA']);
+$html5 = new Html5Document(['language'=>'en-CA']);
 
 //  Assemble some javascript code to include with the <script> element
 $code = <<<JavaScript

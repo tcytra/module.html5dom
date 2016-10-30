@@ -7,7 +7,7 @@ $testcase = "Test 03";
 $describe = "Provide the ability to wrap an Html5Fragment with a constructor argument";
 
 //  Create an instance of the Html5Document
-$html5 = new Html5Document("en_CA");
+$html5 = new Html5Document();
 
 //  Create an instance of the Html5Fragment
 $fragment = $html5->fragment("header.testcase", "<h3>{$testcase}</h3><p>{$describe}</p>");

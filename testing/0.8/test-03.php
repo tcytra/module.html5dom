@@ -7,7 +7,7 @@ $testcase = "Test 03";
 $describe = "Alter the append method to accept an argument to create the element with text content or html structure";
 
 //  Create an instance of the Html5Document
-$html5 = new Html5Document(['language'=>'en_CA']);
+$html5 = new Html5Document(['language'=>'en-CA']);
 
 //  Create the document <head> elements
 $html5->head->meta(["name"=>"description","content"=>$describe])->title("Html5Dom | 0.8 {$testcase}")->favicon("/favicon.png");

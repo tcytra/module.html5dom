@@ -7,7 +7,7 @@ $testcase = "Test 01";
 $describe = "Move the append method from the Html5Document to the Html5 object";
 
 //  Create an instance of the Html5Document
-$html5 = new Html5Document(['language'=>'en_CA']);
+$html5 = new Html5Document(['language'=>'en-CA']);
 
 //  Assemble some javascript code to include with the <script> element
 $code = <<<JavaScript
