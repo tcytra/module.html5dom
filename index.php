@@ -11,21 +11,76 @@
 			header { background-color:steelblue; }
 			h1 { width:960px; margin:0 auto; color:white; }
 			main { width:960px; margin:0 auto; padding-bottom:2em; }
+			code { margin: 1em 0; }
+			code ol { border:1px solid slategrey; background-color:#efefef;color:#a0b0c0; }
+			code ol li { padding:.25em .75em;background-color:white; color:darkslategrey; }
+			code ol li .comment { color:lightslategrey; }
+			code ol li:first-child { padding-top:.5em; }
+			code ol li:last-child { padding-bottom:.5em; }
+			code blockquote { margin-top:0;margin-bottom:0; }
 		</style>
 	</head>
 	<body>
 		<div class="page interface">
 			<header>
-				<div class="body">
-					<h1 class="heading">Html5Dom</h1>
-				</div>
+				<h1>Html5Dom</h1>
 			</header>
 			<main>
 				<div class="body">
 					<section class="description">
 						<h2>Description</h2>
+						<p>Current stable: 0.1.0; <strong>This module is currently in development and not yet intended for production use.</strong></p>
 						<p>Html5Dom is a PHP-based module incorporating the concept of selectors and utilizing instances of DOMDocument objects for creating, manipulating, and outputting HTML5 documents or portions of HTML5 markup.</p>
-						<p><strong>This module is currently in development and not yet intended for production use.</strong></p>
+					</section>
+					<section class="exampleuse">
+						<h2>Example Use</h2>
+						<p>The following code:</p>
+						<code>
+							<ol>
+								<li>&lt;?php</li>
+								<li><span class="comment">//  Create an instance of the Html5Document object</span></li>
+								<li>$html5 = new Html5Document("en");</li>
+								<li></li>
+								<li><span class="comment">//  Append some of the HTML5 &lt;head&gt; elements</span></li>
+								<li>$html5-&gt;head-&gt;title("Document Title")</li>
+								<li><blockquote>-&gt;meta(["viewport"=&gt;"width=device-width,initial-scale=1"])</blockquote></li>
+								<li><blockquote>-&gt;meta(["name"=>"author","content"=>"Strawberry Fields"])</blockquote></li>
+								<li><blockquote>-&gt;stylesheet("/css/default.css")</blockquote></li>
+								<li><blockquote>-&gt;javascript("/js/init.js")</blockquote></li>
+								<li><blockquote>-&gt;favicon("/favicon.png");</blockquote></li>
+								<li></li>
+								<li><span class="comment">//  Create an instance of the Html5Fragment object and attache it to the &lt;body&gt;</span></li>
+								<li>$html5-&gt;fragment(".interface.wrapper", "&lt;header&gt;&lt;h1&gt;Page Title&lt;/h1&gt;&lt;/header&gt;")</li>
+								<li><blockquote>-&gt;append("main.content", "&lt;p&gt;Hello world!&lt;/p&gt;")</blockquote></li>
+								<li><blockquote>-&gt;appendTo($html5-&gt;body);</blockquote></li>
+								<li></li>
+								<li><span class="comment">//  Output the document</span></li>
+								<li>$html5-&gt;save()-&gt;write();</li>
+							</ol>
+						</code>
+						<p>Will output:</p>
+						<code>
+							<ol>
+								<li>&lt;!DOCTYPE html&gt;</li>
+								<li>&lt;html lang="en"&gt;</li>
+								<li><blockquote>&lt;head&gt;</blockquote></li>
+								<li><blockquote><blockquote>&lt;meta charset="utf-8"&gt;</blockquote></blockquote></li>
+								<li><blockquote><blockquote>&lt;meta viewport="width=device-width,initial-scale=1"&gt;</blockquote></blockquote></li>
+								<li><blockquote><blockquote>&lt;meta name="author" content="Strawberry Fields"&gt;</blockquote></blockquote></li>
+								<li><blockquote><blockquote>&lt;title&gt;Document Title&lt;/title&gt;</blockquote></blockquote></li>
+								<li><blockquote><blockquote>&lt;link rel="icon" href="/favicon.png"&gt;</blockquote></blockquote></li>
+								<li><blockquote><blockquote>&lt;link rel="stylesheet" type="text/css" href="/css/default.css"&gt;</blockquote></blockquote></li>
+								<li><blockquote><blockquote>&lt;script type="text/javascript" src="/js/init.js"&gt;&lt;/script&gt;</blockquote></blockquote></li>
+								<li><blockquote>&lt;/head&gt;</blockquote></li>
+								<li><blockquote>&lt;body&gt;</blockquote></li>
+								<li><blockquote><blockquote>&lt;div class="interface wrapper"&gt;</blockquote></blockquote></li>
+								<li><blockquote><blockquote><blockquote>&lt;header&gt;&lt;h1&gt;Page Title&lt;/h1&gt;&lt;/header&gt;</blockquote></blockquote></blockquote></li>
+								<li><blockquote><blockquote><blockquote>&lt;main class="content"&gt;&lt;p&gt;Hello world!&lt;/p&gt;&lt;/main&gt;</blockquote></blockquote></blockquote></li>
+								<li><blockquote><blockquote>&lt;/div&gt;</blockquote></blockquote></li>
+								<li><blockquote>&lt;/body&gt;</blockquote></li>
+								<li>&lt;/html&gt;</li>
+							</ol>
+						</code>
 					</section>
 					<section class="objectives">
 						<h2>Objectives</h2>
