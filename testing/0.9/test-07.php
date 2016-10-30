@@ -4,7 +4,7 @@
 
 //  Title and describe this testcase
 $testcase = "Test 07";
-$describe = "Clone an Html5Fragment into a target node";
+$describe = "Create a clone of the Html5Fragment and work with it separately";
 
 //  Create an instance of the Html5Document
 $html5 = new Html5Document("en_CA");
