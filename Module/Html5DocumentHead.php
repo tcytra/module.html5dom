@@ -58,6 +58,10 @@ class Html5DocumentHead extends Html5
 	
 	//  Public Methods
 	
+	/**
+	 *  create()
+	 *  Create the document <head> tag and append to the parent target
+	 */
 	public function create()
 	{
 		$this->objnode	= $this->domobj->createElement("head");
@@ -73,11 +77,11 @@ class Html5DocumentHead extends Html5
 	 *  favicon()
 	 *  Add a document <link> tag and attributes for the icon to the node tree
 	 *  
-	 *  @param  string  $href = "favicon.png"
+	 *  @param  string  $href = "/favicon.png"
 	 *  @return object  Html5DocumentHead
 	 *  @access public
 	 */
-	public function favicon($href = "favicon.png")
+	public function favicon($href = "/favicon.png")
 	{
 		$node = null;
 		
