@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1"/>
+		<meta name="author" content="Todd Cytra tcytra.gmail.com.">
+		<meta name="description" content="The Html5Element object provides methods for creating and manipulating a PHP DOMElement in the context of an HTML5 document.">
+		<title>Class Html5Element Extends Html5Element</title>
+		<style type="text/css">
+			body { margin:0; padding:0; font-family:verdana,sans-serif; font-size:16px; }
+			h1,h2,h3,h4,h5,h6 { margin:0; padding:1em 0; font-family:arial,sans-serif; }
+			header { background-color:steelblue; }
+			h1 { width:960px; margin:0 auto; color:white; }
+			main { width:960px; margin:0 auto; padding-bottom:2em; }
+			code { margin: 1em 0; }
+			code ol { border:1px solid slategrey; background-color:#efefef;color:#a0b0c0; }
+			code ol li { padding:.25em .75em; background-color:white; color:darkslategrey; white-space:nowrap; }
+			code ol li .comment { color:lightslategrey; }
+			code ol li:first-child { padding-top:.5em; }
+			code ol li:last-child { padding-bottom:.5em; }
+			code blockquote { margin-top:0;margin-bottom:0; }
+		</style>
+	</head>
+	<body>
+		<div class="page interface">
+			<header>
+				<h1>Html5Element</h1>
+			</header>
+			<main>
+				<div class="body">
+					<section class="description">
+						<h2>Description</h2>
+						<p>The Html5Element object provides methods for creating and manipulating a PHP DOMElement in the context of an HTML5 document.</p>
+						<p><span class="note">Note:</span><br>Although the Html5Element object can be utilized independant of a parent object, a developer may execute the __construct and create methods through a single call to the Html5 append method, which is available to all classes that extend it.</p>
+					</section>
+					<section class="properties">
+						<h2>Properties</h2>
+						<dl>
+							<dt><span class="modifier">protected</span> <span class="type">object</span> $objnode</dt>
+							<dd>The local instance target PHP DOMElement</dd>
+						</dl>
+						<dl>
+							<dt><span class="modifier">public</span> <span class="type">string</span> $objtype</dt>
+							<dd>The type-name of this object; Value: element</dd>
+						</dl>
+					</section>
+					<section class="methods">
+						<h2>Methods</h2>
+						<dl>
+							<dt><span class="modifier">public</span> __construct( [<span class="type">array</span> $config = null] )</dt>
+							<dd>Create an instance of the Html5Element and process the provided $config</dd>
+						</dl>
+						<dl>
+							<dt><span class="modifier">public</span> <span class="type">void</span> <a href="./create.html">create</a>( <span class="type">string</span> $construct[, <span class="type">string</span> $with = null] )</dt>
+							<dd>Create the document element with a provided constructor and append it to the parent target</dd>
+						</dl>
+					</section>
+					<section class="exampleuse">
+						<h2>Example Use</h2>
+						<code>
+							<ol>
+								<li>&lt;?php</li>
+								<li class="comment">//  Create an instance of the Html5Document object</li>
+								<li>$html5 = new Html5Document();</li>
+								<li></li>
+								<li class="comment">//  Create an instance of the Html5Element object</li>
+								<li>$element = new Html5Element( ["parent"=&gt;$html5, "target"=&gt;$html5-&gt;body] );</li>
+								<li></li>
+								<li class="comment">//  Create the element with a constructor and provide some inner text</li>
+								<li>$element->create("div#interface.wrapper", "This document is ready for content.");</li>
+								<li></li>
+								<li class="comment">//  Output the document html</li>
+								<li>$html5->save()->write();</li>
+								<li></li>
+								<li class="comment">//  Result:</li>
+								<li>&lt;!DOCTYPE html&gt;</li>
+								<li>&lt;html lang="en"&gt;</li>
+								<li>&lt;head&gt;</li>
+								<li>&lt;meta charset="utf-8"&gt;</li>
+								<li>&lt;/head&gt;</li>
+								<li>&lt;body&gt;&lt;div class="wrapper" id="interface"&gt;This document is ready for content&lt;/div&gt;&lt;/body&gt;.</li>
+								<li>&lt;/html&gt;</li>
+							</ol>
+						</code>
+					</section>
+				</div>
+			</main>
+		</div>
+	</body>
+</html>

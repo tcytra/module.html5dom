@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1"/>
+		<meta name="author" content="Todd Cytra tcytra.gmail.com.">
+		<meta name="description" content="The Html5Document object will create a PHP DOMDocument (via an HTML documentType DOMImplementation) and provide methods for creating and manipulating the internal DOM node tree.">
+		<title>Class Html5Document Extends Html5</title>
+		<style type="text/css">
+			body { margin:0; padding:0; font-family:verdana,sans-serif; font-size:16px; }
+			h1,h2,h3,h4,h5,h6 { margin:0; padding:1em 0; font-family:arial,sans-serif; }
+			header { background-color:steelblue; }
+			h1 { width:960px; margin:0 auto; color:white; }
+			main { width:960px; margin:0 auto; padding-bottom:2em; }
+			code { margin: 1em 0; }
+			code ol { border:1px solid slategrey; background-color:#efefef;color:#a0b0c0; }
+			code ol li { padding:.25em .75em; background-color:white; color:darkslategrey; white-space:nowrap; }
+			code ol li .comment { color:lightslategrey; }
+			code ol li:first-child { padding-top:.5em; }
+			code ol li:last-child { padding-bottom:.5em; }
+			code blockquote { margin-top:0;margin-bottom:0; }
+		</style>
+	</head>
+	<body>
+		<div class="page interface">
+			<header>
+				<h1>Class Html5Document Extends Html5</h1>
+			</header>
+			<main>
+				<div class="body">
+					<section class="description">
+						<h2>Description</h2>
+						<p>The Html5Document object will create a PHP DOMDocument (via an HTML documentType DOMImplementation) and provide methods for creating and manipulating the internal DOM node tree.</p>
+					</section>
+					<section class="properties">
+						<h2>Properties</h2>
+						<dl>
+							<dt><span class="modifier">public</span> <span class="type">object</span> $body</dt>
+							<dd>The HTML document &lt;body&gt; element DOMNode</dd>
+						</dl>
+						<dl>
+							<dt><span class="modifier">public</span> <span class="type">object</span> $head</dt>
+							<dd>The instance of the Html5DocumentHead object</dd>
+						</dl>
+						<dl>
+							<dt><span class="modifier">public</span> <span class="type">string</span> $objtype</dt>
+							<dd>The type-name of this object; Value: document</dd>
+						</dl>
+						<dl>
+							<dt><span class="modifier">public</span> <span class="type">string</span> $output</dt>
+							<dd>The saveHTML string returned from PHP DOMDocument</dd>
+						</dl>
+					</section>
+					<section class="methods">
+						<h2>Methods</h2>
+						<dl>
+							<dt><span class="modifier">public</span> __construct( [<span class="type">array</span> $config = null] )</dt>
+							<dd>Create an instance of the Html5Document and process the provided $config</dd>
+						</dl>
+						<dl>
+							<dt><span class="modifier">public</span> <span class="type">object</span> <a href="./fragment.html">fragment</a>( <span class="type">string</span> $construct[, <span class="type">string</span> $with = null] )</dt>
+							<dd>Create and return an instance of the Html5Fragment object</dd>
+						</dl>
+						<dl>
+							<dt><span class="modifier">public</span> <span class="type">void</span> <a href="./save.html">save</a>( )</dt>
+							<dd>Perform a PHP DOMDocument saveHTML into the instance $output variable</dd>
+						</dl>
+						<dl>
+							<dt><span class="modifier">public</span> <span class="type">string</span> <a href="./write.html">write</a>( )</dt>
+							<dd>Write the Html5Document $output string content</dd>
+						</dl>
+					</section>
+					<section class="exampleuse">
+						<h2>Example Use</h2>
+						<code>
+							<ol>
+								<li>&lt;?php</li>
+								<li class="comment">//  Create and output an instance of the Html5Document object</li>
+								<li>$html5 = new Html5Document();</li>
+								<li>$html5->save()->write();</li>
+								<li></li>
+								<li>//  Result:</li>
+								<li>&lt;!DOCTYPE html&gt;</li>
+								<li>&lt;html lang="en"&gt;</li>
+								<li>&lt;head&gt;&lt;meta charset="utf-8"&gt;&lt;/head&gt;</li>
+								<li>&lt;body&gt;&lt;/body&gt;</li>
+								<li>&lt;/html&gt;</li>
+							</ol>
+						</code>
+					</section>
+				</div>
+			</main>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1"/>
+		<meta name="author" content="Todd Cytra tcytra.gmail.com.">
+		<meta name="description" content="The Html5DocumentHead object provides methods for adding and manipulating the various nodes in the DOMDocument &lt;head&gt; element.">
+		<title>Html5DocumentHead</title>
+		<style type="text/css">
+			body { margin:0; padding:0; font-family:verdana,sans-serif; font-size:16px; }
+			h1,h2,h3,h4,h5,h6 { margin:0; padding:1em 0; font-family:arial,sans-serif; }
+			header { background-color:steelblue; }
+			h1 { width:960px; margin:0 auto; color:white; }
+			main { width:960px; margin:0 auto; padding-bottom:2em; }
+			code { margin: 1em 0; }
+			code ol { border:1px solid slategrey; background-color:#efefef;color:#a0b0c0; }
+			code ol li { padding:.25em .75em; background-color:white; color:darkslategrey; white-space:nowrap; }
+			code ol li .comment { color:lightslategrey; }
+			code ol li:first-child { padding-top:.5em; }
+			code ol li:last-child { padding-bottom:.5em; }
+			code blockquote { margin-top:0;margin-bottom:0; }
+		</style>
+	</head>
+	<body>
+		<div class="page interface">
+			<header>
+				<h1>Class Html5DocumentHead Extends Html5</h1>
+			</header>
+			<main>
+				<div class="body">
+					<section class="description">
+						<h2>Description</h2>
+						<p>The Html5DocumentHead object provides methods for adding and manipulating the various nodes in the DOMDocument &lt;head&gt; element.</p>
+					</section>
+					<section class="properties">
+						<h2>Properties</h2>
+						<dl>
+							<dt><span class="modifier">protected</span> <span class="type">object</span> $objnode</dt>
+							<dd>The local instance target PHP DOMElement</dd>
+						</dl>
+						<dl>
+							<dt><span class="modifier">public</span> <span class="type">string</span> $objtype</dt>
+							<dd>The type-name of this object; Value: documenthead</dd>
+						</dl>
+					</section>
+					<section class="methods">
+						<h2>Methods</h2>
+						<dl>
+							<dt><span class="modifier">public</span> __construct( [<span class="type">array</span> $config = null] )</dt>
+							<dd>Create an instance of the Html5DocumentHead and process the provided $config</dd>
+						</dl>
+						<dl>
+							<dt><span class="modifier">public</span> <span class="type">void</span> <a href="./create.html">create</a>( )</dt>
+							<dd>Create the document &lt;head&gt; tag and append it to the parent target</dd>
+						</dl>
+						<dl>
+							<dt><span class="modifier">public</span> <span class="type">object</span> <a href="./favicon.html">favicon</a>( [<span class="type">string</span> $href = "/favicon.png"] )</dt>
+							<dd>Add a document &lt;link&gt; tag and attributes for the icon to the node tree</dd>
+							<dd>Returns $this instance of the Html5DocumentHead</dd>
+						</dl>
+						<dl>
+							<dt><span class="modifier">public</span> <span class="type">object</span> <a href="./javascript.html">javascript</a>( <span class="type">string</span> $src[, <span class="type">string</span> $code = null] )</dt>
+							<dd>Add a document &lt;script&gt; tag and attributes to the html5 node tree</dd>
+						</dl>
+						<dl>
+							<dt><span class="modifier">public</span> <span class="type">object</span> <a href="./meta.html">meta</a>( <span class="type">array</span> $attr )</dt>
+							<dd>Add a document &lt;meta&gt; tag and attributes to the Html5 node tree</dd>
+						</dl>
+						<dl>
+							<dt><span class="modifier">public</span> <span class="type">object</span> <a href="./stylesheet.html">stylesheet</a>( <span class="type">string</span> $href )</dt>
+							<dd>Add a document &lt;link&gt; tag and attributes to the html5 node tree</dd>
+						</dl>
+						<dl>
+							<dt><span class="modifier">public</span> <span class="type">object</span> <a href="./title.html">title</a>( <span class="type">string</span> $text[, <span class="type">int</span> $amend = 0, <span class="type">string</span> $join = null] )</dt>
+							<dd>Add the document &lt;title&gt; tag to the html5 node tree</dd>
+						</dl>
+					</section>
+					<section class="exampleuse">
+						<h2>Example Use</h2>
+						<p></p>
+						<code>
+							<ol>
+								<li>&lt;?php</li>
+								<li class="comment">//  Create an instance of the Html5Document object</li>
+								<li>$html5 = new Html5Document();</li>
+								<li></li>
+								<li class="comment">//  Append the various &lt;head&gt; elements to the $html</li>
+								<li>$html5->head->meta(["viewport"=>"width=device-width,initial-scale=1"])</li>
+								<li><blockquote>-&gt;stylesheet("/css/styles.css")</blockquote></li>
+								<li><blockquote>-&gt;javascript("/js/script.js")</blockquote></li>
+								<li><blockquote>-&gt;javascript(null, "(function(){ /* inline script */ })();")</blockquote></li>
+								<li><blockquote>-&gt;title("Class Html5DocumentHead Extends Html5")</blockquote></li>
+								<li><blockquote>-&gt;favicon("/favicon.png");</blockquote></li>
+								<li></li>
+								<li class="comment">//  Output the document html</li>
+								<li>$html5->save()->write();</li>
+								<li></li>
+								<li class="comment">//  Result:</li>
+								<li>&lt;!DOCTYPE html&gt;</li>
+								<li>&lt;html lang="en"&gt;</li>
+								<li>&lt;head&gt;</li>
+								<li>&lt;meta charset="utf-8"&gt;</li>
+								<li>&lt;meta viewport="width=device-width,initial-scale=1"&gt;</li>
+								<li>&lt;title&gt;Class Html5DocumentHead Extends Html5&lt;/title&gt;</li>
+								<li>&lt;link rel="icon" href="/favicon.png"&gt;</li>
+								<li>&lt;link rel="stylesheet" type="text/css" href="/css/styles.css"&gt;</li>
+								<li>&lt;script type="text/javascript" src="/js/script.js"&gt;&lt;/script&gt;&lt;script type="text/javascript"&gt;</li>
+								<li>(function(){ /* inline javascript */ })();</li>
+								<li>&lt;/script&gt;</li>
+								<li>&lt;/head&gt;</li>
+								<li>&lt;body&gt;&lt;/body&gt;</li>
+								<li>&lt;/html&gt;</li>
+							</ol>
+						</code>
+					</section>
+				</div>
+			</main>
+		</div>
+	</body>
+</html>

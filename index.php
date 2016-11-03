@@ -1,3 +1,9 @@
+<?php include "load.html5dom.php"; ?>
+<?php
+
+
+
+?>
 <!DOCTYPE html>
 <html lang="en-CA">
 	<head>
