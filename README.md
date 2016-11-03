@@ -71,10 +71,20 @@ Further information for using the Html5Dom objects may be found in the following
 
 [Html5Construct](Docs/Html5Construct.md)
 
+The Html5Construct object will evaluate a provided HTML element constructor in string format and retrieve the parameters as instance properties.
+
 [Html5Document](Docs/Html5Document.md)
+
+The Html5Document object will create a PHP DOMDocument (via an HTML documentType DOMImplementation) and provide methods for creating and manipulating the internal DOM node tree.
 
 [Html5DocumentHead](Docs/Html5DocumentHead.md)
 
+The Html5DocumentHead object provides methods for adding and manipulating the various child nodes in the DOMDocument &lt;head&gt; node.
+
 [Html5Element](Docs/Html5Element.md)
 
+The Html5Element object provides methods for creating and manipulating a PHP DOMElement in the context of an HTML5 document.
+
 [Html5Fragment](Docs/Html5Fragment.md)
+
+The Html5Fragment object provides methods for creating and manipulating a PHP DOMFragment in the context of an HTML5 document.
