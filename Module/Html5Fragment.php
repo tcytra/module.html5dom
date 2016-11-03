@@ -151,6 +151,10 @@ class Html5Fragment extends Html5
 	/**
 	 *  getOutput()
 	 *  Return the derived output from this Html5Fragment
+	 *  
+	 *  @param  bool    $stripnewlines = false
+	 *  @return string
+	 *  @access public
 	 */
 	public function getOutput($stripnewlines = false)
 	{
