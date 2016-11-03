@@ -6,7 +6,7 @@ Created: 2016-09-22
 
 ## Description
 
-Current stable: 0.1.0; *This project is currently in development and not yet intended for production use.*
+Current stable: 0.1.0; *This project is currently in development and not intended for production use.*
 
 Html5Dom is a PHP-based project incorporating the concept of selectors and utilizing instances of DOMDocument objects for creating, manipulating, and outputting HTML5 documents or portions of HTML5 markup.
 
@@ -65,3 +65,16 @@ Will output:
 </html>
 ```
 
+## Documentation
+
+Further information for using the Html5Dom objects may be found in the following documents:
+
+[Html5Construct](Docs/Html5Construct.md)
+
+[Html5Document](Docs/Html5Document.md)
+
+[Html5DocumentHead](Docs/Html5DocumentHead.md)
+
+[Html5Element](Docs/Html5Element.md)
+
+[Html5Fragment](Docs/Html5Fragment.md)
