@@ -4,8 +4,8 @@
 		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width,initial-scale=1"/>
 		<meta name="author" content="Todd Cytra tcytra.gmail.com.">
-		<meta name="description" content="">
-		<title>Html5Document</title>
+		<meta name="description" content="The Html5Document object will create a PHP DOMDocument (via an HTML documentType DOMImplementation) and provide methods for creating and manipulating the internal DOM node tree.">
+		<title>Class Html5Document Extends Html5</title>
 		<style type="text/css">
 			body { margin:0; padding:0; font-family:verdana,sans-serif; font-size:16px; }
 			h1,h2,h3,h4,h5,h6 { margin:0; padding:1em 0; font-family:arial,sans-serif; }
@@ -54,19 +54,19 @@
 					<section class="methods">
 						<h2>Methods</h2>
 						<dl>
-							<dt><span class="modifier">public</span> __construct( array $config = null )</dt>
+							<dt><span class="modifier">public</span> __construct( [<span class="type">array</span> $config = null] )</dt>
 							<dd>Create an instance of the Html5Document and process the provided $config</dd>
 						</dl>
 						<dl>
-							<dt><span class="modifier">public</span> <span class="type">object</span> <a href="">fragment</a>( string $construct, string $with = null )</dt>
+							<dt><span class="modifier">public</span> <span class="type">object</span> <a href="./fragment.html">fragment</a>( <span class="type">string</span> $construct[, <span class="type">string</span> $with = null] )</dt>
 							<dd>Create and return an instance of the Html5Fragment object</dd>
 						</dl>
 						<dl>
-							<dt><span class="modifier">public</span> <span class="type">void</span> <a href="">save</a>()</dt>
+							<dt><span class="modifier">public</span> <span class="type">void</span> <a href="./save.html">save</a>( )</dt>
 							<dd>Perform a PHP DOMDocument saveHTML into the instance $output variable</dd>
 						</dl>
 						<dl>
-							<dt><span class="modifier">public</span> <span class="type">string</span> <a href="">write</a>()</dt>
+							<dt><span class="modifier">public</span> <span class="type">string</span> <a href="./write.html">write</a>( )</dt>
 							<dd>Write the Html5Document $output string content</dd>
 						</dl>
 					</section>
