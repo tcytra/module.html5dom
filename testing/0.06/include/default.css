@@ -1,0 +1,14 @@
+/*
+Author	: Todd Cytra
+Created	: 2016-10-13
+*/
+
+html {
+	font: normal normal 100 16px helvetica,sans-serif;
+}
+
+body {
+	width: 60em;
+	margin-left: auto;
+	margin-right: auto;
+}
