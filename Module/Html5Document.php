@@ -1,12 +1,13 @@
 <?php
 /**
- *  Html5Document
+ *  Class       Html5Document
+ *  Extends     Html5
  *  
  *  This object provides the ability to create and utilize the PHP DomDocument
  *  + object to create, identify, and manipulate the types of nodes in the tree
  *  
  *  @author     Todd Cytra <tcytra@gmail.com>
- *  @version    0.2.9 Html5Document.php 2016-09-14
+ *  @version    0.3.1 Html5Document.php 2016-09-14
  *  @since      html5-0.0.1
  */
 class Html5Document extends Html5
@@ -34,10 +35,13 @@ class Html5Document extends Html5
 	 */
 	function __construct($config = null)
 	{
+		//  the option exists to simply argue the language as the $config
 		if (!is_array($config) && self::isValid("language", $config)) { $config = ["language" => $config]; }
 		
-		//  pass the config to the parent object for evaluation
-		parent::__construct($config);
+		//  cycle the provided configuration array into the configure method
+		if ($config && is_array($config)) {
+			foreach ($config as $index=>$value) { $this->configure($index, $value); }
+		}
 		
 		//  implement the DomDocument
 		$this->implement();
@@ -66,6 +70,9 @@ class Html5Document extends Html5
 	 */
 	protected function implement()
 	{
+		//  sanity check: prevent another implementation if the domnode exists
+		if ($this->domnode) { return; }
+		
 		parent::implement();
 		
 		//  create a reference to the dom documentelement
