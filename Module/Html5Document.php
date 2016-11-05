@@ -121,7 +121,6 @@ class Html5Document extends Html5
 	 *  save()
 	 *  Perform a PHP DomDocument saveHTML into the instance $output variable
 	 *  
-	 *  @param	bool	$showdoctype = true
 	 *  @return	object	Html5Document
 	 *  @access	public
 	 */
