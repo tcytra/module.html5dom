@@ -1,7 +1,7 @@
 <?php
 /**
  *  Class       Html5DocumentHead
- *  Extends     Html5
+ *  Extends     Html5Document
  *  
  *  This object provides the ability to create, identify, and manipulate the
  *  + document head elements distinctly.
