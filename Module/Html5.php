@@ -42,17 +42,6 @@ abstract class Html5
 	/** @var object $domnode  The documentElement node, <html> element */
 	protected	$domnode;
 	
-	/**
-	 * __construct()
-	 *  Create an instance of the Html5 object
-	 *  
-	 *  @param  array  $config = null
-	 *
-	public function __construct($config = null)
-	{
-		
-	}*/
-	
 	//  Secure Methods
 	
 	/**
