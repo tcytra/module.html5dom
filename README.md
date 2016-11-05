@@ -15,9 +15,10 @@ Html5Dom is a PHP-based project incorporating the concept of selectors and utili
 There are several key objectives identified for this system that will be met as development progresses.
 
 * Top-down document rendering: The ability to define an Html5 document and build the internal structure within it
-* Bottom-up document rendering: The ability to define an Hhtml5 fragment and build the remaining document upwards around it
+* Bottom-up document rendering: The ability to define an Html5 fragment and build the remaining document upwards around it
 * Perform hierarchical searches across multiple indexed instances of the various Html5 objects and argue for deep manipulation
 * Chain and/or repeat manipulation methods to create Html5 node tree structures and populate with externally derived content
+* Load and push content into an Html5 markup skeleton as defined by a constructor configuration tree or pre-created html files
 
 ## Example Use
 
