@@ -1,14 +1,15 @@
 <?php
 /**
- *  Html5Element
+ *  Class       Html5Element
+ *  Extends     Html5Document
  *  
  *  This object provides the ability to create and manipulate a PHP DomElement
  *  
  *  @author		Todd Cytra <tcytra@gmail.com>
- *  @version	0.1.7 Html5Element.php 2016-09-21
+ *  @version	0.2.1 Html5Element.php 2016-09-21
  *  @since		html5-0.0.1
  */
-class Html5Element extends Html5
+class Html5Element extends Html5Document
 {
 	//  Html5Element Parameters
 	

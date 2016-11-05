@@ -1,15 +1,16 @@
 <?php
 /**
- *  Html5DocumentHead
+ *  Class       Html5DocumentHead
+ *  Extends     Html5
  *  
  *  This object provides the ability to create, identify, and manipulate the
  *  + document head elements distinctly.
  *  
  *  @author     Todd Cytra <tcytra@gmail.com>
- *	@version    0.1.5 Html5DocumentHead.php 2016-10-13
+ *	@version    0.2.1 Html5DocumentHead.php 2016-10-13
  *	@since      html5-0.0.6
  */
-class Html5DocumentHead extends Html5
+class Html5DocumentHead extends Html5Document
 {
 	//  Local Object Parameters
 	
@@ -24,37 +25,20 @@ class Html5DocumentHead extends Html5
 	 */
 	function __construct($config = null)
 	{
-		//  cycle the provided configuration into the configure method
-		if ($config && is_array($config)) {
-			foreach ($config as $index=>$value) { $this->configure($index, $value); }
-		}
-		
-		//  pass the remaining config to the parent constructor
+		//  pass the configuration to the parent constructor
 		parent::__construct($config);
 	}
 	
 	//  Secure Methods
 	
 	/**
-	 *  configure()
-	 *  Set a configuration value for this object by specified index
+	 *  implement()
+	 *  Prevent an implementation attempt for the Html5DocumentHead
 	 *  
-	 *  @param  string  $index
-	 *  @param  string  $value
-	 *  @access protected
+	 *  @access	protected
 	 */
-	protected function configure($index, $value)
-	{
-		//  evaluate and execute the configuration change, if possible
-		switch ($index) {
-			case 'parent':
-				$this->domobj = $value->domobject();
-				break;
-			case 'target':
-				$this->target = $value;
-				break;
-		}
-	}
+	protected function implement()
+	{ /* do nothing */ }
 	
 	//  Public Methods
 	
