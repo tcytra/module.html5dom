@@ -82,9 +82,23 @@ class Html5Construct
 	 *  @return	bool
 	 *  @access	public
 	 */
-	public	function able()
+	public function able()
 	{
 		return	Html5::isValid("nodename", $this->name);
+	}
+	
+	/**
+	 *  classNames()
+	 *  Explode and return the class names in this constructor
+	 *  
+	 *  @return  array
+	 *  @access  public
+	 */
+	public function classNames()
+	{
+		if (strlen($this->class)) { return explode(" ", trim($this->class)); }
+		
+		return array();
 	}
 	
 	//  Global Methods
@@ -100,9 +114,9 @@ class Html5Construct
 	public static function Explode($constructor, $strict = false)
 	{
 		//  create and return an instance of the HTML5Construct object
-		$construct	= new Html5Construct($constructor, $strict);
+		$construct = new Html5Construct($constructor, $strict);
 		
-		return	$construct;
+		return $construct;
 	}
 }
 ?>
