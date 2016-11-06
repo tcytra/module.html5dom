@@ -91,7 +91,7 @@ class Html5Fragment extends Html5Document
 	public function create($construct, $with = null)
 	{
 		//  create an instance of the Html5Contruct object
-		$this->construct = Html5Construct::Set($construct);
+		$this->construct = Html5Construct::Explode($construct);
 		
 		/** @todo  perform this element create via the Html5Element */
 		

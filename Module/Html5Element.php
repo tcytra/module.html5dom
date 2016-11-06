@@ -72,7 +72,7 @@ class Html5Element extends Html5Document
 	public function create($construct, $with = null)
 	{
 		//  create an instance of the HTML5Contructor object
-		$this->construct = HTML5Construct::Set($construct);
+		$this->construct = HTML5Construct::Explode($construct);
 		
 		//  create a DomElement for this instance of the Html5Element, if able
 		if ($this->construct->able()) {
