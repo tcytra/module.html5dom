@@ -7,7 +7,7 @@
  *  + the top level configuration and dom references and interaction
  *  
  *  @author     Todd Cytra <tcytra@gmail.com>
- *  @version    0.2.1 Html5.php 2016-10-21
+ *  @version    0.2.3 Html5.php 2016-10-21
  *  @since      Html5-0.0.7
  */
 abstract class Html5
@@ -173,31 +173,14 @@ abstract class Html5
 	}
 	
 	/**
-	 *  setId()
-	 *  Add the provided id to this element id attribute
-	 *  
-	 *  @param  string  $node
-	 *  @param  string  $id
-	 *  @return object
-	 *  @access public
-	 */
-	public function setId($node, $id)
-	{
-		$node->setAttribute("id", $id);
-		$node->setIdAttribute("id", true);
-		
-		return $this;
-	}
-	
-	/**
-	 *  with()
+	 *  html()
 	 *  Import the argument into the object node; replace existing text/html
 	 *  
 	 *  @param  string  $with
 	 *  @return object
 	 *  @access public
 	 */
-	public function with($with)
+	public function html($with)
 	{
 		//  remove any existing structure from this objectnode
 		while ($this->objnode->childNodes->length) {
@@ -228,6 +211,23 @@ abstract class Html5
 		
 		//  return this instance of the Html5 object
 		return  $this;
+	}
+	
+	/**
+	 *  setId()
+	 *  Add the provided id to this element id attribute
+	 *  
+	 *  @param  string  $node
+	 *  @param  string  $id
+	 *  @return object
+	 *  @access public
+	 */
+	public function setId($node, $id)
+	{
+		$node->setAttribute("id", $id);
+		$node->setIdAttribute("id", true);
+		
+		return $this;
 	}
 	
 	//  Html5Document DOM References

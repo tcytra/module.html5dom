@@ -6,7 +6,7 @@
  *  This object provides the ability to create and manipulate a PHP DomElement
  *  
  *  @author		Todd Cytra <tcytra@gmail.com>
- *  @version	0.2.1 Html5Element.php 2016-09-21
+ *  @version	0.2.3 Html5Element.php 2016-09-21
  *  @since		html5-0.0.1
  */
 class Html5Element extends Html5Document
@@ -91,7 +91,7 @@ class Html5Element extends Html5Document
 			if ($this->target) { $this->target->appendChild( $this->objnode ); }
 			
 			//  execute any provided $with arguments
-			if ($with) { $this->with($with); }
+			if ($with) { $this->html($with); }
 		}
 		
 		return $this;
