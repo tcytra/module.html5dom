@@ -230,6 +230,22 @@ abstract class Html5
 	}
 	
 	/**
+	 *  search()
+	 *  Return a list of nodes matching the provided construct argument
+	 *  
+	 *  @param  string  $construct
+	 *  @return object  Html5Search
+	 *  @access public
+	 */
+	public function search($construct)
+	{
+		$search = new Html5Search($this);
+		$search->find($construct);
+		
+		return $search;
+	}
+	
+	/**
 	 *  setId()
 	 *  Add the provided id to this element id attribute
 	 *  
