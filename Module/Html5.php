@@ -42,39 +42,7 @@ abstract class Html5
 	/** @var object $domnode  The documentElement node, <html> element */
 	protected	$domnode;
 	
-	//  Secure Methods
-	
-	/**
-	 *  configure()
-	 *  Set a configuration value for this object by specified index
-	 *  
-	 *  @param  string  $index
-	 *  @param  string  $value
-	 *  @access protected
-	 */
-	protected function configure($index, $value)
-	{
-		//  evaluate and execute the configuration change, if possible
-		switch ($index) {
-			case 'charset':
-				if (self::isValid("charset", $value)) { self::$charset = $value; }
-				break;
-			case 'language':
-				if (self::isValid("language", $value)) { self::$language = $value; }
-				break;
-			//  these are necessary for Html5DocumentHead, Html5Element, and
-			//  + Html5Fragment
-			case 'parent':
-				$this->domobj = $value->domobject();
-				$this->parent = $value;
-				unset($this->config[ $index ]);
-				break;
-			case 'target':
-				$this->target = $value;
-				unset($this->config[ $index ]);
-				break;
-		}
-	}
+	//  DomDocument Implementation
 	
 	/**
 	 *  implement()
@@ -100,6 +68,54 @@ abstract class Html5
 		$this->domobj->formatOutput = true;
 		$this->domobj->preserveWhiteSpace = true;
 		$this->domobj->encoding	= strtoupper( self::isValid("charset", Html5::$charset) ? Html5::$charset : "utf-8" );
+	}
+	
+	//  Secure Methods
+	
+	/**
+	 *  configure()
+	 *  Set a configuration value for this object by specified index
+	 *  
+	 *  @param  string  $index
+	 *  @param  string  $value
+	 *  @access protected
+	 */
+	protected function configure($index, $value)
+	{
+		//  evaluate and execute the configuration change, if possible
+		switch ($index) {
+			case 'charset':
+				if (self::isValid("charset", $value)) { self::$charset = $value; }
+				break;
+			case 'language':
+				if (self::isValid("language", $value)) { self::$language = $value; }
+				break;
+			//  these are necessary for Html5DocumentHead, Html5Element, and
+			//  + Html5Fragment
+			case 'parent':
+				$this->domobj = $value->domobject();
+				$this->parent = $value;
+				$this->unsetconfig($index);
+				break;
+			case 'target':
+				$this->target = $value;
+				$this->unsetconfig($index);
+				break;
+		}
+	}
+	
+	/**
+	 *  unsetconfig()
+	 *  Unset a configuration value for this object, if the index exists
+	 *  
+	 *  @param  string  $index
+	 *  @access protected
+	 */
+	protected function unsetconfig($index)
+	{
+		//if (is_array($this->config) && array_key_exists($index, $this->config)) {
+			unset($this->config[ $index ]);
+		//}
 	}
 	
 	//  Public Methods
