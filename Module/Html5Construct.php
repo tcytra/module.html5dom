@@ -12,6 +12,13 @@ class Html5Construct
 {
 	static  $defaultNode = "div";
 	
+	//  Private Parameters
+	
+	/** @var string $constructor Is the argument for the element attributes */
+	private $constructor;
+	/** @var bool $strict Prevent the instance from assuming the $defaultNode */
+	private $strict;
+	
 	//  Public Parameters
 	
 	/** @var string $id */
@@ -30,24 +37,25 @@ class Html5Construct
 		//  if the constructor is an object, return the object
 		if (gettype($constructor) === "object") { return $constructor; }
 		
+		$this->constructor = $constructor;
+		$this->strict = $strict;
+		
 		//  otherwise, evaluate the provided constructor
-		$this->evaluate($constructor, $strict);
+		$this->evaluate();
 	}
 	
 	//  Private Methods
 	
 	/**
 	 *  evaluate()
-	 *  Evaluate a provided construct and break it down into logical components
-	 *  + If set true, strict will not allow the object to assume a defaultNode
+	 *  Evaluate the instance construct and explode it into logical components
 	 *  
-	 *  @param  string  $constructor
-	 *  @param  bool    $strict
 	 *  @access private
-	 *  @throws Exception
 	 */
-	private function evaluate($constructor, $strict)
+	private function evaluate()
 	{
+		$constructor = $this->constructor;
+		
 		//  extract a node class definition, if available; match '.classname'
 		if(preg_match("/\.[a-z]?([a-z0-9-]+)$/", $constructor))
 		{ $this->class = str_replace(".", " ", substr($constructor, strpos($constructor,".")+1)); $constructor = substr($constructor, 0, strpos($constructor,".")); }
@@ -57,11 +65,12 @@ class Html5Construct
 		{ $this->id = substr($constructor, strpos($constructor,"#")+1); $constructor = substr($constructor, 0, strpos($constructor,"#")); }
 		
 		//  verify the remainder as the node name
-		$this->name = preg_match("/^[a-z]?([a-zA-Z0-9-]+)$/", $constructor) ? $constructor : (($strict) ? null : self::$defaultNode);
+		$this->name = preg_match("/^[a-z]?([a-zA-Z0-9-]+)$/", $constructor) ? $constructor : (($this->strict) ? null : self::$defaultNode);
 		
 		//  ensure the construct node is a valid HTML5 entity
-		if(!$this->able())
-		{ throw new Exception("The construct node '{$this->name}' is not a valid HTML5 entity."); }
+		//  + this should be (and is being) performed by the object calling the instance
+		//if(!$this->able())
+		//{ throw new Exception("The construct node '{$this->name}' is not a valid HTML5 entity."); }
 	}
 	
 	//  Public Methods
@@ -88,10 +97,10 @@ class Html5Construct
 	 *  @return object
 	 *  @access public
 	 */
-	public static function Explode($constructor)
+	public static function Explode($constructor, $strict = false)
 	{
 		//  create and return an instance of the HTML5Construct object
-		$construct	= new Html5Construct($constructor);
+		$construct	= new Html5Construct($constructor, $strict);
 		
 		return	$construct;
 	}
