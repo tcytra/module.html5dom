@@ -90,18 +90,20 @@ abstract class Html5
 			case 'language':
 				if (self::isValid("language", $value)) { self::$language = $value; }
 				break;
-			//  these are necessary for Html5DocumentHead, Html5Element, and
-			//  + Html5Fragment
+			case 'object':
+				$this->objnode = $value;
+				break;
 			case 'parent':
 				$this->domobj = $value->domobject();
 				$this->parent = $value;
-				$this->unsetconfig($index);
 				break;
 			case 'target':
 				$this->target = $value;
-				$this->unsetconfig($index);
 				break;
 		}
+		
+		//  ensure this config argument is removed to prevent reapplication
+		$this->unsetconfig($index);
 	}
 	
 	/**
@@ -214,6 +216,8 @@ abstract class Html5
 	 */
 	public function html($with)
 	{
+		//echo "{$this->objtype};{$this->objnode->nodeName}:{$this->objnode->getAttribute('id')}\n";
+		
 		//  remove any existing structure from this objectnode
 		while ($this->objnode->childNodes->length) {
 			$this->objnode->removeChild( $this->objnode->childNodes->item(0) );
