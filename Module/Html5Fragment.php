@@ -46,24 +46,10 @@ class Html5Fragment extends Html5Document
 	//  Secure Methods
 	
 	/**
-	 *  configure()
-	 *  Set a configuration value for this object by specified index
-	 *  
-	 *  @param  string  $index
-	 *  @param  string  $value
-	 *  @access protected
-	 */
-	protected function configure($index, $value)
-	{
-		//  pass the arguments to the parent object
-		parent::configure($index, $value);
-	}
-	
-	/**
 	 *  implement()
 	 *  Create an instance of the DomImplementation for this Html5Document
 	 *  
-	 *  @access	private
+	 *  @access	protected
 	 */
 	protected function implement()
 	{

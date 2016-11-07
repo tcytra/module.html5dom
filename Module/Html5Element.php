@@ -42,19 +42,11 @@ class Html5Element extends Html5Document
 	//  Secure Methods
 	
 	/**
-	 *  configure()
-	 *  Set a configuration value for this object by specified index
+	 *  implement()
+	 *  Ensure the implement method is not invoked in Html5Element
 	 *  
-	 *  @param  string  $index
-	 *  @param  string  $value
-	 *  @access protected
+	 *  @access	protected
 	 */
-	protected function configure($index, $value)
-	{
-		//  pass the arguments to the parent object
-		parent::configure($index, $value);
-	}
-	
 	protected function implement()
 	{ /* do nothing */ }
 	
@@ -95,6 +87,11 @@ class Html5Element extends Html5Document
 		}
 		
 		return $this;
+	}
+	
+	public function setNode($node)
+	{
+		$this->objnode = $node;
 	}
 }
 ?>
