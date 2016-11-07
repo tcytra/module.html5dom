@@ -20,7 +20,7 @@ $markup = <<<MarkUp
 		<h2 class="describe">{$describe}</h2>
 	</header>
 	<main>
-		<div class="inner.wrapper">
+		<div id="content" class="inner.wrapper">
 			<p>This document is ready for content.</p>
 		</div>
 	</main>
@@ -33,5 +33,8 @@ MarkUp;
 
 //  Append the markup to the document <body>
 $html5->html($markup);
+
+//  Apply a search to the existing document node tree by node id
+$html5->find("#content")->html("<p>This element has been written with the find method.</p>");
 
 $html5->save()->write();
