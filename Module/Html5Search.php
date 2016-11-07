@@ -12,5 +12,40 @@
  */
 class Html5Search extends Html5
 {
+	//  Html5Search Parameters
 	
+	/** @var string $objtype  The instance type of this object is search */
+	public		$objtype	= "search";
+	
+	/**
+	 * __construct()
+	 *  Create an instance of the Html5Document object
+	 */
+	public function __construct($parent)
+	{
+		$this->configure("parent", $parent);
+	}
+	
+	//  Public Methods
+	
+	public function find($construct)
+	{
+		//  create an instance of the HTML5Contructor object
+		$this->construct = HTML5Construct::Explode($construct, true);
+		
+		//  define the parent top level object node to search against
+		$this->objnode = $this->parent->objnode;
+		
+		//  first, search for a match by id and return a result
+		if ($this->construct->id) {
+			if ($node = $this->domobj->getElementById($this->construct->id)) {
+				
+				$this->objnode = $node;
+				
+				return new Html5Element( ["parent"=>$this->parent] );
+			} else {
+				return $this;
+			}
+		}
+	}
 }
