@@ -37,9 +37,7 @@ class Html5Search extends Html5
 	
 	public function find($construct)
 	{
-		//  the top level object node must be reset; the reason for this is that
-		//  + this object will vary depending on the results.. if the results
-		//  + are a list, the objnode must iterate to each item on the list
+		//  the top level object node must be reset
 		$this->objnode = null;
 		
 		//  create an empty array placeholder list
@@ -64,6 +62,19 @@ class Html5Search extends Html5
 		//  search for a match by nodeName, if provided
 		if ($this->construct->name) {
 			$list = $this->domobj->getElementsByTagName($this->construct->name);
+		}
+		
+		//  search for a match by className, if provided
+		if ($this->construct->class) {
+			$list = (count($list)) ? $list : $this->parent->body->childNodes;
+			
+			foreach ($list as $each) {
+				if ($each->nodeType == 1) {
+					echo "{$each->nodeName}\n";//:{$each->getAttribute('class')}\n";
+				}
+			}
+			
+			exit;
 		}
 		
 		//  count the number of matching nodes
