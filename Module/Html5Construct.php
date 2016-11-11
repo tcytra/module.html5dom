@@ -54,18 +54,31 @@ class Html5Construct
 	 */
 	private function evaluate()
 	{
+		//  the instance constructor will be preserved for future reference, if required
 		$constructor = $this->constructor;
 		
 		//  extract a node class definition, if available; match '.classname'
-		if(preg_match("/\.[a-z]?([a-z0-9-]+)$/", $constructor))
-		{ $this->class = str_replace(".", " ", substr($constructor, strpos($constructor,".")+1)); $constructor = substr($constructor, 0, strpos($constructor,".")); }
+		if (preg_match("/\.[a-z]?([a-z0-9-]+)$/", $constructor)) {
+			//  strip the classes from the construct and convert periods to spaces
+			$this->class = str_replace(".", " ", substr($constructor, strpos($constructor, ".") +1));
+			//  devise a new construct without the classes portion
+			$constructor = substr($constructor, 0, strpos($constructor,"."));
+		}
 		
 		//  extract a node identifier, if available; match '#elementid'
-		if(preg_match("/#[a-z]?([a-zA-Z0-9_]+)$/", $constructor))
-		{ $this->id = substr($constructor, strpos($constructor,"#")+1); $constructor = substr($constructor, 0, strpos($constructor,"#")); }
+		if (preg_match("/#[a-z]?([a-zA-Z0-9_]+)$/", $constructor)) {
+			//  strip the id from the construct
+			$this->id = substr($constructor, strpos($constructor, "#") +1);
+			//  devise a new construct without the id portion
+			$constructor = substr($constructor, 0, strpos($constructor, "#"));
+		}
 		
-		//  verify the remainder as the node name
-		$this->name = preg_match("/^[a-z]?([a-zA-Z0-9-]+)$/", $constructor) ? $constructor : (($this->strict) ? null : self::$defaultNode);
+		//  verify the remainder of the construct as the node name
+		$this->name = preg_match("/^[a-z]?([a-z0-9]+)$/", $constructor)
+				//  by default the remaining construct is a nodeName
+				? $constructor
+				//  with no remaining construct, decide how to default
+				: (($this->strict) ? null : self::$defaultNode);
 		
 		//  ensure the construct node is a valid HTML5 entity
 		//  + this should be (and is being) performed by the object calling the instance
