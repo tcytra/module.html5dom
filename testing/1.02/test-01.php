@@ -14,13 +14,13 @@ $html5->head->title($testcase)->meta( ["name"=>"description", "content"=>$descri
 
 //  Define some html markup
 $markup = <<<MarkUp
-<div id="homepage" class="page.interface">
+<div id="homepage" class="page interface">
 	<header>
 		<h1 class="testcase">{$testcase}</h1>
 		<h2 class="describe">{$describe}</h2>
 	</header>
 	<main>
-		<div id="content" class="inner.wrapper">
+		<div id="content" class="inner wrapper">
 			<p>This document is ready for content.</p>
 		</div>
 	</main>
