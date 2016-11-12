@@ -295,7 +295,7 @@ class Html5Search extends Html5
 			}
 		}
 		
-		//  restore the original node
+		//  restore the original object node
 		$this->objnode = $node;
 		
 		return $this;
@@ -311,9 +311,6 @@ class Html5Search extends Html5
 	 */
 	public function attribute($name, $value = null)
 	{
-		//  preserve the current object node
-		$node = $this->objnode;
-		
 		//  cycle the current search list
 		foreach ($this->list as $each) {
 			//  test to ensure this listed node still exists
@@ -325,9 +322,6 @@ class Html5Search extends Html5
 			}
 		}
 		
-		//  restore the original node
-		$this->objnode = $node;
-		
 		return $this;
 	}
 	
@@ -336,14 +330,11 @@ class Html5Search extends Html5
 	 *  Add the provided classname(s) to the element class attribute
 	 *  
 	 *  @param  string  $className
-	 *  @return object
+	 *  @return object  Html5Search
 	 *  @access public
 	 */
 	public function classAdd($className)
 	{
-		//  preserve the current object node
-		$node = $this->objnode;
-		
 		//  cycle the current search list
 		foreach ($this->list as $each) {
 			//  test to ensure this listed node still exists
@@ -355,8 +346,29 @@ class Html5Search extends Html5
 			}
 		}
 		
-		//  restore the original node
-		$this->objnode = $node;
+		return $this;
+	}
+	
+	/**
+	 *  classRemove()
+	 *  Remove the provided className(s) from the element class attribute
+	 *  
+	 *  @param  string  $className
+	 *  @return object  Html5Search
+	 *  @access public
+	 */
+	public function classRemove($className)
+	{
+		//  cycle the current search list
+		foreach ($this->list as $each) {
+			//  test to ensure this listed node still exists
+			if (isset($each->nodeType)) {
+				//  create a new temporary instance of Html5Element
+				$element = new Html5Element(["object"=>$each]);
+				//  pass the method to the element instance
+				$element->classRemove($className);
+			}
+		}
 		
 		return $this;
 	}
@@ -386,7 +398,7 @@ class Html5Search extends Html5
 			}
 		}
 		
-		//  restore the original node
+		//  restore the original object node
 		$this->objnode = $node;
 		
 		return $this;

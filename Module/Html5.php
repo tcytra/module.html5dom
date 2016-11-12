@@ -174,18 +174,46 @@ abstract class Html5
 	public function classAdd($className)
 	{
 		//  retrieve a list of existing classes
-		$list = ($class = $this->attribute("class")) ? explode(" ", $class) : array();
-		
+		$classes = ($this->attribute("class")) ? explode(" ", $this->attribute("class")) : array();
 		//  exlode the list of classes to add
-		$className = explode(" ", trim(str_replace(".", " ", $className)));
+		$include = explode(" ", trim(str_replace(".", " ", $className)));
 		
 		//  add non existing classes to the list
-		foreach ($className as $each) {
-			if (!in_array($each, $list)) { $list[] = $each; }
+		foreach ($include as $each) {
+			if (!in_array($each, $classes)) { $classes[] = $each; }
 		}
 		
-		//  implode the list into the attribute
-		$this->attribute("class", implode(" ", $list));
+		//  sort and implode the list into the attribute
+		sort($classes);
+		$this->attribute("class", implode(" ", $classes));
+		
+		return $this;
+	}
+	
+	/**
+	 *  classRemove()
+	 *  Remove the provided className(s) from the element class attribute
+	 *  
+	 *  @param  string  $className
+	 *  @return object
+	 *  @access public
+	 */
+	public function classRemove($className)
+	{
+		$classes = array();
+		//  retrieve a list of existing classes
+		$current = ($this->attribute("class")) ? explode(" ", $this->attribute("class")) : array();
+		//  exlode the list of classes to remove
+		$exclude = explode(" ", trim(str_replace(".", " ", $className)));
+		
+		//  add non excluded classes to the list
+		foreach ($current as $each) {
+			if (!in_array($each, $exclude)) { $classes[] = $each; }
+		}
+		
+		//  aort and implode the list into the attribute
+		sort($classes);
+		$this->attribute("class", implode(" ", $classes));
 		
 		return $this;
 	}
