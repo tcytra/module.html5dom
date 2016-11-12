@@ -35,6 +35,8 @@ MarkUp;
 $html5->html($markup);
 
 //  Apply a search to the existing document node tree by node name
-$html5->find("div")->html("<p>The .wrapper element content has been over-written with the find method.</p>");
+$html5->find("div")->html("<p>The div elements content has been over-written with the find method.</p>");
+
+$html5->find("p")->html("And then the p elements were directly overwritten with another find method!");
 
 $html5->save()->write();
