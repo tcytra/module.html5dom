@@ -33,9 +33,30 @@ class Html5Search extends Html5
 		$this->configure("parent", $parent);
 	}
 	
+	//  Parent Methods
+	
+	public function html($with)
+	{
+		//  preserve the current object node
+		$node = $this->objnode;
+		
+		//  cycle the current search list
+		foreach ($this->list as $each) {
+			//  target each search list node
+			$this->objnode = $each;
+			//  defer to the parent method
+			parent::html($with);
+		}
+		
+		//  restore the original node, probably null
+		$this->objnode = $node;
+		
+		return $this;
+	}
+	
 	//  Public Methods
 	
-	public function find($construct)
+	public function find($construct, $node = null)
 	{
 		//  the top level object node must be reset
 		$this->objnode = null;
@@ -53,34 +74,46 @@ class Html5Search extends Html5
 		if ($this->construct->id) {
 			if ($node = $this->domobj->getElementById($this->construct->id)) {
 				//  the found node becomes the top level object node
-				$this->objnode = $node;
+				$this->list = array($node);
 			}
+			
+			$this->length = count($this->list);
 			
 			return $this;
 		}
 		
 		//  search for a match by nodeName, if provided
 		if ($this->construct->name) {
-			$list = $this->domobj->getElementsByTagName($this->construct->name);
+			//  add matching nodes to the instance list
+			$this->list = $this->domobj->getElementsByTagName($this->construct->name);
 		}
 		
 		//  search for a match by className, if provided
 		if ($this->construct->class) {
-			$list = (count($list)) ? $list : $this->parent->body->childNodes;
+			//  create an array of the classes to find
+			$find = explode(" ", $this->construct->class);
+			//  create a local copy of the list
+			$list = (count($this->list)) ? $this->list : $this->parent->body->childNodes;
+			//  reset the instance list to rebuild with matches
+			$this->list = array();
 			
+			//  cycle the list and strike a match
 			foreach ($list as $each) {
-				if ($each->nodeType == 1) {
-					echo "{$each->nodeName}\n";//:{$each->getAttribute('class')}\n";
+				//  only evaluate html tag nodes with class attributes
+				if (($each->nodeType == 1) && $each->hasAttribute("class")) {
+					//  convert the node classes into an array
+					$classes = explode(" ", $each->getAttribute("class"));
+					//  compare the intersection of the class arrays
+					if (array_intersect($find, $classes) == $find) {
+						//  add this node to the instance list
+						$this->list[] = $each;
+					}
 				}
 			}
-			
-			exit;
 		}
 		
 		//  count the number of matching nodes
-		$this->length = count($list);
-		//  set the list as the instance parameter
-		$this->list = $list;
+		$this->length = count($this->list);
 		
 		return $this;
 	}
