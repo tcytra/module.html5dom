@@ -145,9 +145,10 @@ class Html5DocumentHead extends Html5Document
         //  append the requested attributes to this <meta> tag
 		foreach ($attr as $name=>$text) {
 			$nameok	= preg_match("/^[a-z]+$/", $name);
-			$textok = preg_match("/^[a-zA-Z][a-zA-Z0-9:;=-_\.,]/", $text);
+			/** @todo need a better textok or not at all */
+			//$textok = preg_match("/^[a-zA-Z][a-zA-Z0-9:;=-_\.,]/", $text);
 			
-			if ($nameok && $textok) { $node->setAttribute($name, $text); }
+			if ($nameok) { $node->setAttribute($name, $text); }
 		}
 		
         //  ensure the <meta> tag is appended before the <title>, <link>, or <script> tags
