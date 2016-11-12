@@ -10,7 +10,7 @@
  *  + default as it may be the case a list of nodes match the search criteria
  *  
  *  @author		Todd Cytra <tcytra@gmail.com>
- *  @version	0.0.3 Html5Search.php 2016-11-06
+ *  @version	0.0.5 Html5Search.php 2016-11-06
  *  @since		html5-0.1.2
  */
 class Html5Search extends Html5
@@ -71,6 +71,40 @@ class Html5Search extends Html5
 	}
 	
 	/**
+	 *  findByNodeId()
+	 *  Cycle through a node tree to find elements with the requested nodeName
+	 *  + This was originally performed via getElementById, however this method
+	 *  + cannot be invoked on an element, only on the entire dom. There were
+	 *  + other issues also.
+	 *  
+	 *  @param  string  $id
+	 *  @param  object  $node
+	 *  @access private
+	 */
+	private function findByNodeId($id, $node)
+	{
+		//  only evaluate html tag nodes
+		if ($node->nodeType == 1) {
+			//  ensure the node has ad id attribute
+			if ($node->hasAttribute("id")) {
+				//  retrieve the id attribute
+				$nodeid = $node->getAttribute("id");
+				//  compare the id attribute with the requested id
+				if ($nodeid == $id) { $this->list[] = $node; }
+			}
+			
+			//  a request for an id match can only have one result
+			if (count($this->list)) { return; }
+			
+			//  continue searching through the available childNodes
+			if ($node->childNodes->length) {
+				//  cycle the childNodes back into this method
+				foreach ($node->childNodes as $each) { $this->findByClassName($id, $each); }
+			}
+		}
+	}
+	
+	/**
 	 *  findByNodeName()
 	 *  Cycle through a node tree to find elements with the requested nodeName
 	 *  
@@ -112,18 +146,22 @@ class Html5Search extends Html5
 		$construct = Html5Construct::Explode($constructor, true);
 		
 		//  define the parent top level object node to search against
-		$this->objnode = $this->parent->objnode;
+		$this->objnode = $this->parent->objectnode();
 		
 		//  first, search for a match by id and return a result
 		if ($construct->id) {
-			if ($node = $this->domobj->getElementById($construct->id)) {
-				//  the found node becomes the top level object node
-				$this->list = array($node);
-			}
+			//  create a local copy of the list
+			$list = (count($this->list)) ? $this->list : $this->objnode->childNodes;
+			//  reset the instance list to rebuild with matches
+			$this->list = array();
 			
+			//  cycle the list and strike a match
+			foreach ($list as $each) { $this->findByNodeId($construct->id, $each); }
+			
+			//  update the Html5Search list length
 			$this->length = count($this->list);
 			
-			//  there can only be one match for an element id
+			//  there can only be one match or nothing for an element id
 			return $this;
 		}
 		
@@ -141,7 +179,7 @@ class Html5Search extends Html5
 		//  search for a match by className, if provided
 		if ($construct->class) {
 			//  create a local copy of the list
-			$list = (count($this->list)) ? $this->list : $this->parent->body->childNodes;
+			$list = (count($this->list)) ? $this->list : $this->objnode->childNodes;
 			//  reset the instance list to rebuild with matches
 			$this->list = array();
 			
@@ -161,12 +199,19 @@ class Html5Search extends Html5
 	 *  
 	 *  @param  int	    $index = 0
 	 *  @return object  Html5Element
+	 *  @access public
 	 */
 	public function item($index = 0)
 	{
-		$this->objnode = ($index < $this->length) ? $this->list[$index] : null;
+		//  ensure the index exists in the list
+		if ($index < $this->length) {
+			//  return a new temporary instance of the Html5Element
+			$object = $this->list[$index];
+			return new Html5Element( ["object"=>$object] );
+		}
 		
-		return $this;
+		/** @todo report an error here, or create/return a new Html5Element? */
+		return null;
 	}
 	
 	/**
@@ -226,6 +271,97 @@ class Html5Search extends Html5
 	//  Parent Methods
 	
 	/**
+	 *  append()
+	 *  Create and return a DomElement with the specified nodename
+	 *  
+	 *  @param  string  $construct
+	 *  @param  string  $with = null
+	 *  @return object
+	 *  @access	public
+	 */
+	public function append($construct, $with = null)
+	{
+		//  preserve the current object node
+		$node = $this->objnode;
+		
+		//  cycle the current search list
+		foreach ($this->list as $each) {
+			//  test to ensure this listed node still exists
+			if (isset($each->nodeType)) {
+				//  target each search list node
+				$this->objnode = $each;
+				//  defer to the parent method
+				parent::append($construct, $with);
+			}
+		}
+		
+		//  restore the original node
+		$this->objnode = $node;
+		
+		return $this;
+	}
+	
+	/**
+	 *  attribute()
+	 *  Get or set an attribute value by name
+	 *  
+	 *  @param  string  $name
+	 *  @param  string  $value = null
+	 *  @return string|object
+	 */
+	public function attribute($name, $value = null)
+	{
+		//  preserve the current object node
+		$node = $this->objnode;
+		
+		//  cycle the current search list
+		foreach ($this->list as $each) {
+			//  test to ensure this listed node still exists
+			if (isset($each->nodeType)) {
+				//  create a new temporary instance of Html5Element
+				$element = new Html5Element(["object"=>$each]);
+				//  pass the method to the element instance
+				$element->attribute($name, $value);
+			}
+		}
+		
+		//  restore the original node
+		$this->objnode = $node;
+		
+		return $this;
+	}
+	
+	/**
+	 *  classAdd()
+	 *  Add the provided classname(s) to the element class attribute
+	 *  
+	 *  @param  string  $className
+	 *  @return object
+	 *  @access public
+	 */
+	public function classAdd($className)
+	{
+		//  preserve the current object node
+		$node = $this->objnode;
+		
+		//  cycle the current search list
+		foreach ($this->list as $each) {
+			//  test to ensure this listed node still exists
+			if (isset($each->nodeType)) {
+				//  create a new temporary instance of Html5Element
+				$element = new Html5Element(["object"=>$each]);
+				//  pass the method to the element instance
+				$element->classAdd($className);
+			}
+		}
+		
+		//  restore the original node
+		$this->objnode = $node;
+		
+		return $this;
+	}
+	
+	/**
 	 *  html()
 	 *  Import the argument into the object node; replace existing text/html
 	 *  
@@ -250,10 +386,9 @@ class Html5Search extends Html5
 			}
 		}
 		
-		//  restore the original node, probably null
+		//  restore the original node
 		$this->objnode = $node;
 		
 		return $this;
 	}
-	
 }
