@@ -3,14 +3,14 @@
 <?php
 
 //  Title and describe this testcase
-$testcase = "Test 01";
-$describe = "Declare the Html5 object as abstract, move the config evaluation to the Html5Document";
+$testcase = "Test 02";
+$describe = "";
 
 //  Create an instance of the Html5Document
-$html5 = new Html5Document( ["language"=>"en-CA", "charset"=>"utf-16"] );
+$html5 = new Html5Document();
 
 //  Append some elements to the document <head>
-$html5->head->title($testcase)->meta( ["name"=>"description", "content"=>$describe] );
+$html5->head->title($testcase)->meta( ["name"=>"description", "content"=>"{$testcase}: {$describe}"] );
 
 //  Define some html markup
 $markup = <<<MarkUp
