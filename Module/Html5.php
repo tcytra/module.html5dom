@@ -167,20 +167,20 @@ abstract class Html5
 	 *  classAdd()
 	 *  Add the provided classname(s) to the element class attribute
 	 *  
-	 *  @param  string  $classname
+	 *  @param  string  $className
 	 *  @return object
 	 *  @access public
 	 */
-	public function classAdd($classname)
+	public function classAdd($className)
 	{
 		//  retrieve a list of existing classes
 		$list = ($class = $this->attribute("class")) ? explode(" ", $class) : array();
 		
 		//  exlode the list of classes to add
-		$classname = explode(" ", trim(str_replace(".", " ", $classname)));
+		$className = explode(" ", trim(str_replace(".", " ", $className)));
 		
 		//  add non existing classes to the list
-		foreach ($classname as $each) {
+		foreach ($className as $each) {
 			if (!in_array($each, $list)) { $list[] = $each; }
 		}
 		
