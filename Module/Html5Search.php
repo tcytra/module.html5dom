@@ -36,26 +36,65 @@ class Html5Search extends Html5
 	//  Private Methods
 	
 	
-	
-	//  Parent Methods
-	
-	public function html($with)
+	/**
+	 *  findByClassName()
+	 *  Cycle through a node tree to find elements with the requested class attribute
+	 *  
+	 *  @param  string  $class
+	 *  @param  object  $node
+	 *  @access private
+	 */
+	private function findByClassName($class, $node)
 	{
-		//  preserve the current object node
-		$node = $this->objnode;
+		//  create an array of the classes to find
+		$find = explode(" ", $class);
 		
-		//  cycle the current search list
-		foreach ($this->list as $each) {
-			//  target each search list node
-			$this->objnode = $each;
-			//  defer to the parent method
-			parent::html($with);
+		//  only evaluate html tag nodes
+		if ($node->nodeType == 1) {
+			//  ensure the node has a class attribute
+			if ($node->hasAttribute("class")) {
+				//  convert the node classes into an array
+				$classes = explode(" ", $node->getAttribute("class"));
+				
+				//  compare the intersection of the class arrays
+				if (array_intersect($find, $classes) == $find) {
+					//  add this node to the instance list
+					$this->list[] = $node;
+				}
+			}
+			
+			//  continue searching through the available childNodes
+			if ($node->childNodes->length) {
+				//  cycle the childNodes back into this method
+				foreach ($node->childNodes as $each) { $this->findByClassName($class, $each); }
+			}
 		}
-		
-		//  restore the original node, probably null
-		$this->objnode = $node;
-		
-		return $this;
+	}
+	
+	/**
+	 *  findByNodeName()
+	 *  Cycle through a node tree to find elements with the requested nodeName
+	 *  
+	 *  @param  string  $name
+	 *  @param  object  $node
+	 *  @access private
+	 */
+	private function findByNodeName($name, $node)
+	{
+		//  only evaluate html tag nodes with class attributes
+		if ($node->nodeType == 1) {
+			//  compare the nodeName with the requested name
+			if (strtolower($node->nodeName) == strtolower($name)) {
+				//  add this node to the instance list
+				$this->list[] = $node;
+			}
+			
+			//  continue searching through the available childNodes
+			if ($node->childNodes->length) {
+				//  cycle the childNodes back into this method
+				foreach ($node->childNodes as $each) { $this->findByNodeName($name, $each); }
+			}
+		}
 	}
 	
 	//  Public Methods
@@ -124,56 +163,6 @@ class Html5Search extends Html5
 		return $this;
 	}
 	
-	public function findByNodeName($name, $node)
-	{
-		//  only evaluate html tag nodes with class attributes
-		if ($node->nodeType == 1) {
-			//  compare the nodeName with the requested name
-			if (strtolower($node->nodeName) == strtolower($name)) {
-				//  add this node to the instance list
-				$this->list[] = $node;
-			}
-			
-			//  continue searching through the available childNodes
-			if ($node->childNodes->length) {
-				//  cycle the childNodes back into this method
-				foreach ($node->childNodes as $each) { $this->findByNodeName($name, $each); }
-			}
-		}
-	}
-	
-	/**
-	 *  findByClass()
-	 *  Cycle through a node tree to find elements with the requested class attribute
-	 *  
-	 *  @param  string  $class
-	 *  @param  object  $node
-	 *  @access public
-	 */
-	public function findByClassName($class, $node)
-	{
-		//  create an array of the classes to find
-		$find = explode(" ", $class);
-		
-		//  only evaluate html tag nodes with class attributes
-		if (($node->nodeType == 1) && $node->hasAttribute("class")) {
-			//  convert the node classes into an array
-			$classes = explode(" ", $node->getAttribute("class"));
-			
-			//  compare the intersection of the class arrays
-			if (array_intersect($find, $classes) == $find) {
-				//  add this node to the instance list
-				$this->list[] = $node;
-			}
-		}
-		
-		//  continue searching through the available childNodes
-		if (($node->nodeType == 1) && $node->childNodes->length) {
-			//  cycle the childNodes back into this method
-			foreach ($node->childNodes as $each) { $this->findByClassName($class, $each); }
-		}
-	}
-	
 	/**
 	 *  item()
 	 *  Return a requested item in this Html5Search by index, if possible
@@ -187,4 +176,38 @@ class Html5Search extends Html5
 		
 		return $this;
 	}
+	
+	//  Parent Methods
+	
+	/**
+	 *  html()
+	 *  Import the argument into the object node; replace existing text/html
+	 *  
+	 *  @param  string  $with
+	 *  @param  bool    $clear = true
+	 *  @return object  Html5Search
+	 *  @access public
+	 */
+	public function html($with, $clear = true)
+	{
+		//  preserve the current object node
+		$node = $this->objnode;
+		
+		//  cycle the current search list
+		foreach ($this->list as $each) {
+			//  test to ensure this listed node still exists
+			if (isset($each->nodeType)) {
+				//  target each search list node
+				$this->objnode = $each;
+				//  defer to the parent method
+				parent::html($with, $clear);
+			}
+		}
+		
+		//  restore the original node, probably null
+		$this->objnode = $node;
+		
+		return $this;
+	}
+	
 }
