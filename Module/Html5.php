@@ -211,16 +211,17 @@ abstract class Html5
 	 *  Import the argument into the object node; replace existing text/html
 	 *  
 	 *  @param  string  $with
+	 *  @param  bool    $clear = true
 	 *  @return object
 	 *  @access public
 	 */
-	public function html($with)
+	public function html($with, $clear = true)
 	{
-		//echo "{$this->objtype};{$this->objnode->nodeName}:{$this->objnode->getAttribute('id')}\n";
-		
 		//  remove any existing structure from this objectnode
-		while ($this->objnode->childNodes->length) {
-			$this->objnode->removeChild( $this->objnode->childNodes->item(0) );
+		if ($clear) {
+			while ($this->objnode->childNodes->length) {
+				$this->objnode->removeChild( $this->objnode->childNodes->item(0) );
+			}
 		}
 		
 		//  create a temporary instance of the DomDocument object
