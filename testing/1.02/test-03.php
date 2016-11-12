@@ -3,14 +3,14 @@
 <?php
 
 //  Title and describe this testcase
-$testcase = "Test 01";
-$describe = "Declare the Html5 object as abstract, move the config evaluation to the Html5Document";
+$testcase = "Test 03";
+$describe = "Require the ability to find and argue available methods against element class attributes";
 
 //  Create an instance of the Html5Document
-$html5 = new Html5Document( ["language"=>"en-CA", "charset"=>"utf-16"] );
+$html5 = new Html5Document();
 
 //  Append some elements to the document <head>
-$html5->head->title($testcase)->meta( ["name"=>"description", "content"=>$describe] );
+$html5->head->title($testcase)->meta( ["name"=>"description", "content"=>"{$testcase}: {$describe}"] );
 
 //  Define some html markup
 $markup = <<<MarkUp
@@ -35,6 +35,6 @@ MarkUp;
 $html5->html($markup);
 
 //  Apply a search to the existing document node tree by node name
-$html5->find(".wrapper")->item(0)->html("<p>This element content has been over-written with the find method.</p>");
+$html5->find(".page.interface")->html("<p>The .page.interface element content has been over-written with the find method.</p>");
 
 $html5->save()->write();
