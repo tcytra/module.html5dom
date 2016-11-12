@@ -33,6 +33,10 @@ class Html5Search extends Html5
 		$this->configure("parent", $parent);
 	}
 	
+	//  Private Methods
+	
+	
+	
 	//  Parent Methods
 	
 	public function html($with)
@@ -56,6 +60,15 @@ class Html5Search extends Html5
 	
 	//  Public Methods
 	
+	/**
+	 *  find()
+	 *  FInd matching nodes against a provided construct
+	 *  
+	 *  @param  string  $construct
+	 *  @param  object  $node = null
+	 *  @return object  Html5Search
+	 *  @access public
+	 */
 	public function find($construct, $node = null)
 	{
 		//  the top level object node must be reset
@@ -79,43 +92,86 @@ class Html5Search extends Html5
 			
 			$this->length = count($this->list);
 			
+			//  there can only be one match for an element id
 			return $this;
 		}
 		
 		//  search for a match by nodeName, if provided
 		if ($this->construct->name) {
-			//  add matching nodes to the instance list
-			$this->list = $this->domobj->getElementsByTagName($this->construct->name);
+			//  create a local copy of the list
+			$list = (count($this->list)) ? $this->list : $list = $this->objnode->childNodes;
+			//  reset the instance list to rebuild with matches
+			$this->list = array();
+			
+			//  cycle the list and strike a match
+			foreach ($list as $each) { $this->findByNodeName($this->construct->name, $each); }
 		}
 		
 		//  search for a match by className, if provided
 		if ($this->construct->class) {
-			//  create an array of the classes to find
-			$find = explode(" ", $this->construct->class);
 			//  create a local copy of the list
 			$list = (count($this->list)) ? $this->list : $this->parent->body->childNodes;
 			//  reset the instance list to rebuild with matches
 			$this->list = array();
 			
 			//  cycle the list and strike a match
-			foreach ($list as $each) {
-				//  only evaluate html tag nodes with class attributes
-				if (($each->nodeType == 1) && $each->hasAttribute("class")) {
-					//  convert the node classes into an array
-					$classes = explode(" ", $each->getAttribute("class"));
-					//  compare the intersection of the class arrays
-					if (array_intersect($find, $classes) == $find) {
-						//  add this node to the instance list
-						$this->list[] = $each;
-					}
-				}
-			}
+			foreach ($list as $each) { $this->findbyClassName($this->construct->class, $each); }
 		}
 		
 		//  count the number of matching nodes
 		$this->length = count($this->list);
 		
 		return $this;
+	}
+	
+	public function findByNodeName($name, $node)
+	{
+		//  only evaluate html tag nodes with class attributes
+		if ($node->nodeType == 1) {
+			//  compare the nodeName with the requested name
+			if (strtolower($node->nodeName) == strtolower($name)) {
+				//  add this node to the instance list
+				$this->list[] = $node;
+			}
+			
+			//  continue searching through the available childNodes
+			if ($node->childNodes->length) {
+				//  cycle the childNodes back into this method
+				foreach ($node->childNodes as $each) { $this->findByNodeName($name, $each); }
+			}
+		}
+	}
+	
+	/**
+	 *  findByClass()
+	 *  Cycle through a node tree to find elements with the requested class attribute
+	 *  
+	 *  @param  string  $class
+	 *  @param  object  $node
+	 *  @access public
+	 */
+	public function findByClassName($class, $node)
+	{
+		//  create an array of the classes to find
+		$find = explode(" ", $class);
+		
+		//  only evaluate html tag nodes with class attributes
+		if (($node->nodeType == 1) && $node->hasAttribute("class")) {
+			//  convert the node classes into an array
+			$classes = explode(" ", $node->getAttribute("class"));
+			
+			//  compare the intersection of the class arrays
+			if (array_intersect($find, $classes) == $find) {
+				//  add this node to the instance list
+				$this->list[] = $node;
+			}
+		}
+		
+		//  continue searching through the available childNodes
+		if (($node->nodeType == 1) && $node->childNodes->length) {
+			//  cycle the childNodes back into this method
+			foreach ($node->childNodes as $each) { $this->findByClassName($class, $each); }
+		}
 	}
 	
 	/**
