@@ -3,8 +3,8 @@
 <?php
 
 //  Title and describe this testcase
-$testcase = "Test 04";
-$describe = "Require the ability to match nodeNames and class attributes throughout the childNodes";
+$testcase = "Test 06";
+$describe = "Require the ability to invoke Html5 methods compatable with the Html5Search results";
 
 //  Create an instance of the Html5Document
 $html5 = new Html5Document();

@@ -3,7 +3,7 @@
 <?php
 
 //  Title and describe this testcase
-$testcase = "Test 04";
+$testcase = "Test 05";
 $describe = "Require the ability to match nodeNames and class attributes throughout the childNodes";
 
 //  Create an instance of the Html5Document
