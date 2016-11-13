@@ -6,8 +6,9 @@
  *  This object provides the ability to search for dom nodes matching a
  *  + provided construct argument and manipulate the list of nodes
  *  
- *  Unlike other classes that extend Html5, this class has a null objnode by
- *  + default as it may be the case a list of nodes match the search criteria
+ *  Unlike other classes that extend Html5, this class has a dynamic objnode
+ *  + as it is often the case it must cycle the list of available nodes when
+ *  + a method is invoked upon the search results
  *  
  *  @author		Todd Cytra <tcytra@gmail.com>
  *  @version	0.0.5 Html5Search.php 2016-11-06
