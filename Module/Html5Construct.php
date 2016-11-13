@@ -1,6 +1,6 @@
 <?php
 /**
- *  Html5Construct
+ *  Class   Html5Construct
  *  
  *  This class provides the ability to evaluate and manage a provided $construct
  *  
