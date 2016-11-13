@@ -1,4 +1,4 @@
-# Class Html5Fragment Extends Html5
+# Class Html5Fragment Extends Html5Document
 
 ## Description
 
@@ -39,7 +39,10 @@ public void `write( )`
 
 ## Example Use
 
-```
+The following code:
+
+```php
+<?php
 // Create an instance of the Html5Document object
 $html5 = new Html5Document();
 
@@ -63,8 +66,11 @@ $fragment->cloneFragment()
 
 // Output the document html
 $html5->save()->write();
+```
 
-// Result:
+Will output:
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
