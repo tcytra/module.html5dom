@@ -1,4 +1,4 @@
-# Class Html5DocumentHead Extends Html5
+# Class Html5DocumentHead Extends Html5Document
 
 ## Description
 
@@ -37,7 +37,9 @@ public object `title( string $text[, int $amend = 0[, string $join = null]] )`
 
 ## Example Use
 
-```
+The following code:
+
+```php
 <?php
 // Create an instance of the Html5Document object
 $html5 = new Html5Document();
@@ -52,8 +54,11 @@ $html5->head->meta(["viewport"=>"width=device-width,initial-scale=1"])
 
 // Output the document html
 $html5->save()->write();
+```
 
-// Result:
+Will output:
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -76,7 +81,3 @@ $html5->save()->write();
   * An `$amend` argument of `1` will cause the text to be appended to existing content
   * An `$amend` argument of `-1` will cause the text to be prepended to existing content
   * The $join argument accepts a single character with which to {ap,pre}pend
-
-## Todo
-
-- [ ] Provide the ability to argue for inline styles
