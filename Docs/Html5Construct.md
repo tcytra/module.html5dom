@@ -6,6 +6,9 @@ The Html5Construct object will evaluate a provided HTML element constructor in s
 
 ## Properties
 
+public static `$defaultNode = div`
+> *The default nodeName used in the creation of node elements via this Html5Construct*
+
 public string `$class`
 > *The requested class name(s) in the constructor*
 
@@ -17,22 +20,29 @@ public string `$name`
 
 ## Methods
 
-public `__construct(  )`
+public `__construct( $constructor[, $strict = false] )`
 > Create an instance of the Html5Construct object
+> The $strict argument will allow or prevent the Html5Construct to default to the static $defaultNode
 
 public bool `able( )`
 > Indicates whether a provided constructor is a viable HTML5 element
 
 ## Example Use
 
-```
+The following code
+
+```php
 <?php
 // Set an instance of Html5Construct with a constructor argument
 $construct = Html5Construct::Set("div#interface.wrapper");
 
 // Dump the Html5Construct
 var_dump($construct);
+```
 
+Will output:
+
+```php
 //  Result:
 object(Html5Construct)#1 (3) {
   ["id"]=>
@@ -43,10 +53,3 @@ object(Html5Construct)#1 (3) {
   string(3) "div"
 }
 ```
-
-## Todo
-
-- [ ] Rename the Set method to Explode
-- [ ] Provide the ability to Implode a constructor
-- [ ] Migrate the functionality in Set to a non-static method
-- [ ] Verify a valid HTML5 element nodeName
