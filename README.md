@@ -18,7 +18,8 @@ There are several key objectives identified for this system that will be met as 
 * Bottom-up document rendering: The ability to define an Html5 fragment and build the remaining document upwards around it
 * Perform hierarchical searches across multiple indexed instances of the various Html5 objects and argue for deep manipulation
 * Chain and/or repeat manipulation methods to create Html5 node tree structures and populate with externally derived content
-* Load and push content into an Html5 markup skeleton as defined by a constructor configuration tree or pre-created html files
+* Load and push content into an Html5 markup skeleton as defined by a constructor configuration tree or .html template files
+* Provide a full-featured Html5 templating system which completely excludes instruction logic from the templates themselves
 
 ## Example Use
 
@@ -89,3 +90,7 @@ The Html5Element object provides methods for creating and manipulating a PHP DOM
 [Html5Fragment](Docs/Html5Fragment.md)
 
 The Html5Fragment object provides methods for creating and manipulating a PHP DOMFragment in the context of an HTML5 document.
+
+[Html5Search](Docs/Html5Search.md)
+
+The Html5Search object provides the ability to search for nodes matching a provided constructor argument and argue available methods against the resulting list of nodes.
