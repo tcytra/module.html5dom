@@ -1,7 +1,7 @@
 <?php
 /**
  *  Class       Html5Element
- *  Extends     Html5Document
+ *  Extends     Html5
  *  
  *  This object provides the ability to create and manipulate a PHP DomElement
  *  
@@ -9,7 +9,7 @@
  *  @version	0.2.3 Html5Element.php 2016-09-21
  *  @since		html5-0.0.1
  */
-class Html5Element extends Html5Document
+class Html5Element extends Html5
 {
 	//  Html5Element Parameters
 	
@@ -36,7 +36,7 @@ class Html5Element extends Html5Document
 		}
 		
 		//  pass the remaining config to the parent object for further evaluation
-		parent::__construct($this->config);
+		//parent::__construct($this->config);
 	}
 	
 	//  Secure Methods
