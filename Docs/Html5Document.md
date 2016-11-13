@@ -34,12 +34,18 @@ public void `write( )`
 
 ## Example Use
 
-```
+The following code:
+
+```php
+<?php
 //  Create and output an instance of the Html5Document object
 $html5 = new Html5Document();
 $html5->save()->write();
+```
 
-//  Result:
+Will output:
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head><meta charset="utf-8"></head>
@@ -55,8 +61,3 @@ $html5->save()->write();
 * The $config should be provided in the following format:
   * `['charset'=>'utf-8', 'language'=>'en']`, but
   * The $config can also be argued with just the language
-
-##  Todo
-
-- [ ] Provide the ability to suppress the DOCTYPE declaration
-- [ ] Provide the ability to output as text/plain
