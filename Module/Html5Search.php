@@ -99,7 +99,7 @@ class Html5Search extends Html5
 			//  continue searching through the available childNodes
 			if ($node->childNodes->length) {
 				//  cycle the childNodes back into this method
-				foreach ($node->childNodes as $each) { $this->findByClassName($id, $each); }
+				foreach ($node->childNodes as $each) { $this->findByNodeId($id, $each); }
 			}
 		}
 	}
