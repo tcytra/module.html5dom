@@ -1,4 +1,4 @@
-# Class Html5Element Extends Html5Element
+# Class Html5Element Extends Html5
 
 ## Description
 
@@ -24,7 +24,10 @@ public void `create( string $construct[, string $with = null] )`
 
 ## Example Use
 
-```
+The following code:
+
+```php
+<?php
 // Create an instance of the Html5Document object
 $html5 = new Html5Document();
 
@@ -36,8 +39,11 @@ $element->create("div#interface.wrapper", "This document is ready for content.")
 
 // Output the document html
 $html5->save()->write();
+```
 
-// Result:
+Will output:
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
