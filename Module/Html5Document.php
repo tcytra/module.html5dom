@@ -19,6 +19,13 @@ class Html5Document extends Html5
 	/** @var object $head     The instance of the Html5DocumentHead object */
 	public		$head;
 	
+	//  Html5Document Input
+	
+	/** @var string $export   . */
+	//private		$export;
+	/** @var string $import   . */
+	//private		$import;
+	
 	//  Html5Document Output
 	
 	/** @var string The saveHTML string returned from PHP DomDocument */
@@ -102,6 +109,18 @@ class Html5Document extends Html5
 		return $fragment;
 	}
 	
+	/**
+	 *  loadFile()
+	 *  Load an HTML template from a provided filename
+	 *  
+	 *  @param  string  $filename
+	 *  @access public
+	 */
+	public function loadFile($filename)
+	{
+		
+	}
+	
 	//  Html5Document Output
 	
 	/**
@@ -116,6 +135,18 @@ class Html5Document extends Html5
 		$this->output = $this->domobj->saveHTML();
 		
 		return $this;
+	}
+	
+	/**
+	 *  saveFile()
+	 *  Save an HTML template with a specified filename
+	 *  
+	 *  @param  string  $filename
+	 *  @access public
+	 */
+	public function saveFile($filename)
+	{
+		
 	}
 	
 	/**
