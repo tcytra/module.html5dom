@@ -11,11 +11,6 @@
  */
 class Html5Fragment extends Html5Document
 {
-	//  Html5Fragment Output
-	
-	/** @var string The saveHTML string returned from PHP DomDocument */
-	private		$output;
-	
 	//  Html5Fragment Parameters
 	
 	/** @var string $objtype  The instance type of this object is fragment */
@@ -59,7 +54,7 @@ class Html5Fragment extends Html5Document
 			parent::implement();
 		}
 		
-		//  the new DomDocumentFragment becomes the instance domnode (?)
+		//  the new DomDocumentFragment becomes the instance domnode
 		$this->domnode	= $this->domobj->createDocumentFragment();
 	}
 	
@@ -167,9 +162,8 @@ class Html5Fragment extends Html5Document
 			$this->domobj->removeChild( $this->domobj->childNodes->item(0) );
 		}
 		
-		$this->output = $this->domobj->saveHTML();
-		
-		return $this;
+		//  defer the remainder of the method to the parent
+		parent::save();
 	}
 	
 	/**
