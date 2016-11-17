@@ -239,11 +239,11 @@ abstract class Html5
 	 *  Import the argument into the object node; replace existing text/html
 	 *  
 	 *  @param  string  $with
-	 *  @param  bool    $clear = true
+	 *  @param  bool    $clear = false
 	 *  @return object
 	 *  @access public
 	 */
-	public function html($with, $clear = true)
+	public function html($with, $clear = false)
 	{
 		//  remove any existing structure from this objectnode
 		if ($clear) {
