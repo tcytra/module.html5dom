@@ -7,7 +7,7 @@
  *  + object to create, identify, and manipulate the types of nodes in the tree
  *  
  *  @author     Todd Cytra <tcytra@gmail.com>
- *  @version    0.3.1 Html5Document.php 2016-09-14
+ *  @version    0.3.3 Html5Document.php 2016-09-14
  *  @since      html5-0.0.1
  */
 class Html5Document extends Html5
@@ -114,11 +114,19 @@ class Html5Document extends Html5
 	 *  Load an HTML template from a provided filename
 	 *  
 	 *  @param  string  $filename
+	 *  @return object  Html5Document
 	 *  @access public
 	 */
 	public function loadFile($filename)
 	{
+		if (self::isValid("filename", $filename) && file_exists($filename)) {
+			//  retrieve the file content
+			$content = file_get_contents($filename);
+			//  append the content to the document body
+			$this->html($content);
+		}
 		
+		return $this;
 	}
 	
 	//  Html5Document Output
@@ -146,7 +154,7 @@ class Html5Document extends Html5
 	 */
 	public function saveFile($filename)
 	{
-		
+		//file_put_contents($filename);
 	}
 	
 	/**
