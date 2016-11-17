@@ -147,21 +147,33 @@ class Html5Document extends Html5
 	
 	/**
 	 *  saveFile()
-	 *  Save an HTML template with a specified filename
+	 *  Save the HTML output to a specified directory/filename
 	 *  
 	 *  @param  string  $filename
+	 *  @return object  Html5Document
 	 *  @access public
 	 */
 	public function saveFile($filename)
 	{
 		if (self::isValid("filename", $filename)) {
-			//  save the content of the domdocument to the instance output
-			$this->save();
-			//  write the file content
-			$result = file_put_contents($filename, $this->output);
-			//  sanity check: ensure the file was written
-			if ($result !== true) {
-				/** @todo generate an error */
+			$dirname = dirname($filename);
+			
+			//  attempt to create a non-existing directory
+			if (!file_exists($dirname)) {
+				try { mkdir($dirname, 0755, true); }
+				catch (Exception $e) { /** @todo generate an error */ }
+			}
+			
+			//  determine if the target directory exists and is writable
+			if ( file_exists($dirname) && is_writable($dirname) ) {
+				//  save the content of the domdocument to the instance output
+				$this->save();
+				//  write the file content
+				$result = file_put_contents($filename, $this->output);
+				//  sanity check: ensure the file was written
+				if ($result !== true) {
+					/** @todo generate an error */
+				}
 			}
 		}
 		
