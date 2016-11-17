@@ -335,7 +335,7 @@ abstract class Html5
 				$valid = preg_match("/^[a-z][a-z0-9-]+[0-9]{1}$/", $value);
 				break;
 			case 'filename':
-				$valid = preg_match("/^(\/)?(([\w\.-]+\/)+)?[\w-]+((\.[a-zA-Z-]+)+)?[a-z]+$/", $value);
+				$valid = preg_match("/^(\/)?(([\w\.-]+\/)+)?[\w-]+((\.[\w-]+)+)?[a-z]+$/", $value);
 				break;
 			case 'language':
 				$valid = preg_match("/^[a-z]{2}(-[A-Z]{2})?$/", $value);
