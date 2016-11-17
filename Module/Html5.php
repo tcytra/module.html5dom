@@ -90,6 +90,9 @@ abstract class Html5
 			case 'language':
 				if (self::isValid("language", $value)) { self::$language = $value; }
 				break;
+			case 'loadfile':
+				$this->source = $value;
+				break;
 			case 'object':
 				$this->objnode = $value;
 				break;
