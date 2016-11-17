@@ -69,6 +69,9 @@ class Html5Document extends Html5
 		
 		parent::implement();
 		
+		//  the remainder of the implementation is specific to the document
+		if($this->objtype != "document") { return; }
+		
 		//  create a reference to the dom documentelement
 		$this->domnode = $this->domobj->documentElement;
 		
