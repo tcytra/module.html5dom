@@ -21,10 +21,8 @@ class Html5Document extends Html5
 	
 	//  Html5Document Input
 	
-	/** @var string $export   . */
-	//private		$export;
-	/** @var string $import   . */
-	//private		$import;
+	/** @var string $source   The html source file to load in this instance */
+	protected	$source;
 	
 	//  Html5Document Output
 	
@@ -68,6 +66,22 @@ class Html5Document extends Html5
 		if ($this->domnode) { return; }
 		
 		parent::implement();
+		
+		//  determine if there is a source file request for this instance
+		if ($this->source && self::isValid("filename", $this->source) && file_exists($this->source)) {
+			//  load the source into the domdocument implementation
+			$this->domobj->loadHTMLFile($this->source);
+			//  discover the document body
+			$this->body = $this->domobj->documentElement->getElementsByTagName("body")->item(0);
+			//  discover the document head, if exists
+			if ($this->domobj->documentElement->getElementsByTagName("head")->length) {
+				$this->head = new Html5DocumentHead( ["parent"=>$this, "object"=>$this->domobj->documentElement->getElementsByTagName("head")->item(0)] );
+			}
+			//  set the Html5Document objectnode
+			$this->objnode = $this->body;
+			
+			return;
+		}
 		
 		//  the remainder of the implementation is specific to the document
 		if($this->objtype != "document") { return; }
