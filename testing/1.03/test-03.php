@@ -3,8 +3,8 @@
 <?php
 
 //  Title and describe this testcase
-$testcase = "Html5Dom 1.03: Test 02";
-$describe = "Require the ability to load a file into the Html5Fragment";
+$testcase = "Html5Dom 1.03: Test 03";
+$describe = "Require the ability to save an Html5Document into the filesystem";
 
 //  Define some test environment variables
 $rootpath = dirname(__FILE__);
