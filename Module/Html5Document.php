@@ -154,7 +154,18 @@ class Html5Document extends Html5
 	 */
 	public function saveFile($filename)
 	{
-		//file_put_contents($filename);
+		if (self::isValid("filename", $filename)) {
+			//  save the content of the domdocument to the instance output
+			$this->save();
+			//  write the file content
+			$result = file_put_contents($filename, $this->output);
+			//  sanity check: ensure the file was written
+			if ($result !== true) {
+				/** @todo generate an error */
+			}
+		}
+		
+		return $this;
 	}
 	
 	/**
