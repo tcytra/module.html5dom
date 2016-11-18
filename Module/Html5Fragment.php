@@ -35,7 +35,7 @@ class Html5Fragment extends Html5Document
 		parent::__construct($this->config);
 		
 		//  implement the DomDocumentFragment
-		$this->implement();
+		//$this->implement();
 	}
 	
 	//  Secure Methods
@@ -52,10 +52,27 @@ class Html5Fragment extends Html5Document
 		//  + will not have a dom object to create a fragment against
 		if (!$this->domobj) {
 			parent::implement();
+			
+			//  get rid of the DOCTYPE declaration
+			if ($this->domobj->childNodes->item(0)->nodeType == 10) {
+				$this->domobj->removeChild( $this->domobj->childNodes->item(0) );
+			}
 		}
 		
 		//  the new DomDocumentFragment becomes the instance domnode
 		$this->domnode	= $this->domobj->createDocumentFragment();
+		
+		//  determine if there is a source file request for this instance
+		if ($this->source && self::isValid("filename", $this->source) && file_exists($this->source)) {
+			//  read the content of the html fragment
+			$content = file_get_contents($this->source);
+			
+			//  point to the local objectnode
+			$this->objnode = $this->domobj;
+			
+			//  load the html content into the fragment instance
+			$this->html($content);
+		}
 	}
 	
 	//  Public Methods
@@ -162,8 +179,9 @@ class Html5Fragment extends Html5Document
 			$this->domobj->removeChild( $this->domobj->childNodes->item(0) );
 		}
 		
-		//  defer the remainder of the method to the parent
-		parent::save();
+		$this->output = $this->domobj->saveHTML();
+		
+		return $this;
 	}
 	
 	/**

@@ -67,41 +67,48 @@ class Html5Document extends Html5
 		
 		parent::implement();
 		
-		//  determine if there is a source file request for this instance
-		if ($this->source && self::isValid("filename", $this->source) && file_exists($this->source)) {
-			//  load the source into the domdocument implementation
-			$this->domobj->loadHTMLFile($this->source);
-			//  discover the document body
-			$this->body = $this->domobj->documentElement->getElementsByTagName("body")->item(0);
-			//  discover the document head, if exists
-			if ($this->domobj->documentElement->getElementsByTagName("head")->length) {
-				$this->head = new Html5DocumentHead( ["parent"=>$this, "object"=>$this->domobj->documentElement->getElementsByTagName("head")->item(0)] );
-			}
-			//  set the Html5Document objectnode
-			$this->objnode = $this->body;
-			
-			return;
-		}
-		
 		//  the remainder of the implementation is specific to the document
 		if($this->objtype != "document") { return; }
 		
-		//  create a reference to the dom documentelement
-		$this->domnode = $this->domobj->documentElement;
-		
-		//  set the language attribute for the <html> element, if available
-		if(Html5::$language){ $this->domnode->setAttribute("lang", Html5::$language); }
-		
-		//  append the <head> element to the document <html> element
-		$this->head = new Html5DocumentHead(['parent'=>$this, 'target'=>$this->domnode]);
-		$this->head->create();
-		
-		//  append the <body> to the document <html> and identify the instance
-		//  + $objnode as the "body" node
-		$this->body = $this->domobj->createElement("body");
-		$this->domnode->appendChild($this->body);
-		
-		$this->objnode = $this->body;
+		//  determine if there is a source file request for this instance
+		if ($this->source && self::isValid("filename", $this->source) && file_exists($this->source)) {
+			//  load the source into the domdocument implementation: this will
+			//  + automatically create an <html> and <body> tag if not existing
+			$this->domobj->loadHTMLFile($this->source);
+			
+			//  discover the document body
+			$this->body = $this->domobj->documentElement->getElementsByTagName("body")->item(0);
+			
+			//  discover the document head, or create one
+			if ($this->domobj->documentElement->getElementsByTagName("head")->length) {
+				$this->head = new Html5DocumentHead( ["parent"=>$this, "object"=>$this->domobj->documentElement->getElementsByTagName("head")->item(0)] );
+			} else {
+				$this->head = new Html5DocumentHead( ['parent'=>$this, 'target'=>$this->domnode] );
+				$this->head->create();
+			}
+			
+			//  set the Html5Document objectnode
+			$this->objnode = $this->body;
+			
+		//  otherwise create a basic html document skeleton
+		} else {
+			//  create a reference to the dom documentelement
+			$this->domnode = $this->domobj->documentElement;
+
+			//  set the language attribute for the <html> element, if available
+			if(Html5::$language){ $this->domnode->setAttribute("lang", Html5::$language); }
+
+			//  append the <head> element to the document <html> element
+			$this->head = new Html5DocumentHead( ['parent'=>$this, 'target'=>$this->domnode] );
+			$this->head->create();
+
+			//  append the <body> to the document <html> and identify the instance
+			//  + $objnode as the "body" node
+			$this->body = $this->domobj->createElement("body");
+			$this->domnode->appendChild($this->body);
+
+			$this->objnode = $this->body;
+		}
 	}
 	
 	//  Public Methods
