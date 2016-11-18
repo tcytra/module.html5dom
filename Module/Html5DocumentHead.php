@@ -7,8 +7,8 @@
  *  + document head elements distinctly.
  *  
  *  @author     Todd Cytra <tcytra@gmail.com>
- *	@version    0.2.1 Html5DocumentHead.php 2016-10-13
- *	@since      html5-0.0.6
+ *  @version    0.2.1 Html5DocumentHead.php 2016-10-13
+ *  @since      html5-0.0.6
  */
 class Html5DocumentHead extends Html5Document
 {
@@ -142,7 +142,7 @@ class Html5DocumentHead extends Html5Document
 	{
 		$node = $this->domobj->createElement("meta");
 		
-        //  append the requested attributes to this <meta> tag
+		//  append the requested attributes to this <meta> tag
 		foreach ($attr as $name=>$text) {
 			$nameok	= preg_match("/^[a-z]+$/", $name);
 			/** @todo need a better textok or not at all */
@@ -151,7 +151,7 @@ class Html5DocumentHead extends Html5Document
 			if ($nameok) { $node->setAttribute($name, $text); }
 		}
 		
-        //  ensure the <meta> tag is appended before the <title>, <link>, or <script> tags
+		//  ensure the <meta> tag is appended before the <title>, <link>, or <script> tags
 		if ($this->objnode->getElementsByTagName("title")->length) {
 			$this->objnode->insertBefore($node, $this->objnode->getElementsByTagName("title")->item(0));
 		} else 
@@ -184,7 +184,7 @@ class Html5DocumentHead extends Html5Document
 		//  append the stylesheet attributes to this <meta> tag
 		foreach (["rel"=>"stylesheet","type"=>"text/css"] as $name=>$text) { $node->setAttribute($name, $text); }
 		
-        //  append the href attribute with the source file
+		//  append the href attribute with the source file
 		$node->setAttribute("href", $href);
 		
 		//  ensure the stylesheet is appended before any <script> tags

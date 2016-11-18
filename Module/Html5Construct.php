@@ -1,12 +1,12 @@
 <?php
 /**
- *  Class   Html5Construct
+ *  Class       Html5Construct
  *  
  *  This class provides the ability to evaluate and manage a provided $construct
  *  
- *  @author		Todd Cytra <tcytra@gmail.com>
- *  @version	0.1.6 Html5Construct.php 2016-09-19
- *  @since		Html5-0.0.1
+ *  @author     Todd Cytra <tcytra@gmail.com>
+ *  @version    0.1.6 Html5Construct.php 2016-09-19
+ *  @since      Html5-0.0.1
  */
 class Html5Construct
 {
@@ -75,15 +75,10 @@ class Html5Construct
 		
 		//  verify the remainder of the construct as the node name
 		$this->name = preg_match("/^[a-z]?([a-z0-9]+)$/", $constructor)
-				//  by default the remaining construct is a nodeName
-				? $constructor
-				//  with no remaining construct, decide how to default
-				: (($this->strict) ? null : self::$defaultNode);
-		
-		//  ensure the construct node is a valid HTML5 entity
-		//  + this should be (and is being) performed by the object calling the instance
-		//if(!$this->able())
-		//{ throw new Exception("The construct node '{$this->name}' is not a valid HTML5 entity."); }
+			//  by default the remaining construct is a nodeName
+			? $constructor
+			//  with no remaining construct, decide how to default
+			: (($this->strict) ? null : self::$defaultNode);
 	}
 	
 	//  Public Methods

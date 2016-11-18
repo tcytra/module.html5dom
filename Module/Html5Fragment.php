@@ -182,16 +182,16 @@ class Html5Fragment extends Html5Document
 	}
 	
 	/**
-	 *	wrap()
-	 *	Wrap the HTML5Fragment contents with the specified construct
-	 *	
-	 *	@param	string	$construct = null
-	 *	@return	object	HTML5Fragment
-	 *	@access	public
+	 *  wrap()
+	 *  Wrap the HTML5Fragment contents with the specified construct
+	 *  
+	 *  @param  string  $construct = null
+	 *  @return object  HTML5Fragment
+	 *  @access public
 	 */
 	public	function wrap($construct = null)
 	{
-		//	create an instance of the HTML5Contruct object
+		//  create an instance of the HTML5Contruct object
 		$construct = Html5Construct::Set($construct);
 		
 		if ($construct->able()) {
@@ -206,7 +206,7 @@ class Html5Fragment extends Html5Document
 			$this->objnode = $wrapper->objectnode();
 		}
 		
-		//	return this instance of the HTML5Fragment
+		//  return this instance of the HTML5Fragment
 		return	$this;
 	}
 	
@@ -214,7 +214,7 @@ class Html5Fragment extends Html5Document
 	 *  write()
 	 *  Write the Html5Document DomDocument contents
 	 *  
-	 *  @access	public
+	 *  @access public
 	 */
 	public function write()
 	{
