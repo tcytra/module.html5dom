@@ -5,9 +5,9 @@
  *  
  *  This object provides the ability to create and manipulate a PHP DomFragment
  *  
- *  @author		Todd Cytra <tcytra@gmail.com>
- *  @version	0.3.5 Html5Fragment.php 2016-09-19
- *  @since		html5-0.0.1
+ *  @author     Todd Cytra <tcytra@gmail.com>
+ *  @version    0.3.5 Html5Fragment.php 2016-09-19
+ *  @since      html5-0.0.1
  */
 class Html5Fragment extends Html5Document
 {
@@ -33,9 +33,6 @@ class Html5Fragment extends Html5Document
 		
 		//  pass the remaining config to the parent object for further evaluation
 		parent::__construct($this->config);
-		
-		//  implement the DomDocumentFragment
-		//$this->implement();
 	}
 	
 	//  Secure Methods
@@ -52,11 +49,6 @@ class Html5Fragment extends Html5Document
 		//  + will not have a dom object to create a fragment against
 		if (!$this->domobj) {
 			parent::implement();
-			
-			//  get rid of the DOCTYPE declaration
-			if ($this->domobj->childNodes->item(0)->nodeType == 10) {
-				$this->domobj->removeChild( $this->domobj->childNodes->item(0) );
-			}
 		}
 		
 		//  the new DomDocumentFragment becomes the instance domnode
@@ -72,6 +64,9 @@ class Html5Fragment extends Html5Document
 			
 			//  load the html content into the fragment instance
 			$this->html($content);
+			
+			//echo $this->domobj->saveHTML();
+			//exit;
 		}
 	}
 	
@@ -179,7 +174,9 @@ class Html5Fragment extends Html5Document
 			$this->domobj->removeChild( $this->domobj->childNodes->item(0) );
 		}
 		
-		$this->output = $this->domobj->saveHTML();
+		parent::save();
+		
+		//$this->output = $this->domobj->saveHTML();
 		
 		return $this;
 	}

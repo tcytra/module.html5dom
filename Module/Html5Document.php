@@ -26,8 +26,8 @@ class Html5Document extends Html5
 	
 	//  Html5Document Output
 	
-	/** @var string The saveHTML string returned from PHP DomDocument */
-	private		$output;
+	/** @var string $output   The saveHTML string returned from DomDocument */
+	protected	$output;
 	
 	//  Html5Document Parameters
 	
