@@ -7,7 +7,7 @@
  *  + object to create, identify, and manipulate the types of nodes in the tree
  *  
  *  @author     Todd Cytra <tcytra@gmail.com>
- *  @version    0.3.3 Html5Document.php 2016-09-14
+ *  @version    0.3.5 Html5Document.php 2016-09-14
  *  @since      html5-0.0.1
  */
 class Html5Document extends Html5
